@@ -104,59 +104,6 @@ export function LandingHero() {
             Ethiopia's living lab for applied artificial intelligence—anchored at the Ethiopian Artificial Intelligence Institute (EAII) in collaboration with Addis Ababa University and powered by the timbuktoo initiative to co-create AI solutions for national development, inclusion, and sovereign innovation.
           </motion.p>
 
-          {/* Institutional Partner Bar */}
-          <motion.div
-            variants={itemVariants}
-            className="mt-6 flex flex-wrap items-center gap-2.5 sm:gap-3 rounded-2xl border border-border/70 bg-card/60 px-3.5 py-2 backdrop-blur-md w-fit shadow-2xs"
-          >
-            <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
-              National Initiative:
-            </span>
-            <div className="flex items-center gap-2 sm:gap-3">
-              <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-foreground">
-                <img
-                  src="/partners/eaii-logo.webp"
-                  alt="EAII"
-                  width="20"
-                  height="20"
-                  className="size-5 object-contain"
-                  onError={(e) => {
-                    e.currentTarget.src = "/partners/eaii-logo.png";
-                  }}
-                />
-                EAII
-              </span>
-              <span className="text-border/80">·</span>
-              <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-foreground">
-                <img
-                  src="/partners/aau-logo.webp"
-                  alt="AAU"
-                  width="20"
-                  height="20"
-                  className="size-5 object-contain"
-                  onError={(e) => {
-                    e.currentTarget.src = "/partners/aau-logo.png";
-                  }}
-                />
-                AAU
-              </span>
-              <span className="text-border/80">·</span>
-              <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-foreground">
-                <img
-                  src="/partners/undp-logo.webp"
-                  alt="UNDP"
-                  width="20"
-                  height="20"
-                  className="size-5 object-contain"
-                  onError={(e) => {
-                    e.currentTarget.src = "/partners/undp-logo.png";
-                  }}
-                />
-                UNDP timbuktoo
-              </span>
-            </div>
-          </motion.div>
-
           {/* Primary Action Buttons */}
           <motion.div variants={itemVariants} className="mt-7 flex flex-wrap items-center gap-3.5 sm:gap-4">
             <motion.div whileHover={{ scale: 1.03, y: -2 }} whileTap={{ scale: 0.97 }}>

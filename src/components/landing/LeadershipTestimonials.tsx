@@ -40,7 +40,7 @@ export function LeadershipTestimonials() {
         "The establishment of this center reflects Ethiopia's growing commitment to technological advancement. Addis Ababa University will contribute skilled human resources and academic support to help advance the goals of Digital Ethiopia 2030.",
       name: "Samuel Kifle (PhD)",
       title: "President, Addis Ababa University",
-      image: "/leaders/samuel-kifle-ena.webp",
+      image: "/leaders/samuel-kifle.webp",
       fallbackImage: "/leaders/samuel-kifle-ena.png",
       institution: "Addis Ababa University (AAU)",
     },
@@ -139,37 +139,6 @@ export function LeadershipTestimonials() {
               <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-ink/60 via-transparent to-transparent" />
             </div>
 
-            {/* Clickable Leader Avatars */}
-            <div className="mt-5 flex items-center justify-center gap-3">
-              {testimonials.map((item, idx) => (
-                <button
-                  key={item.id}
-                  type="button"
-                  onClick={() => setCurrentIndex(idx)}
-                  title={`${item.name} (${item.title})`}
-                  aria-label={`View quote by ${item.name}`}
-                  className={`group relative size-11 overflow-hidden rounded-full border-2 transition-all duration-300 focus:outline-hidden ${
-                    idx === currentIndex
-                      ? "border-brand-blue ring-2 ring-brand-blue/40 scale-110 shadow-lg opacity-100"
-                      : "border-on-ink/20 opacity-55 hover:opacity-100 hover:scale-105 hover:border-on-ink/40"
-                  }`}
-                >
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    width="44"
-                    height="44"
-                    onError={(e) => {
-                      if (item.fallbackImage && e.currentTarget.src !== item.fallbackImage) {
-                        e.currentTarget.src = item.fallbackImage;
-                      }
-                    }}
-                    className="h-full w-full object-cover object-top"
-                  />
-                </button>
-              ))}
-            </div>
-
             {/* Slideshow Controls */}
             <div className="mt-4 flex w-full max-w-[280px] items-center justify-between sm:max-w-[320px]">
               {/* Pagination Dots */}
@@ -180,11 +149,10 @@ export function LeadershipTestimonials() {
                     type="button"
                     onClick={() => setCurrentIndex(idx)}
                     aria-label={`Go to slide ${idx + 1}`}
-                    className={`h-2 transition-all duration-300 rounded-full ${
-                      idx === currentIndex
-                        ? "w-7 bg-brand-blue"
-                        : "w-2 bg-on-ink/25 hover:bg-on-ink/50"
-                    }`}
+                    className={`h-2 transition-all duration-300 rounded-full ${idx === currentIndex
+                      ? "w-7 bg-brand-blue"
+                      : "w-2 bg-on-ink/25 hover:bg-on-ink/50"
+                      }`}
                   />
                 ))}
               </div>

@@ -184,7 +184,7 @@ export function LandingFooter() {
                   rel="noopener noreferrer"
                   title={`${partner.name} (${partner.role})`}
                   aria-label={`${partner.name} (${partner.role})`}
-                  className="group flex items-center gap-2 rounded-xl border border-on-ink/15 bg-on-ink/5 px-2.5 py-1.5 transition-all duration-200 hover:border-brand-blue/40 hover:bg-on-ink/10"
+                  className="group flex items-center gap-2 rounded-xl  px-2.5 py-1.5 transition-all duration-200 hover:border-brand-blue/40 hover:bg-on-ink/10"
                 >
                   <img
                     src={partner.logo}
@@ -200,9 +200,6 @@ export function LandingFooter() {
                     }}
                     className="size-7 object-contain transition-transform duration-200 group-hover:scale-105"
                   />
-                  <span className="text-xs font-semibold text-on-ink/80 group-hover:text-on-ink">
-                    {partner.short}
-                  </span>
                 </a>
               ))}
             </div>
