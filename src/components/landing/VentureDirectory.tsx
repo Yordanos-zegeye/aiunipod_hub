@@ -40,6 +40,7 @@ export function VentureDirectory() {
       startup.name.toLowerCase().includes(query) ||
       startup.tagline.toLowerCase().includes(query) ||
       startup.sector.toLowerCase().includes(query) ||
+      (startup.cohort || "").toLowerCase().includes(query) ||
       startup.description.toLowerCase().includes(query) ||
       startup.products.some((p) => p.name.toLowerCase().includes(query) || p.stage.toLowerCase().includes(query)) ||
       startup.location.toLowerCase().includes(query);
@@ -198,9 +199,14 @@ export function VentureDirectory() {
                   >
                     <div>
                       <div className="flex items-start justify-between gap-4">
-                        <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
-                          {startup.sector}
-                        </span>
+                        <div className="flex flex-wrap items-center gap-1.5">
+                          <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+                            {startup.sector}
+                          </span>
+                          <span className="rounded-full border border-primary/20 bg-primary/5 px-2 py-0.5 text-[10px] font-bold text-primary">
+                            {startup.cohort || "Cohort 3"}
+                          </span>
+                        </div>
                         <span className="grid h-8 w-8 place-items-center rounded-full border border-border text-muted-foreground transition-all duration-200 group-hover:rotate-45 group-hover:border-primary group-hover:bg-primary group-hover:text-primary-foreground">
                           <ArrowUpRight className="size-4" />
                         </span>

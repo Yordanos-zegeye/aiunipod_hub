@@ -88,7 +88,7 @@ export function InvestorPortalPage() {
     {
       startupSlug: "sela-health",
       stage: "In Talks",
-      privateNotes: "Met Bethlehem at EAII demo day. Impressive offline Amharic NLP benchmarks. Reviewing clinical data room.",
+      privateNotes: "Met founder at EAII demo day. Impressive offline Amharic NLP benchmarks. Reviewing clinical data room.",
       pledgedAmount: 100000,
     },
     {
@@ -267,22 +267,22 @@ export function InvestorPortalPage() {
               <Button
                 onClick={() => {
                   switchDemoRole("investor_vetted");
-                  toast.success("Authorized as Vetted Investor (Sofia Mengesha · Novastar Ventures)");
+                  toast.success("Authorized as Vetted Investor (investor@investor.com)");
                 }}
                 className="w-full h-12 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm shadow-md gap-2"
               >
-                <ShieldCheck className="size-4" /> Sign In as Vetted Investor (Sofia Mengesha)
+                <ShieldCheck className="size-4" /> Sign In as Vetted Investor (investor@investor.com)
               </Button>
 
               <Button
                 onClick={() => {
                   switchDemoRole("investor_pending");
-                  toast.success("Authorized as Pending Investor (Dawit Alemu · Addis Angels)");
+                  toast.success("Authorized as Pending Investor (angel@investor.com)");
                 }}
                 variant="outline"
                 className="w-full h-12 rounded-2xl border-border font-semibold text-sm gap-2"
               >
-                <Clock className="size-4 text-amber-500" /> Sign In as Pending Investor (Dawit Alemu)
+                <Clock className="size-4 text-amber-500" /> Sign In as Pending Investor (angel@investor.com)
               </Button>
             </div>
 
@@ -438,23 +438,17 @@ export function InvestorPortalPage() {
               sidebarCollapsed ? "justify-center" : ""
             }`}
           >
-            {user?.avatarUrl ? (
-              <img
-                src={user.avatarUrl}
-                alt={user.name}
-                width={36}
-                height={36}
-                className="size-9 rounded-xl object-cover shrink-0 border border-border"
-              />
-            ) : (
-              <div className="size-9 rounded-xl bg-emerald-500/20 text-emerald-600 font-bold grid place-items-center shrink-0 text-xs">
-                {user?.name?.slice(0, 2).toUpperCase() || "IN"}
-              </div>
-            )}
+            <img
+              src={user?.avatarUrl || "/avatars/investor.svg"}
+              alt={user?.name || "Vetted Investor"}
+              width={36}
+              height={36}
+              className="size-9 rounded-xl object-cover shrink-0 border border-border"
+            />
 
             {!sidebarCollapsed && (
               <div className="flex-1 min-w-0">
-                <p className="text-xs font-bold text-foreground truncate">{user?.name || "Sofia Mengesha"}</p>
+                <p className="text-xs font-bold text-foreground truncate">{user?.name || "Vetted Investor"}</p>
                 <div className="flex items-center gap-1.5">
                   <span
                     className={`size-1.5 rounded-full ${
@@ -556,11 +550,15 @@ export function InvestorPortalPage() {
 
             <div className="pt-4 border-t border-border flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <div className="size-8 rounded-full bg-emerald-500/20 grid place-items-center text-xs font-bold text-emerald-600">
-                  {user?.name?.slice(0, 2).toUpperCase() || "IN"}
-                </div>
+                <img
+                  src={user?.avatarUrl || "/avatars/investor.svg"}
+                  alt={user?.name || "Vetted Investor"}
+                  width={32}
+                  height={32}
+                  className="size-8 rounded-lg object-cover shrink-0 border border-border"
+                />
                 <div className="text-left">
-                  <p className="text-xs font-bold text-foreground">{user?.name || "Sofia Mengesha"}</p>
+                  <p className="text-xs font-bold text-foreground">{user?.name || "Vetted Investor"}</p>
                   <p className="text-[10px] text-muted-foreground">{vettingStatus}</p>
                 </div>
               </div>
@@ -960,9 +958,14 @@ export function InvestorPortalPage() {
                     >
                       <div className="space-y-3">
                         <div className="flex items-center justify-between">
-                          <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-[11px] font-bold text-primary">
-                            {s.sector}
-                          </span>
+                          <div className="flex items-center gap-1.5">
+                            <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-[11px] font-bold text-primary">
+                              {s.sector}
+                            </span>
+                            <span className="rounded-full border border-primary/20 bg-primary/5 px-2 py-0.5 text-[10px] font-bold text-primary">
+                              {s.cohort || "Cohort 3"}
+                            </span>
+                          </div>
                           <span className="text-xs text-muted-foreground">{s.location}</span>
                         </div>
 

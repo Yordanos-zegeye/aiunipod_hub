@@ -20,6 +20,7 @@ import { useState } from "react";
 
 import { LandingFooter } from "@/components/landing/LandingFooter";
 import { Button } from "@/components/ui/button";
+import { STARTUPS } from "@/data/startups";
 
 const TITLE = "Apply for Cohort 3 Incubation — AI UNIPOD Ethiopia";
 const DESCRIPTION =
@@ -179,6 +180,70 @@ function Cohort3Page() {
             <p className="mt-1 text-xs text-muted-foreground">
               Direct bridge to timbuktoo’s 10 thematic innovation hubs across Africa.
             </p>
+          </div>
+        </div>
+
+        {/* Currently Incubated Cohort 3 Ventures */}
+        <div className="mt-14 space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div>
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+                <Rocket className="size-3.5" /> Active Living Lab Roster
+              </span>
+              <h2 className="mt-2 font-display text-2xl sm:text-3xl font-bold text-foreground">
+                Currently Incubated in Cohort 3 ({STARTUPS.filter((s) => s.cohort === "Cohort 3").length} Ventures)
+              </h2>
+              <p className="mt-1 text-xs text-muted-foreground">
+                Explore sovereign AI teams accelerating at the EAII living lab facility in Addis Ababa.
+              </p>
+            </div>
+            <Button asChild variant="outline" size="sm" className="rounded-full text-xs">
+              <Link to="/startups">
+                Explore Full Directory <ArrowRight className="ml-1 size-3" />
+              </Link>
+            </Button>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {STARTUPS.filter((s) => s.cohort === "Cohort 3").map((startup) => (
+              <div
+                key={startup.slug}
+                className="rounded-2xl border border-border bg-card p-5 shadow-xs flex flex-col justify-between transition-all hover:border-primary/40 hover:shadow-md"
+                style={{ borderTopColor: startup.theme.primary_color, borderTopWidth: "3px" }}
+              >
+                <div>
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-semibold text-primary">
+                      {startup.sector}
+                    </span>
+                    <span className="text-[11px] font-medium text-muted-foreground">
+                      {startup.investment_ask.round}
+                    </span>
+                  </div>
+                  <h3 className="mt-3 font-display text-lg font-bold text-foreground">{startup.name}</h3>
+                  <p className="mt-1 text-xs text-muted-foreground line-clamp-2">{startup.tagline}</p>
+
+                  <div className="mt-3 flex flex-wrap gap-1">
+                    {startup.products.map((p) => (
+                      <span key={p.name} className="rounded border border-border bg-muted/40 px-2 py-0.5 text-[10px] text-muted-foreground">
+                        {p.name} ({p.stage})
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="mt-4 pt-3 border-t border-border/70 flex items-center justify-between">
+                  <span className="text-[11px] text-muted-foreground">{startup.location.split(",")[0]}</span>
+                  <Link
+                    to="/$startupSlug"
+                    params={{ startupSlug: startup.slug }}
+                    className="text-xs font-semibold text-primary hover:underline inline-flex items-center gap-1"
+                  >
+                    Venture Profile <ArrowRight className="size-3" />
+                  </Link>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 

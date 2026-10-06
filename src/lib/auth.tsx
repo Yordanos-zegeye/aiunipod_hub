@@ -36,44 +36,44 @@ export interface InvestorRegisterData {
 export const DEMO_USERS: Record<string, AuthUser> = {
   super_admin: {
     id: "usr_admin_01",
-    email: "admin@unipod.et",
-    name: "Dr. Worku Gachena",
-    title: "UNIPOD Ecosystem Director",
+    email: "admin@admin.com",
+    name: "Admin User",
+    title: "Super Administrator",
     role: "SUPER_ADMIN",
-    avatarUrl: "/leaders/worku-gachena.webp",
+    avatarUrl: "/avatars/admin.svg",
     createdAt: "2025-01-10",
   },
   startup_admin: {
     id: "usr_founder_01",
-    email: "founder@selahealth.et",
-    name: "Bethlehem Tadesse",
-    title: "Co-Founder & CEO, Sela Health",
+    email: "founder@founder.com",
+    name: "Startup Founder",
+    title: "Founder & CEO",
     role: "STARTUP_ADMIN",
     startupSlug: "sela-health",
     startupName: "Sela Health",
-    avatarUrl: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80",
+    avatarUrl: "/avatars/founder.svg",
     createdAt: "2025-03-15",
   },
   startup_editor: {
     id: "usr_editor_01",
-    email: "editor@kurazagri.et",
-    name: "Amanuel Tesfaye",
-    title: "Product Engineer, Kuraz Agri",
+    email: "editor@founder.com",
+    name: "Startup Editor",
+    title: "Product Lead",
     role: "STARTUP_EDITOR",
     startupSlug: "kuraz-agri",
     startupName: "Kuraz Agri",
-    avatarUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
+    avatarUrl: "/avatars/editor.svg",
     createdAt: "2025-04-20",
   },
   investor_vetted: {
     id: "usr_inv_vetted_01",
-    email: "investor@novastar.vc",
-    name: "Sofia Mengesha",
-    title: "General Partner, Novastar Ventures",
+    email: "investor@investor.com",
+    name: "Vetted Investor",
+    title: "Partner · Venture Capital",
     role: "INVESTOR",
-    avatarUrl: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&auto=format&fit=crop&q=80",
+    avatarUrl: "/avatars/investor.svg",
     investorProfile: {
-      organization: "Novastar Ventures",
+      organization: "Venture Capital Partner",
       investorType: "VC",
       ticketSize: "$150k – $500k",
       focusSectors: ["Health AI", "AgriTech", "Fintech AI"],
@@ -83,13 +83,13 @@ export const DEMO_USERS: Record<string, AuthUser> = {
   },
   investor_pending: {
     id: "usr_inv_pending_01",
-    email: "angel@addisangels.et",
-    name: "Dawit Alemu",
-    title: "Syndicate Member, Addis Angels Network",
+    email: "angel@investor.com",
+    name: "Angel Investor",
+    title: "Syndicate Member",
     role: "INVESTOR",
-    avatarUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
+    avatarUrl: "/avatars/angel.svg",
     investorProfile: {
-      organization: "Addis Angels Network",
+      organization: "Angel Investor Network",
       investorType: "Angel",
       ticketSize: "$25k – $50k",
       focusSectors: ["Language AI", "AgriTech"],
@@ -112,7 +112,7 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-const AUTH_STORAGE_KEY = "unipod_auth_user_v1";
+const AUTH_STORAGE_KEY = "unipod_auth_user_v2";
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<AuthUser | null>(null);
@@ -166,13 +166,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const slug = startupSlug || (role === "STARTUP_ADMIN" ? "sela-health" : undefined);
       const startup = slug ? STARTUPS.find((s) => s.slug === slug) : undefined;
 
+      const avatar =
+        role === "SUPER_ADMIN"
+          ? "/avatars/admin.svg"
+          : role === "INVESTOR"
+          ? "/avatars/investor.svg"
+          : role === "STARTUP_EDITOR"
+          ? "/avatars/editor.svg"
+          : "/avatars/founder.svg";
+
       authUser = {
         id: `usr_${Date.now()}`,
         email,
-        name: email.split("@")[0] || "Ecosystem Member",
+        name: email.split("@")[0] || "User",
         role,
         startupSlug: slug,
         startupName: startup?.name,
+        avatarUrl: avatar,
         createdAt: new Date().toISOString(),
       };
     }
@@ -188,6 +198,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       name: data.fullName,
       role: "INVESTOR",
       title: `${data.investorType} Investor · ${data.organization}`,
+      avatarUrl: "/avatars/investor.svg",
       investorProfile: {
         organization: data.organization,
         investorType: data.investorType,

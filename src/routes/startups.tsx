@@ -62,6 +62,7 @@ function StartupsDirectoryPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const deferredSearch = useDeferredValue(searchQuery);
   const [selectedSector, setSelectedSector] = useState("All");
+  const [selectedCohort, setSelectedCohort] = useState("All");
   const [selectedStage, setSelectedStage] = useState("All");
   const [selectedRound, setSelectedRound] = useState("All");
   const [selectedLocation, setSelectedLocation] = useState("All");
@@ -74,6 +75,7 @@ function StartupsDirectoryPage() {
     return ["All", ...Array.from(new Set(STARTUPS.map((s) => s.sector)))];
   }, []);
 
+  const cohorts = ["All", "Cohort 3", "Cohort 2"];
   const stages = ["All", "Market", "Pilot", "Prototype", "Concept"];
   const rounds = ["All", "Seed", "Pre-seed"];
   const locations = useMemo(() => {
@@ -102,6 +104,11 @@ function StartupsDirectoryPage() {
   // Filter and sort startups
   const filteredStartups = useMemo(() => {
     return STARTUPS.filter((startup) => {
+      // Cohort filter
+      if (selectedCohort !== "All" && (startup.cohort || "Cohort 3") !== selectedCohort) {
+        return false;
+      }
+
       // Sector filter
       if (selectedSector !== "All" && startup.sector.toLowerCase() !== selectedSector.toLowerCase()) {
         return false;
@@ -129,13 +136,14 @@ function StartupsDirectoryPage() {
         const matchesTagline = startup.tagline.toLowerCase().includes(q);
         const matchesDesc = startup.description.toLowerCase().includes(q);
         const matchesSector = startup.sector.toLowerCase().includes(q);
+        const matchesCohort = (startup.cohort || "").toLowerCase().includes(q);
         const matchesLocation = startup.location.toLowerCase().includes(q);
         const matchesProduct = startup.products.some(
           (p) => p.name.toLowerCase().includes(q) || p.summary.toLowerCase().includes(q)
         );
         const matchesAsk = startup.investment_ask.round.toLowerCase().includes(q);
 
-        if (!matchesName && !matchesTagline && !matchesDesc && !matchesSector && !matchesLocation && !matchesProduct && !matchesAsk) {
+        if (!matchesName && !matchesTagline && !matchesDesc && !matchesSector && !matchesCohort && !matchesLocation && !matchesProduct && !matchesAsk) {
           return false;
         }
       }
@@ -149,10 +157,11 @@ function StartupsDirectoryPage() {
       if (sortBy === "newest") return parseInt(b.founded) - parseInt(a.founded);
       return 0; // featured default
     });
-  }, [deferredSearch, selectedSector, selectedStage, selectedRound, selectedLocation, sortBy]);
+  }, [deferredSearch, selectedCohort, selectedSector, selectedStage, selectedRound, selectedLocation, sortBy]);
 
   const hasActiveFilters =
     searchQuery !== "" ||
+    selectedCohort !== "All" ||
     selectedSector !== "All" ||
     selectedStage !== "All" ||
     selectedRound !== "All" ||
@@ -161,6 +170,7 @@ function StartupsDirectoryPage() {
 
   const clearAllFilters = () => {
     setSearchQuery("");
+    setSelectedCohort("All");
     setSelectedSector("All");
     setSelectedStage("All");
     setSelectedRound("All");
@@ -285,6 +295,23 @@ function StartupsDirectoryPage() {
                   <ChevronDown className="pointer-events-none absolute right-2.5 top-1/2 size-3 -translate-y-1/2 text-muted-foreground" />
                 </div>
 
+                {/* Cohort Select */}
+                <div className="relative">
+                  <select
+                    value={selectedCohort}
+                    onChange={(e) => setSelectedCohort(e.target.value)}
+                    aria-label="Filter by incubation cohort"
+                    className="h-9 cursor-pointer appearance-none rounded-full border border-border bg-card pl-3.5 pr-8 text-xs font-semibold text-foreground shadow-xs outline-none transition-colors hover:border-primary/50 focus:border-primary focus:ring-2 focus:ring-primary/20"
+                  >
+                    {cohorts.map((coh) => (
+                      <option key={coh} value={coh}>
+                        Cohort: {coh}
+                      </option>
+                    ))}
+                  </select>
+                  <ChevronDown className="pointer-events-none absolute right-2.5 top-1/2 size-3 -translate-y-1/2 text-muted-foreground" />
+                </div>
+
                 {/* Stage Select */}
                 <div className="relative">
                   <select
@@ -392,6 +419,14 @@ function StartupsDirectoryPage() {
                     </button>
                   </span>
                 )}
+                {selectedCohort !== "All" && (
+                  <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-0.5 font-medium text-primary">
+                    Cohort: {selectedCohort}
+                    <button type="button" onClick={() => setSelectedCohort("All")} className="hover:opacity-75">
+                      <X className="size-3" />
+                    </button>
+                  </span>
+                )}
                 {selectedStage !== "All" && (
                   <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-0.5 font-medium text-primary">
                     Stage: {selectedStage}
@@ -474,11 +509,16 @@ function StartupsDirectoryPage() {
                   }}
                 >
                   <div>
-                    {/* Header Row: Sector & Brand Swatch */}
+                    {/* Header Row: Sector, Cohort & Brand Swatch */}
                     <div className="flex items-center justify-between gap-2">
-                      <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-semibold text-primary">
-                        {startup.sector}
-                      </span>
+                      <div className="flex flex-wrap items-center gap-1.5">
+                        <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-semibold text-primary">
+                          {startup.sector}
+                        </span>
+                        <span className="rounded-full border border-primary/20 bg-primary/5 px-2 py-0.5 text-[10px] font-bold text-primary">
+                          {startup.cohort || "Cohort 3"}
+                        </span>
+                      </div>
                       <div className="flex items-center gap-1.5">
                         <span
                           className="h-2.5 w-2.5 rounded-full ring-2 ring-background"
@@ -610,9 +650,14 @@ function StartupsDirectoryPage() {
                         </div>
                       </td>
                       <td className="px-4 py-4">
-                        <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-semibold text-primary">
-                          {startup.sector}
-                        </span>
+                        <div className="flex flex-col gap-1">
+                          <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-semibold text-primary w-fit">
+                            {startup.sector}
+                          </span>
+                          <span className="text-[10px] font-bold text-muted-foreground">
+                            {startup.cohort || "Cohort 3"}
+                          </span>
+                        </div>
                       </td>
                       <td className="px-4 py-4">
                         <div className="flex flex-wrap gap-1">
@@ -709,9 +754,12 @@ function StartupsDirectoryPage() {
             </button>
 
             {/* Modal Header */}
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
                 {previewStartup.sector}
+              </span>
+              <span className="rounded-full border border-primary/20 bg-primary/5 px-2.5 py-0.5 text-xs font-bold text-primary">
+                {previewStartup.cohort || "Cohort 3"}
               </span>
               <span className="rounded-full border border-border px-2.5 py-0.5 text-xs font-medium text-muted-foreground">
                 {previewStartup.investment_ask.round} Round

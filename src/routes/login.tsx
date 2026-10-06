@@ -46,11 +46,11 @@ function LoginPage() {
     try {
       // Determine default role based on email if not already mapped
       let requestedRole: UserRole = "GUEST";
-      if (email.includes("admin") || email === "admin@unipod.et") {
+      if (email.includes("admin") || email === "admin@admin.com") {
         requestedRole = "SUPER_ADMIN";
-      } else if (email.includes("founder") || email.includes("sela")) {
+      } else if (email.includes("founder") || email === "founder@founder.com") {
         requestedRole = "STARTUP_ADMIN";
-      } else if (email.includes("investor") || email.includes("angel")) {
+      } else if (email.includes("investor") || email.includes("angel") || email === "investor@investor.com") {
         requestedRole = "INVESTOR";
       }
 
@@ -142,7 +142,7 @@ function LoginPage() {
               >
                 <Shield className="size-4 text-purple-400 group-hover:scale-110 transition-transform" />
                 <span className="mt-1 text-[11px] font-bold text-portal-foreground leading-tight">Super Admin</span>
-                <span className="text-[9px] text-portal-foreground/60">Dr. Worku</span>
+                <span className="text-[9px] text-portal-foreground/60 truncate max-w-full">admin@admin.com</span>
               </button>
 
               <button
@@ -152,7 +152,7 @@ function LoginPage() {
               >
                 <Sparkles className="size-4 text-blue-400 group-hover:scale-110 transition-transform" />
                 <span className="mt-1 text-[11px] font-bold text-portal-foreground leading-tight">Founder</span>
-                <span className="text-[9px] text-portal-foreground/60">Sela Health</span>
+                <span className="text-[9px] text-portal-foreground/60 truncate max-w-full">founder@founder.com</span>
               </button>
 
               <button
@@ -162,7 +162,7 @@ function LoginPage() {
               >
                 <UserCheck className="size-4 text-amber-400 group-hover:scale-110 transition-transform" />
                 <span className="mt-1 text-[11px] font-bold text-portal-foreground leading-tight">Investor</span>
-                <span className="text-[9px] text-portal-foreground/60">Novastar VC</span>
+                <span className="text-[9px] text-portal-foreground/60 truncate max-w-full">investor@investor.com</span>
               </button>
             </div>
           </div>
@@ -181,7 +181,7 @@ function LoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   autoComplete="email"
-                  placeholder="admin@unipod.et"
+                  placeholder="admin@admin.com"
                   required
                   className="portal-input"
                 />

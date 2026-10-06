@@ -1,4 +1,9 @@
-import type { WhiteLabelSettings } from "@/lib/white-label";
+const fs = require('fs');
+const path = require('path');
+
+const targetPath = path.resolve('c:/Users/yordanos.zegeye/OneDrive - United Nations Development Programme/Desktop/aiunipod_hub/src/data/startups.ts');
+
+const startupsData = `import type { WhiteLabelSettings } from "@/lib/white-label";
 
 export type Product = {
   name: string;
@@ -1678,3 +1683,7 @@ export function getStartupStage(startup: Startup): "Concept" | "Prototype" | "Pi
 export function getStartupCohort(startup: Startup): string {
   return startup.cohort || "Cohort 3";
 }
+`;
+
+fs.writeFileSync(targetPath, startupsData, 'utf8');
+console.log('Successfully updated startups.ts with all 18 template dimensions!');

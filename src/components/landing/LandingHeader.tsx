@@ -306,7 +306,7 @@ export function LandingHeader() {
                           onClick={() => handleSwitchRole("super_admin")}
                           className="w-full text-left rounded-lg px-2 py-1 text-[11px] hover:bg-muted text-muted-foreground hover:text-foreground flex items-center justify-between"
                         >
-                          <span>Super Admin</span>
+                          <span>Super Admin (admin@admin.com)</span>
                           {user.role === "SUPER_ADMIN" && <Check className="size-3 text-primary" />}
                         </button>
                         <button
@@ -314,7 +314,7 @@ export function LandingHeader() {
                           onClick={() => handleSwitchRole("startup_admin")}
                           className="w-full text-left rounded-lg px-2 py-1 text-[11px] hover:bg-muted text-muted-foreground hover:text-foreground flex items-center justify-between"
                         >
-                          <span>Startup Founder (Sela Health)</span>
+                          <span>Startup Founder (founder@founder.com)</span>
                           {user.role === "STARTUP_ADMIN" && <Check className="size-3 text-primary" />}
                         </button>
                         <button
@@ -322,7 +322,7 @@ export function LandingHeader() {
                           onClick={() => handleSwitchRole("investor_vetted")}
                           className="w-full text-left rounded-lg px-2 py-1 text-[11px] hover:bg-muted text-muted-foreground hover:text-foreground flex items-center justify-between"
                         >
-                          <span>Vetted Investor (Novastar)</span>
+                          <span>Vetted Investor (investor@investor.com)</span>
                           {user.role === "INVESTOR" && <Check className="size-3 text-primary" />}
                         </button>
                       </div>

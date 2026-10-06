@@ -12,6 +12,7 @@ export function LandingFooter() {
       logo: "/partners/eaii-logo.webp",
       fallbackLogo: "/partners/eaii-logo.png",
       url: "https://aii.et/",
+      className: "h-10 sm:h-11 w-auto",
     },
     {
       name: "Addis Ababa University",
@@ -20,6 +21,7 @@ export function LandingFooter() {
       logo: "/partners/aau-logo.webp",
       fallbackLogo: "/partners/aau-logo.png",
       url: "http://www.aau.edu.et/",
+      className: "h-10 sm:h-11 w-auto",
     },
     {
       name: "UNDP · timbuktoo",
@@ -28,6 +30,7 @@ export function LandingFooter() {
       logo: "/partners/undp-logo.webp",
       fallbackLogo: "/partners/undp-logo.png",
       url: "https://www.undp.org/africa/projects/timbuktoo",
+      className: "h-10 sm:h-11 w-auto",
     },
   ];
 
@@ -175,7 +178,7 @@ export function LandingFooter() {
             <p className="text-[11px] font-semibold uppercase tracking-wider text-on-ink/50">
               Joint Initiative Partners
             </p>
-            <div className="flex flex-wrap items-center gap-3 sm:gap-4">
+            <div className="flex flex-wrap items-center gap-5 sm:gap-6">
               {partnerLogos.map((partner) => (
                 <a
                   key={partner.short}
@@ -184,7 +187,7 @@ export function LandingFooter() {
                   rel="noopener noreferrer"
                   title={`${partner.name} (${partner.role})`}
                   aria-label={`${partner.name} (${partner.role})`}
-                  className="group flex items-center gap-2 rounded-xl  px-2.5 py-1.5 transition-all duration-200 hover:border-brand-blue/40 hover:bg-on-ink/10"
+                  className="inline-flex items-center transition-all duration-200 hover:opacity-80 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue/60"
                 >
                   <img
                     src={partner.logo}
@@ -198,7 +201,7 @@ export function LandingFooter() {
                         e.currentTarget.src = partner.fallbackLogo;
                       }
                     }}
-                    className="size-7 object-contain transition-transform duration-200 group-hover:scale-105"
+                    className={`size-8 transition-transform duration-200 ${partner.className}`}
                   />
                 </a>
               ))}

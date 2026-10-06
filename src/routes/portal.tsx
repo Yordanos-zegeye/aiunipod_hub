@@ -76,23 +76,23 @@ export function StartupPortalPage() {
   const [accessRequests, setAccessRequests] = useState([
     {
       id: "req-1",
-      investorName: "Sofia Mengesha",
-      organization: "Novastar Ventures",
+      investorName: "Vetted Investor",
+      organization: "Venture Capital Partner (investor@investor.com)",
       section: "Q3 Financials & Projections (Investor-Only)",
       status: "APPROVED" as const,
       date: "Yesterday",
     },
     {
       id: "req-2",
-      investorName: "Dawit Alemu",
-      organization: "Addis Angels Network",
+      investorName: "Angel Investor",
+      organization: "Angel Syndicate (angel@investor.com)",
       section: "Confidential Pitch Deck v2.1 (Investor-Only)",
       status: "PENDING" as const,
       date: "3 hours ago",
     },
     {
       id: "req-3",
-      investorName: "Marcus Vance",
+      investorName: "Institutional Investor",
       organization: "Global Frontier Tech",
       section: "Model Weights & Benchmark Data",
       status: "DENIED" as const,
@@ -215,22 +215,22 @@ export function StartupPortalPage() {
               <Button
                 onClick={() => {
                   switchDemoRole("startup_admin");
-                  toast.success("Authorized as Startup Founder (Bethlehem Tadesse · Sela Health)");
+                  toast.success("Authorized as Startup Founder (founder@founder.com)");
                 }}
                 className="w-full h-12 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm shadow-md gap-2"
               >
-                <Rocket className="size-4" /> Sign In as Founder (Bethlehem Tadesse)
+                <Rocket className="size-4" /> Sign In as Founder (founder@founder.com)
               </Button>
 
               <Button
                 onClick={() => {
                   switchDemoRole("startup_editor");
-                  toast.success("Authorized as Startup Editor (Amanuel Tesfaye · Kuraz Agri)");
+                  toast.success("Authorized as Startup Editor (editor@founder.com)");
                 }}
                 variant="outline"
                 className="w-full h-12 rounded-2xl border-border font-semibold text-sm gap-2"
               >
-                <UserCheck className="size-4" /> Sign In as Editor (Amanuel Tesfaye)
+                <UserCheck className="size-4" /> Sign In as Editor (editor@founder.com)
               </Button>
             </div>
 
@@ -401,24 +401,18 @@ export function StartupPortalPage() {
               sidebarCollapsed ? "justify-center" : ""
             }`}
           >
-            {user?.avatarUrl ? (
-              <img
-                src={user.avatarUrl}
-                alt={user.name}
-                width={36}
-                height={36}
-                className="size-9 rounded-xl object-cover shrink-0 border border-border"
-              />
-            ) : (
-              <div className="size-9 rounded-xl bg-primary/20 text-primary font-bold grid place-items-center shrink-0 text-xs">
-                {user?.name?.slice(0, 2).toUpperCase() || "FA"}
-              </div>
-            )}
+            <img
+              src={user?.avatarUrl || "/avatars/founder.svg"}
+              alt={user?.name || "Startup Founder"}
+              width={36}
+              height={36}
+              className="size-9 rounded-xl object-cover shrink-0 border border-border"
+            />
 
             {!sidebarCollapsed && (
               <div className="flex-1 min-w-0">
-                <p className="text-xs font-bold text-foreground truncate">{user?.name || "Bethlehem Tadesse"}</p>
-                <p className="text-[10px] text-muted-foreground truncate">{user?.title || "Co-Founder & CEO"}</p>
+                <p className="text-xs font-bold text-foreground truncate">{user?.name || "Startup Founder"}</p>
+                <p className="text-[10px] text-muted-foreground truncate">{user?.email || "founder@founder.com"}</p>
               </div>
             )}
 
@@ -523,12 +517,16 @@ export function StartupPortalPage() {
 
             <div className="pt-4 border-t border-border flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <div className="size-8 rounded-full bg-primary/20 grid place-items-center text-xs font-bold text-primary">
-                  {user?.name?.slice(0, 2).toUpperCase() || "FA"}
-                </div>
+                <img
+                  src={user?.avatarUrl || "/avatars/founder.svg"}
+                  alt={user?.name || "Startup Founder"}
+                  width={32}
+                  height={32}
+                  className="size-8 rounded-lg object-cover shrink-0 border border-border"
+                />
                 <div className="text-left">
-                  <p className="text-xs font-bold text-foreground">{user?.name || "Bethlehem Tadesse"}</p>
-                  <p className="text-[10px] text-muted-foreground">{user?.role}</p>
+                  <p className="text-xs font-bold text-foreground">{user?.name || "Startup Founder"}</p>
+                  <p className="text-[10px] text-muted-foreground">{user?.email || "founder@founder.com"}</p>
                 </div>
               </div>
               <button
@@ -684,7 +682,7 @@ export function StartupPortalPage() {
 
           {/* TAB 1: OVERVIEW & LIVING LAB */}
           {activeTab === "overview" && (
-            <div className="space-y-6 animate-in fade-in duration-200">
+            <div key={startup.slug} className="space-y-6 animate-in fade-in duration-200">
               {/* Quick KPI Cards */}
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                 <div className="rounded-2xl border border-border bg-card p-5 shadow-2xs">
@@ -702,14 +700,14 @@ export function StartupPortalPage() {
 
                 <div className="rounded-2xl border border-border bg-card p-5 shadow-2xs">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Living Lab Desk</span>
+                    <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Living Lab Program</span>
                     <Cpu className="size-4 text-purple-500" />
                   </div>
                   <p className="mt-2 font-display text-2xl font-bold text-foreground">
-                    EAII Desk 04
+                    {startup.cohort || "Cohort 3"}
                   </p>
                   <p className="mt-1 text-[11px] text-emerald-600 font-semibold flex items-center gap-1">
-                    <CheckCircle2 className="size-3" /> 85 GPU Nodes Available
+                    <CheckCircle2 className="size-3" /> EAII Compute Allocated
                   </p>
                 </div>
 
@@ -745,9 +743,11 @@ export function StartupPortalPage() {
                 <div className="lg:col-span-2 rounded-3xl border border-border bg-card p-6 sm:p-8 shadow-xs space-y-6">
                   <div className="flex items-center justify-between border-b border-border pb-4">
                     <div>
-                      <h3 className="font-display text-lg font-bold text-foreground">Living Lab Cohort Status</h3>
+                      <h3 className="font-display text-lg font-bold text-foreground">
+                        {startup.name} · Living Lab Cohort Status
+                      </h3>
                       <p className="text-xs text-muted-foreground">
-                        Integrated with Ethiopian Artificial Intelligence Institute (EAII) infrastructure.
+                        Incubated under {startup.cohort || "Cohort 3"} with Ethiopian Artificial Intelligence Institute (EAII) infrastructure.
                       </p>
                     </div>
                     <Button size="sm" variant="outline" onClick={() => setActiveTab("profile")} className="rounded-xl text-xs">
@@ -763,9 +763,9 @@ export function StartupPortalPage() {
 
                     <div className="grid gap-4 sm:grid-cols-2 pt-2">
                       <div className="rounded-2xl border border-border bg-muted/20 p-4">
-                        <span className="font-semibold text-foreground text-xs block">Team Size</span>
+                        <span className="font-semibold text-foreground text-xs block">Team Composition</span>
                         <span className="text-lg font-display font-bold text-foreground mt-1 block">
-                          {startup.team_size} Full-Time Engineers
+                          {startup.team_size} Full-Time Specialists
                         </span>
                         <span className="text-[11px] text-muted-foreground mt-0.5 block">
                           Founded {startup.founded} · {startup.location}
@@ -779,6 +779,28 @@ export function StartupPortalPage() {
                         </span>
                       </div>
                     </div>
+
+                    {/* Official Channels */}
+                    {startup.links && startup.links.length > 0 && (
+                      <div className="pt-2 border-t border-border">
+                        <span className="font-semibold text-foreground text-xs block mb-2">Verified Channels:</span>
+                        <div className="flex flex-wrap gap-2">
+                          {startup.links.map((link) => (
+                            <a
+                              key={link.url}
+                              href={link.url}
+                              target="_blank"
+                              rel="noreferrer noopener"
+                              className="inline-flex items-center gap-1.5 rounded-xl border border-border bg-background px-3 py-1 text-xs font-medium text-foreground hover:border-primary/50 transition-colors"
+                            >
+                              <Globe className="size-3 text-primary" />
+                              <span>{link.label}</span>
+                              <ExternalLink className="size-2.5 opacity-60" />
+                            </a>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
 
@@ -796,7 +818,7 @@ export function StartupPortalPage() {
                         <FileCheck className="size-4 text-emerald-600" />
                         <div>
                           <p className="font-semibold text-foreground">Pitch Deck Versioning</p>
-                          <p className="text-[11px] text-muted-foreground">Active v2.1 deck ready</p>
+                          <p className="text-[11px] text-muted-foreground">{startup.name.replace(/\s+/g, '_')}_v2.1</p>
                         </div>
                       </div>
                       <ChevronRight className="size-4 text-muted-foreground" />
@@ -839,11 +861,13 @@ export function StartupPortalPage() {
 
           {/* TAB 2: STRUCTURED INTAKE & PROFILE */}
           {activeTab === "profile" && (
-            <div className="space-y-6 animate-in fade-in duration-200">
+            <div key={startup.slug} className="space-y-6 animate-in fade-in duration-200">
               <div className="rounded-3xl border border-border bg-card p-6 sm:p-8 shadow-xs space-y-6">
                 <div className="flex items-center justify-between border-b border-border pb-4">
                   <div>
-                    <h3 className="font-display text-xl font-bold text-foreground">Structured Venture Intake (FR-10)</h3>
+                    <h3 className="font-display text-xl font-bold text-foreground">
+                      Structured Venture Intake — {startup.name}
+                    </h3>
                     <p className="text-xs text-muted-foreground">
                       Covers AI problem statement, data sources, market sizing, team composition, and risk analysis.
                     </p>
@@ -864,10 +888,31 @@ export function StartupPortalPage() {
                   </div>
 
                   <div>
+                    <label className="text-xs font-semibold text-foreground">Incubation Cohort</label>
+                    <select
+                      defaultValue={startup.cohort || "Cohort 3"}
+                      className="mt-1.5 w-full rounded-xl border border-border bg-background px-3.5 py-2 text-xs text-foreground focus:border-primary focus:outline-hidden"
+                    >
+                      <option value="Cohort 3">Cohort 3 (Active Incubation)</option>
+                      <option value="Cohort 2">Cohort 2 (Graduated)</option>
+                      <option value="Cohort 4">Cohort 4 (Upcoming)</option>
+                    </select>
+                  </div>
+
+                  <div>
                     <label className="text-xs font-semibold text-foreground">Sector / Vertical</label>
                     <input
                       type="text"
                       defaultValue={startup.sector}
+                      className="mt-1.5 w-full rounded-xl border border-border bg-background px-3.5 py-2 text-xs text-foreground focus:border-primary focus:outline-hidden"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-xs font-semibold text-foreground">Founded Year</label>
+                    <input
+                      type="text"
+                      defaultValue={startup.founded}
                       className="mt-1.5 w-full rounded-xl border border-border bg-background px-3.5 py-2 text-xs text-foreground focus:border-primary focus:outline-hidden"
                     />
                   </div>
@@ -900,7 +945,7 @@ export function StartupPortalPage() {
                   </div>
 
                   <div>
-                    <label className="text-xs font-semibold text-foreground">Team Size</label>
+                    <label className="text-xs font-semibold text-foreground">Core Team Size</label>
                     <input
                       type="number"
                       defaultValue={startup.team_size}
@@ -932,13 +977,39 @@ export function StartupPortalPage() {
                     ))}
                   </div>
                 </div>
+
+                {/* Official Links */}
+                {startup.links && startup.links.length > 0 && (
+                  <div className="pt-4 border-t border-border">
+                    <h4 className="font-display text-sm font-bold text-foreground mb-3">Official Web & Social Channels</h4>
+                    <div className="grid gap-3 sm:grid-cols-2">
+                      {startup.links.map((link, idx) => (
+                        <div key={idx} className="flex items-center justify-between rounded-xl border border-border bg-background p-3 text-xs">
+                          <div className="flex items-center gap-2">
+                            <Globe className="size-3.5 text-primary" />
+                            <span className="font-semibold text-foreground">{link.label}:</span>
+                            <span className="text-muted-foreground truncate max-w-[180px]">{link.url}</span>
+                          </div>
+                          <a
+                            href={link.url}
+                            target="_blank"
+                            rel="noreferrer noopener"
+                            className="text-primary hover:underline text-xs flex items-center gap-1"
+                          >
+                            Open <ExternalLink className="size-2.5" />
+                          </a>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           )}
 
           {/* TAB 3: PITCH DECK & FUNDING */}
           {activeTab === "pitch" && (
-            <div className="space-y-6 animate-in fade-in duration-200">
+            <div key={startup.slug} className="space-y-6 animate-in fade-in duration-200">
               <div className="grid gap-6 lg:grid-cols-2">
                 {/* Pitch Deck Card */}
                 <div className="rounded-3xl border border-border bg-card p-6 sm:p-8 shadow-xs space-y-4">
@@ -959,7 +1030,9 @@ export function StartupPortalPage() {
                   <div className="rounded-2xl border border-dashed border-border bg-muted/20 p-6 text-center space-y-3">
                     <FileText className="size-8 text-primary mx-auto" />
                     <div>
-                      <p className="font-bold text-xs text-foreground">Sela_Health_PitchDeck_SeriesPreSeed_v2.1.pdf</p>
+                      <p className="font-bold text-xs text-foreground">
+                        {startup.name.replace(/\s+/g, '_')}_PitchDeck_{startup.investment_ask.round}_v2.1.pdf
+                      </p>
                       <p className="text-[11px] text-muted-foreground">14.2 MB · Updated 2 days ago</p>
                     </div>
                     <div className="flex justify-center gap-2 pt-2">
@@ -1129,7 +1202,7 @@ export function StartupPortalPage() {
 
           {/* TAB 5: WHITE-LABEL THEME BUILDER */}
           {activeTab === "theme" && (
-            <div className="space-y-6 animate-in fade-in duration-200">
+            <div key={startup.slug} className="space-y-6 animate-in fade-in duration-200">
               <div className="rounded-3xl border border-border bg-card p-6 sm:p-8 shadow-xs space-y-4">
                 <div className="flex items-center justify-between border-b border-border pb-4">
                   <div>
