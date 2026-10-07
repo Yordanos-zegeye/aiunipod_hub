@@ -107,10 +107,10 @@ export function PostJobModal({ isOpen, onClose, onJobCreated }: PostJobModalProp
   const activeIncubatedStartup =
     STARTUPS.find((s) => s.slug === selectedStartupSlug) ||
     STARTUPS[0] || {
-      name: "Sela Health",
-      tagline: "AI triage for community clinics",
-      slug: "sela-health",
-      sector: "Health AI",
+      name: "MeklitAI",
+      tagline: "Offline-first, curriculum-grounded AI tutoring platform",
+      slug: "meklit-ai",
+      sector: "EdTech AI",
     };
 
   const handleStartupSelect = (slug: string) => {
@@ -118,9 +118,9 @@ export function PostJobModal({ isOpen, onClose, onJobCreated }: PostJobModalProp
     const s = STARTUPS.find((item) => item.slug === slug);
     if (s) {
       setSector(s.sector);
-      if (s.slug === "sela-health") {
-        setDepartment("Clinical AI & Triage Systems");
-        setLocation("Addis Ababa (EAII HQ) & Tikur Anbessa Hospital");
+      if (s.slug === "meklit-ai") {
+        setDepartment("Applied NLP & Educational AI");
+        setLocation("Addis Ababa, Ethiopia");
       } else if (s.slug === "ethioagrisight") {
         setDepartment("Computer Vision & Remote Sensing");
         setLocation("Addis Ababa (EAII HQ) & Adama Hub");
@@ -657,7 +657,7 @@ export function PostJobModal({ isOpen, onClose, onJobCreated }: PostJobModalProp
                   type="text"
                   value={contactEmailOrUrl}
                   onChange={(e) => setContactEmailOrUrl(e.target.value)}
-                  placeholder="e.g. jobs@selahealth.ai or https://selahealth.ai/apply"
+                  placeholder="e.g. jobs@meklitai.com or https://meklitai.com/apply"
                   className="w-full rounded-xl border border-border bg-card px-3.5 py-2 text-xs text-foreground focus:border-primary focus:outline-hidden"
                 />
                 <p className="mt-1 text-[11px] text-muted-foreground">

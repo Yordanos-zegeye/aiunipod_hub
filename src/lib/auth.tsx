@@ -49,8 +49,8 @@ export const DEMO_USERS: Record<string, AuthUser> = {
     name: "Startup Founder",
     title: "Founder & CEO",
     role: "STARTUP_ADMIN",
-    startupSlug: "sela-health",
-    startupName: "Sela Health",
+    startupSlug: "meklit-ai",
+    startupName: "MeklitAI",
     avatarUrl: "/avatars/founder.svg",
     createdAt: "2025-03-15",
   },
@@ -163,7 +163,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } else {
       // Create user session based on provided credentials
       const role: UserRole = requestedRole || "GUEST";
-      const slug = startupSlug || (role === "STARTUP_ADMIN" ? "sela-health" : undefined);
+      const slug = startupSlug || (role === "STARTUP_ADMIN" ? "meklit-ai" : undefined);
       const startup = slug ? STARTUPS.find((s) => s.slug === slug) : undefined;
 
       const avatar =

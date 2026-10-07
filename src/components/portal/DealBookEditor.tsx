@@ -507,7 +507,7 @@ export function DealBookEditor({ startup, onChange, onSave, hasUnsavedChanges }:
                 <input
                   type="text"
                   value={startup.legal_name || ""}
-                  placeholder="e.g. Sela Digital Health Technologies PLC"
+                  placeholder="e.g. SentriNova Technologies PLC"
                   onChange={(e) => updateStartupField("legal_name", e.target.value)}
                   className="mt-1.5 w-full rounded-xl border border-border bg-background px-3 py-2 text-xs text-foreground focus:border-primary focus:outline-hidden"
                 />
@@ -612,7 +612,7 @@ export function DealBookEditor({ startup, onChange, onSave, hasUnsavedChanges }:
                   <input
                     type="text"
                     value={startup.primary_contact?.name || ""}
-                    placeholder="e.g. Dr. Selamawit Bekele"
+                    placeholder="e.g. Bereket Tesfaye"
                     onChange={(e) => updateNested("primary_contact", "name", e.target.value)}
                     className="mt-1.5 w-full rounded-xl border border-border bg-background px-3 py-2 text-xs text-foreground focus:border-primary focus:outline-hidden"
                   />
@@ -2078,7 +2078,7 @@ export function DealBookEditor({ startup, onChange, onSave, hasUnsavedChanges }:
                   required
                   value={productForm.name}
                   onChange={(e) => setProductForm({ ...productForm, name: e.target.value })}
-                  placeholder="e.g. Sela Edge Triage"
+                  placeholder="e.g. MeklitAI Tutor Core"
                   className="mt-1 w-full rounded-xl border border-border bg-background px-3 py-1.5 text-xs text-foreground"
                 />
               </div>
@@ -2172,7 +2172,7 @@ export function DealBookEditor({ startup, onChange, onSave, hasUnsavedChanges }:
                 required
                 value={founderForm.name}
                 onChange={(e) => setFounderForm({ ...founderForm, name: e.target.value })}
-                placeholder="e.g. Dr. Selamawit Bekele"
+                placeholder="e.g. Bereket Tesfaye"
                 className="mt-1 w-full rounded-xl border border-border bg-background px-3 py-1.5 text-xs text-foreground"
               />
             </div>

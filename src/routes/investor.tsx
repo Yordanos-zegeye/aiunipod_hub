@@ -86,9 +86,9 @@ export function InvestorPortalPage() {
   // Personal deal pipeline state (PRD FR-18)
   const [pipeline, setPipeline] = useState<PipelineDeal[]>([
     {
-      startupSlug: "sela-health",
+      startupSlug: "meklit-ai",
       stage: "In Talks",
-      privateNotes: "Met founder at EAII demo day. Impressive offline Amharic NLP benchmarks. Reviewing clinical data room.",
+      privateNotes: "Met founder at EAII demo day. Impressive offline curriculum-grounded Amharic AI tutor benchmarks. Reviewing data room.",
       pledgedAmount: 100000,
     },
     {
@@ -650,7 +650,7 @@ export function InvestorPortalPage() {
             {/* Log Investment Commitment CTA */}
             <Button
               size="sm"
-              onClick={() => handleLogCommitment("sela-health")}
+              onClick={() => handleLogCommitment(STARTUPS[0]?.slug || "meklit-ai")}
               className="rounded-xl text-xs h-9 gap-1.5 font-semibold bg-primary text-primary-foreground shadow-xs"
             >
               <Plus className="size-3.5" /> <span className="hidden sm:inline">Log Commitment</span> (FR-19)
@@ -1037,31 +1037,31 @@ export function InvestorPortalPage() {
                 <div className="space-y-3">
                   {[
                     {
-                      title: "Sela Health — Pre-Seed Institutional Pitch Deck v2.1",
+                      title: "MeklitAI — Institutional Pitch Deck & EdTech Memorandum",
                       size: "14.2 MB",
                       type: "PITCH_DECK",
-                      startup: "Sela Health",
+                      startup: "MeklitAI",
                       locked: vettingStatus !== "VETTED",
                     },
                     {
-                      title: "Sela Health — Clinical Trial Efficacy & Amharic NLP Benchmark",
+                      title: "HealUp — Clinical Decision Support & Vernacular NLP Validation",
                       size: "8.5 MB",
                       type: "CLINICAL_TRIAL",
-                      startup: "Sela Health",
+                      startup: "HealUp",
                       locked: vettingStatus !== "VETTED",
                     },
                     {
-                      title: "Kuraz Agri — Cooperative Satellite Yield Projections 2026",
+                      title: "EthioAgriSight — Cooperative Satellite Yield Projections 2026",
                       size: "22.1 MB",
                       type: "FINANCIAL_MODEL",
-                      startup: "Kuraz Agri",
+                      startup: "EthioAgriSight",
                       locked: vettingStatus !== "VETTED",
                     },
                     {
-                      title: "Adera Labs — Amharic Speech Corpus Architecture & Latency Report",
+                      title: "TrooFace — Biometric Verification Architecture & Fayda Report",
                       size: "5.4 MB",
                       type: "TECH_REPORT",
-                      startup: "Adera Labs",
+                      startup: "TrooFace",
                       locked: vettingStatus !== "VETTED",
                     },
                   ].map((doc, idx) => (
@@ -1176,9 +1176,9 @@ export function InvestorPortalPage() {
                     <span className="rounded-full bg-emerald-500/10 px-2 py-0.5 text-[10px] font-bold text-emerald-600">
                       SDG 3: Good Health
                     </span>
-                    <h5 className="font-bold text-sm text-foreground">40 Rural Clinics Reached</h5>
+                    <h5 className="font-bold text-sm text-foreground">40 Regional Clinics Reached</h5>
                     <p className="text-xs text-muted-foreground">
-                      Sela Health triage models running offline in Oromia & Amhara regional bureaus.
+                      HealUp and NuraCare triage models delivering clinical decision support in primary care.
                     </p>
                   </div>
 
@@ -1188,7 +1188,7 @@ export function InvestorPortalPage() {
                     </span>
                     <h5 className="font-bold text-sm text-foreground">1,200 Smallholder Farmers</h5>
                     <p className="text-xs text-muted-foreground">
-                      Kuraz Agri yield matching algorithms reducing post-harvest loss by 18%.
+                      EthioAgriSight spatial AI and satellite yield matching algorithms reducing post-harvest loss by 18%.
                     </p>
                   </div>
 

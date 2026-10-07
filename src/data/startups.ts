@@ -6462,194 +6462,6 @@ export const STARTUPS: Startup[] = [
           "radius": "1rem",
           "layout": "classic"
       }
-  },
-{
-    slug: "sela-health",
-    name: "Sela Health",
-    legal_name: "Sela Digital Health Technologies PLC",
-    tagline: "Offline-first clinical AI triage for rural community health posts",
-    sector: "Health AI",
-    cohort: "Cohort 3",
-    description:
-      "Sela Health builds an offline-first clinical triage assistant that helps frontline health extension workers in rural Ethiopia prioritize critical patients. Powered by quantized language models trained on localized symptom vocabularies in Amharic, Afaan Oromoo, and Tigrinya, Sela operates on $60 Android devices with zero cloud dependency.",
-    location: "Addis Ababa, Ethiopia",
-    operating_markets: ["Ethiopia (Oromia & Amhara Regional States)", "East Africa"],
-    founded: "2024",
-    team_size: 9,
-    primary_contact: {
-      name: "Dr. Selamawit Bekele",
-      role: "Co-Founder & Chief Medical Officer",
-      email: "selam@selahealth.et",
-      phone: "+251 91 142 8821",
-    },
-    problem: {
-      problem_statement:
-        "Over 80% of Ethiopians live in rural areas served by 40,000+ Health Extension Workers who lack clinical diagnostic support, leading to late-stage triage of preventable infectious and maternal complications.",
-      target_affected: "Rural primary health posts, community health extension workers, and 60M+ rural citizens.",
-      severity:
-        "Over 45% of critical patient transfers arrive at district hospitals with severe complications that could have been identified 72 hours earlier at primary health posts.",
-      current_alternatives: "Paper-based integrated management of childhood illness (IMCI) booklets and unguided manual referrals.",
-      why_alternatives_fail: "Complex decision trees are difficult to parse under emergency conditions, paper logs lack analytics, and cloud health apps fail due to frequent telecom blackouts.",
-    },
-    ai_tech: {
-      technology_type: "Edge NLP, Multi-Lingual Speech AI & Quantized Diagnostic Decision Trees",
-      models_used: ["Quantized Llama-3 8B (4-bit GGML on ARM)", "Ethiopic Whisper Small (Acoustic ASR)", "Localized IMCI Clinical Graph"],
-      model_ownership: "Proprietary fine-tuned localized models with sovereign clinical weights",
-      system_architecture:
-        "Edge-first architecture executing on local Android NPU; local SQLite transaction ledger; asynchronous mesh sync over Wi-Fi Direct or weekly cellular packet bursts.",
-      proprietary_ip:
-        "Proprietary 14,000-concept clinical ontology mapping colloquial Amharic and Afaan Oromoo somatic idioms to standardized ICD-11 diagnostic codes.",
-      data_sources: "400,000+ de-identified triage interaction transcripts from 42 Woreda clinics, validated with Tikur Anbessa Specialized Hospital clinicians.",
-      dataset_size: "18.4 GB annotated clinical speech and bilingual symptom evaluation logs.",
-      data_rights: "Full sovereign institutional data agreement co-signed with Ethiopian Artificial Intelligence Institute (EAII) and Regional Health Bureaus.",
-      data_advantage:
-        "Only dataset capturing vernacular symptom descriptions (e.g. 'hot stomach' or 'lung stiffness') translated into calibrated triage urgencies.",
-    },
-    market: {
-      tam_usd: "$1.4B",
-      sam_usd: "$320M",
-      som_usd: "$45M",
-      customer_segments: ["Ministry of Health & Regional Health Bureaus", "International NGOs & UNICEF", "Private Rural Clinic Cooperatives"],
-      expansion_markets: ["Kenya (Northern Frontier)", "Rwanda", "Uganda"],
-      opportunity_narrative:
-        "Primary healthcare digitization across Sub-Saharan Africa is accelerating under national universal healthcare mandates, creating high demand for offline-capable sovereign AI tools.",
-    },
-    business_model: {
-      revenue_model: "B2G Enterprise Annual Licensing + Per-Clinic Subscription",
-      pricing: "$120 / clinic / year base tier + $450 / district hospital analytics tier",
-      arpu: "$1,850 / Woreda Health Office / year",
-      mrr_arr: "ARR: $95,000 | MRR: $8,200",
-      other_metrics: "84% gross software margin; 118% net revenue retention across pilot health bureaus",
-    },
-    traction: {
-      key_metric_value: "148,000+",
-      key_metric_label: "Rural Patients Triaged",
-      active_deployments: "42 Primary Clinics across East Shewa & Arsi Zones",
-      key_partners: ["Ethiopian Artificial Intelligence Institute (EAII)", "Oromia Regional Health Bureau", "Tikur Anbessa Hospital", "UNDP timbuktoo"],
-      major_milestones: [
-        "EFDA Phase 1 Software as Medical Device (SaMD) exemption granted",
-        "Clinical pilot completed across 42 clinics with 89.4% triage agreement",
-        "EAII GPU cluster allocation for continuous model quantization",
-      ],
-    },
-    ai_performance: {
-      primary_metric: "Triage Diagnostic Agreement with Senior Clinicians",
-      current_performance: "89.4% Concordance",
-      baseline_benchmark: "61.2% (Standard General LLMs without colloquial adaptation)",
-      improvement: "+28.2% higher emergency triage accuracy in rural field conditions",
-      latency: "< 42ms on MediaTek Helio G85 chipset",
-      inference_cost: "$0.000 (100% on-device zero cloud inference fee)",
-      validation: "Blinded prospective validation study against 1,200 physician-adjudicated emergency cases.",
-      scale: "148,000+ triage consultations; 45M edge tokens processed/month; zero cloud egress costs",
-    },
-    competitive_advantage: {
-      main_competitors: ["Babylon Health (Legacy)", "Ada Health", "Generic Paper IMCI Protocols"],
-      proprietary_moat: "Offline-first quantized edge models and culturally aligned bilingual somatic ontology.",
-      local_expertise: "Founded by EAII NLP research fellows and practicing Ethiopian emergency physicians.",
-      distribution_moat: "Direct institutional pilot integration through the Ministry of Health Primary Health Care Directorate.",
-    },
-    founders: [
-      {
-        name: "Dr. Selamawit Bekele, MD",
-        role: "Chief Executive Officer",
-        background: "Former emergency physician at Tikur Anbessa Hospital; MPH Harvard Chan School of Public Health.",
-      },
-      {
-        name: "Kidus Hailu, MSc",
-        role: "Chief Technology Officer",
-        background: "Ex-EAII Senior NLP Researcher; lead contributor to open Ethiopic language tokenization benchmarks.",
-      },
-    ],
-    team_breakdown: {
-      technical_team_size: 5,
-      ai_data_science_size: 3,
-      key_team_strength: "Unique clinical MD + EAII NLP research fellowship combination with published benchmarks at NeurIPS and ICLR workshops.",
-    },
-    impact: {
-      beneficiaries_reached: "148,000+ rural patients screened; 18,200 maternal complications flagged early",
-      jobs_created: 14,
-      women_youth_representation: "62% women-led management and 85% youth health worker adoption",
-      sdgs: [
-        { number: 3, label: "Good Health and Well-Being" },
-        { number: 10, label: "Reduced Inequalities" },
-        { number: 9, label: "Industry, Innovation and Infrastructure" },
-      ],
-      impact_narrative:
-        "Sela transforms primary health posts from isolated outposts into AI-guided living laboratories, eliminating preventable rural triage delays and cutting maternal transfer times by 3.8 days.",
-    },
-    products: [
-      {
-        name: "Sela Triage Core",
-        summary: "Zero-latency offline symptom triage assistant for low-end Android handsets with voice input.",
-        stage: "Pilot",
-        target_customer: "Frontline health extension workers and rural nurses.",
-        ai_functionality: "Speech-to-text intake in Amharic & Afaan Oromoo paired with a 4-bit clinical decision graph.",
-        differentiation: "Runs 100% offline without cell service; battery life optimized for 14 hours continuous field shifts.",
-      },
-      {
-        name: "Sela Sentinel Dashboard",
-        summary: "Epidemiological caseload heatmaps and disease outbreak syndromic surveillance for Woreda Health Offices.",
-        stage: "Prototype",
-        target_customer: "Woreda Health Officers and Ministry epidemiologists.",
-        ai_functionality: "Spatio-temporal anomaly detection identifying atypical clusters of fever and diarrheal illness.",
-        differentiation: "Aggregates offline clinic records via opportunistic Bluetooth synchronization.",
-      },
-    ],
-    financials: {
-      historical: "FY2024: $42,000 revenue (EAII living lab grant & pilot deployment fees across 42 clinics)",
-      projected: [
-        { year: "FY2025", revenue_usd: 280000, gross_profit_usd: 224000, gross_margin_pct: 80, operating_profit_usd: -90000, active_units: "140 Clinics" },
-        { year: "FY2026", revenue_usd: 890000, gross_profit_usd: 730000, gross_margin_pct: 82, operating_profit_usd: 110000, active_units: "520 Clinics" },
-        { year: "FY2027", revenue_usd: 2450000, gross_profit_usd: 2058000, gross_margin_pct: 84, operating_profit_usd: 680000, active_units: "1,850 Clinics" },
-      ],
-      unit_economics: "$120 customer acquisition cost per clinic, 5.8x LTV/CAC ratio, and 3.4 months payback period.",
-    },
-    growth_plan: {
-      product_growth: "Multimodal acoustic cough diagnostic & low-power thermal sensor integration for fever triage.",
-      customer_growth: "Expand from 42 Woreda clinics to 450 primary healthcare centers across 4 regional states.",
-      geographic_expansion: "Cross-border corridor expansion into Kenya Northern Frontier and Rwanda Community Health programs.",
-      ai_capability_expansion: "Continuous federated on-device fine-tuning without centralized clinical data transfer.",
-    },
-    diligence_documents: [
-      { title: "Sela Health Executive Pitch Deck v2.4", category: "Pitch Deck", file_type: "PDF", file_size: "4.8 MB", status: "Available" },
-      { title: "Sela 3-Year Pro Forma Financial Model & Unit Economics", category: "Financials", file_type: "XLSX", file_size: "1.2 MB", status: "Available" },
-      { title: "EAII Living Lab Benchmark & Quantization Audit", category: "Technical", file_type: "PDF", file_size: "2.1 MB", status: "Verified" },
-      { title: "EFDA Class I Software-as-a-Medical-Device Clearance Dossier", category: "Regulatory & Impact", file_type: "PDF", file_size: "3.4 MB", status: "Verified" },
-      { title: "Sela Health Cap Table & SAFE Round Summary", category: "Cap Table", file_type: "PDF", file_size: "650 KB", status: "Restricted" },
-    ],
-    investment_ask: {
-      amount_usd: 450000,
-      round: "Pre-seed",
-      preferred_instrument: "SAFE (Post-Money Valuation Cap) or Equity",
-      current_funding: "$120,000 non-dilutive grant from EAII & UNDP timbuktoo",
-      use_of_funds: "Clinical validation across 120 additional health centers, EFDA Class II certification, and language model fine-tuning team expansion.",
-      funds_breakdown: [
-        { category: "Clinical Trials & EFDA Regulatory Approval", percentage: 35, amount_usd: 157500, description: "Multi-center clinical validation across 3 regional states." },
-        { category: "Model Engineering & GPU Workstations", percentage: 30, amount_usd: 135000, description: "On-device quantization and Somali/Sidama language expansion." },
-        { category: "Field Operations & Device Subsidies", percentage: 20, amount_usd: 90000, description: "Procurement of 500 certified Android handsets for health extension workers." },
-        { category: "Core Team Hiring", percentage: 15, amount_usd: 67500, description: "2 senior ML engineers and 1 clinical operations lead." },
-      ],
-    },
-    risks: [
-      { risk: "Regulatory delay in Ethiopian Food and Drug Authority (EFDA) SaMD certification.", severity: "Medium", mitigation: "Co-sponsored living lab trials with EAII and AAU School of Public Health." },
-      { risk: "Hardware obsolescence in rural clinics.", severity: "Low", mitigation: "Strict design target of Android 9+ and 2GB RAM minimum hardware requirement." },
-      { risk: "Dialect drift across varied highland regions.", severity: "Medium", mitigation: "Active learning loop that prompts health workers for clarification and flags unknown idioms." },
-    ],
-    links: [
-      { label: "Website", url: "https://example.org/sela" },
-      { label: "LinkedIn", url: "https://example.org/sela-linkedin" },
-      { label: "Clinical Whitepaper", url: "https://example.org/sela-whitepaper" },
-    ],
-    theme: {
-      primary_color: "#0F766E",
-      secondary_color: "#134E4A",
-      accent_color: "#F59E0B",
-      surface_color: "#F8FAF9",
-      text_color: "#0B1F1C",
-      font_family: "system-ui, sans-serif",
-      radius: "1rem",
-      layout: "classic",
-    },
   }
 ];
 
@@ -6657,6 +6469,8 @@ export const STORAGE_PREFIX = "aiunipod_startup_override_";
 
 export function getSavedStartup(slug: string): Startup | null {
   if (typeof window === "undefined" || !window.localStorage) return null;
+  const base = STARTUPS.find((s) => s.slug === slug);
+  if (!base) return null;
   try {
     const raw = window.localStorage.getItem(STORAGE_PREFIX + slug);
     if (!raw) return null;
@@ -6690,6 +6504,25 @@ export function resetStartupOverride(slug: string): void {
 }
 
 export function getAllStartups(): Startup[] {
+  if (typeof window !== "undefined" && window.localStorage) {
+    try {
+      const validSlugs = new Set(STARTUPS.map((s) => s.slug));
+      const keysToRemove: string[] = [];
+      for (let i = 0; i < window.localStorage.length; i++) {
+        const key = window.localStorage.key(i);
+        if (key && key.startsWith(STORAGE_PREFIX)) {
+          const slug = key.slice(STORAGE_PREFIX.length);
+          if (!validSlugs.has(slug)) {
+            keysToRemove.push(key);
+          }
+        }
+      }
+      keysToRemove.forEach((k) => window.localStorage.removeItem(k));
+    } catch {
+      // ignore
+    }
+  }
+
   return STARTUPS.map((base) => {
     if (typeof window !== "undefined" && window.localStorage) {
       try {
@@ -6706,18 +6539,19 @@ export function getAllStartups(): Startup[] {
 }
 
 export function getStartupBySlug(slug: string): Startup | undefined {
+  const base = STARTUPS.find((s) => s.slug === slug);
+  if (!base) return undefined;
   if (typeof window !== "undefined" && window.localStorage) {
     try {
       const stored = window.localStorage.getItem(STORAGE_PREFIX + slug);
       if (stored) {
-        const base = STARTUPS.find((s) => s.slug === slug);
-        return base ? { ...base, ...JSON.parse(stored) } : JSON.parse(stored);
+        return { ...base, ...JSON.parse(stored) };
       }
     } catch {
       // ignore
     }
   }
-  return STARTUPS.find((s) => s.slug === slug);
+  return base;
 }
 
 const STAGE_ORDER: Record<string, number> = {

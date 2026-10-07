@@ -76,8 +76,8 @@ export function StartupPortalPage() {
   const { user, switchDemoRole, logout } = useAuth();
   const navigate = useNavigate();
 
-  // Find active startup: fallback to Sela Health
-  const activeSlug = user?.startupSlug || "sela-health";
+  // Find active startup: fallback to first incubated startup (MeklitAI)
+  const activeSlug = user?.startupSlug || STARTUPS[0]?.slug || "meklit-ai";
   const [selectedStartupSlug, setSelectedStartupSlug] = useState<string>(activeSlug);
 
   // Dynamic startup form state

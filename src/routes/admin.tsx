@@ -118,13 +118,13 @@ const INITIAL_COHORT_APPLICANTS = [
   {
     id: "c3-01",
     cohortId: "cohort-03",
-    name: "TenaMed AI",
-    sector: "Health AI",
-    founder: "Dr. Selamawit Bekele",
-    email: "selam@tenamed.et",
-    university: "Addis Ababa University (Health Sciences)",
+    name: "MeklitAI",
+    sector: "EdTech AI",
+    founder: "Bereket Tesfaye",
+    email: "contact@sentrinova.com",
+    university: "Addis Ababa University / EAII Lab",
     techSummary:
-      "Edge-AI ultrasound diagnostics optimized for maternal clinics with low-bandwidth offline caching.",
+      "Offline-first, curriculum-grounded AI tutoring platform for Ethiopian K-12 learners.",
     score: 94,
     status: "UNDER_REVIEW" as "UNDER_REVIEW" | "SHORTLISTED" | "INTERVIEWED" | "ACCEPTED" | "REJECTED",
     date: "2026-09-12",
@@ -160,13 +160,13 @@ const INITIAL_COHORT_APPLICANTS = [
   {
     id: "c3-04",
     cohortId: "cohort-03",
-    name: "Abyssinia Voice LLM",
-    sector: "Language AI",
-    founder: "Tewodros Kassahun",
-    email: "ted@abyssiniavoice.ai",
+    name: "VocalEye AI",
+    sector: "Accessibility AI",
+    founder: "Muktar Getu",
+    email: "muktar@vocaleye.ai",
     university: "EAII Natural Language Processing Lab",
     techSummary:
-      "Low-resource speech-to-text models for Tigrinya, Afaan Oromoo, and Somali customer support automation.",
+      "AI-powered vision and accessibility assistive platform for visually impaired Ethiopians.",
     score: 92,
     status: "ACCEPTED" as "UNDER_REVIEW" | "SHORTLISTED" | "INTERVIEWED" | "ACCEPTED" | "REJECTED",
     date: "2026-09-20",
@@ -215,7 +215,7 @@ export function AdminDashboardPage() {
     {
       id: "feed-1",
       title: "Clinical Trial Validation Milestone",
-      desc: "Sela Health commenced field pilot validation across 40 rural health extension posts in Oromia.",
+      desc: "HealUp commenced field pilot validation across 40 primary health centers in Oromia.",
       time: "12m ago",
       tag: "PILOT",
       stage: "Pilot",
@@ -224,11 +224,11 @@ export function AdminDashboardPage() {
     {
       id: "feed-2",
       title: "Commercial Cooperative Agreement",
-      desc: "Kuraz Agri reached Market stage with 14 smallholder farmer cooperatives in Hawassa.",
+      desc: "EthioAgriSight reached Market stage with 14 smallholder farmer cooperatives in Hawassa.",
       time: "45m ago",
       tag: "MARKET",
       stage: "Market",
-      cohort: "Cohort 2",
+      cohort: "Cohort 3",
     },
     {
       id: "feed-3",
@@ -242,7 +242,7 @@ export function AdminDashboardPage() {
     {
       id: "feed-4",
       title: "Institutional Deal Room Diligence",
-      desc: "Vetted Institutional Investor accessed deal room diligence pack for Enku Credit.",
+      desc: "Vetted Institutional Investor accessed deal room diligence pack for Birr Gebeya.",
       time: "3h ago",
       tag: "INVESTOR",
       stage: "Market",
@@ -250,21 +250,21 @@ export function AdminDashboardPage() {
     },
     {
       id: "feed-5",
-      title: "Industrial Park Vision Deployment",
-      desc: "Abyssinia Vision deployed TextileInspect AI camera sensor units at Hawassa Industrial Park.",
+      title: "Digital Identity Verification Deployment",
+      desc: "TrooFace deployed Fayda KYC biometric verification units at partner commercial hubs.",
       time: "5h ago",
       tag: "MARKET",
       stage: "Market",
-      cohort: "Cohort 2",
+      cohort: "Cohort 3",
     },
     {
       id: "feed-6",
-      title: "Rift Valley Hydrological Telemetry",
-      desc: "Awash Climate expanded river basin sensor network in partnership with Adama Science and Technology University.",
+      title: "Precision Agriculture Telemetry",
+      desc: "Smart Scarecrow expanded solar-powered acoustic AI pest deterrence network in Arsi Zone.",
       time: "1d ago",
       tag: "PILOT",
       stage: "Pilot",
-      cohort: "Cohort 2",
+      cohort: "Cohort 3",
     },
   ]);
 
@@ -624,14 +624,14 @@ export function AdminDashboardPage() {
     {
       id: "log-3",
       actor: "Admin User",
-      action: "Reviewed Cohort 3 application: TenaMed AI (Score: 94/100)",
+      action: "Reviewed Cohort 3 application: MeklitAI (Score: 94/100)",
       time: "2 hours ago",
       type: "COHORT" as const,
     },
     {
       id: "log-4",
       actor: "Startup Founder",
-      action: "Uploaded v2.4 institutional pitch deck for Sela Health",
+      action: "Uploaded v2.4 institutional pitch deck for MeklitAI",
       time: "5 hours ago",
       type: "STARTUP" as const,
     },
@@ -1590,7 +1590,7 @@ export function AdminDashboardPage() {
                     </p>
                     <div className="mt-3 pt-2.5 border-t border-border/60 flex items-center justify-between text-[11px]">
                       <span className="text-muted-foreground">Key Example:</span>
-                      <span className="font-semibold text-foreground">Adera Labs</span>
+                      <span className="font-semibold text-foreground">VocalEye AI, OpenPIA</span>
                     </div>
                   </div>
 
@@ -1616,7 +1616,7 @@ export function AdminDashboardPage() {
                     </p>
                     <div className="mt-3 pt-2.5 border-t border-border/60 flex items-center justify-between text-[11px]">
                       <span className="text-muted-foreground">Key Examples:</span>
-                      <span className="font-semibold text-foreground">Sela, Awash, Tenaw</span>
+                      <span className="font-semibold text-foreground">HealUp, Smart Scarecrow</span>
                     </div>
                   </div>
 
@@ -1642,7 +1642,7 @@ export function AdminDashboardPage() {
                     </p>
                     <div className="mt-3 pt-2.5 border-t border-border/60 flex items-center justify-between text-[11px]">
                       <span className="text-muted-foreground">Key Examples:</span>
-                      <span className="font-semibold text-foreground">Kuraz, Enku, Sheba</span>
+                      <span className="font-semibold text-foreground">EthioAgriSight, Birr Gebeya, TrooFace</span>
                     </div>
                   </div>
                 </div>

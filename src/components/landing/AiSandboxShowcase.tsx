@@ -171,7 +171,7 @@ export function AiSandboxShowcase() {
             <Mic className="size-4" />
             <span>Ethiopian Voice & NLP</span>
             <span className="rounded-full bg-primary-foreground/20 px-2 py-0.5 text-[10px] font-bold">
-              Adera Labs
+              VocalEye AI
             </span>
           </button>
 
@@ -187,7 +187,7 @@ export function AiSandboxShowcase() {
             <Leaf className="size-4" />
             <span>Crop Vision & Satellite</span>
             <span className="rounded-full bg-primary-foreground/20 px-2 py-0.5 text-[10px] font-bold">
-              Kuraz Agri
+              EthioAgriSight
             </span>
           </button>
 
@@ -203,7 +203,7 @@ export function AiSandboxShowcase() {
             <HeartPulse className="size-4" />
             <span>Offline Clinic Triage</span>
             <span className="rounded-full bg-primary-foreground/20 px-2 py-0.5 text-[10px] font-bold">
-              Sela Health
+              HealUp
             </span>
           </button>
         </div>
@@ -216,7 +216,7 @@ export function AiSandboxShowcase() {
               <div className="space-y-6">
                 <div>
                   <span className="text-xs font-semibold uppercase tracking-widest text-primary">
-                    Model: Adera-Whisper-V3-Ethiopic · High-Performance GPU Benchmarked
+                    Model: VocalEye-Whisper-V3-Ethiopic · High-Performance GPU Benchmarked
                   </span>
                   <h3 className="mt-2 font-display text-2xl font-bold sm:text-3xl">
                     Multi-Lingual Acoustic & Speech Recognition
@@ -349,7 +349,7 @@ export function AiSandboxShowcase() {
               <div className="space-y-6">
                 <div>
                   <span className="text-xs font-semibold uppercase tracking-widest text-primary">
-                    Model: Kuraz-CropVision-YOLOv9 · Regional Edge Node Tested
+                    Model: EthioAgriSight-CropVision-YOLOv9 · Regional Edge Node Tested
                   </span>
                   <h3 className="mt-2 font-display text-2xl font-bold sm:text-3xl">
                     Satellite Telemetry & Crop Pathology Vision
@@ -453,7 +453,7 @@ export function AiSandboxShowcase() {
               <div className="space-y-6">
                 <div>
                   <span className="text-xs font-semibold uppercase tracking-widest text-primary">
-                    Model: Sela-Clinical-Triage-Edge · National Health Priority
+                    Model: HealUp-Clinical-Triage-Edge · National Health Priority
                   </span>
                   <h3 className="mt-2 font-display text-2xl font-bold sm:text-3xl">
                     Offline Clinical Diagnostics & Triage for Health Extension Workers

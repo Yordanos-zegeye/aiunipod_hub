@@ -33,7 +33,7 @@ export interface JobOpening {
 
 export const JOB_OPENINGS: JobOpening[] = [
   {
-    id: "job-kuraz-cv-01",
+    id: "job-agrisight-cv-01",
     title: "Senior Computer Vision Engineer (Crop Pathology & Satellite)",
     startupSlug: "ethioagrisight",
     startupName: "EthioAgriSight",
@@ -80,11 +80,11 @@ export const JOB_OPENINGS: JobOpening[] = [
     ],
   },
   {
-    id: "job-sela-nlp-02",
+    id: "job-healup-nlp-02",
     title: "Clinical NLP Research Scientist (Ethiopic Languages)",
-    startupSlug: "sela-health",
-    startupName: "Sela Health",
-    startupTagline: "AI triage for community clinics",
+    startupSlug: "healup-ai",
+    startupName: "HealUp",
+    startupTagline: "AI-driven clinical diagnostics and medical triage",
     sector: "Health AI",
     location: "Addis Ababa (EAII Headquarters)",
     type: "Full-time",
@@ -98,7 +98,7 @@ export const JOB_OPENINGS: JobOpening[] = [
     computeAllocation: "High-Performance GPU Cluster & EAII Clinical Corpus Storage",
     skills: ["NLP", "Transformers", "LoRA / QLoRA", "Amharic NLP", "GGUF Quantization", "PyTorch"],
     summary:
-      "Join Sela Health to build and calibrate lightweight, offline-first clinical decision support models that process patient case presentations in Amharic and Afaan Oromoo to assist rural health extension workers.",
+      "Join HealUp to build and calibrate lightweight, offline-first clinical decision support models that process patient case presentations in Amharic and Afaan Oromoo to assist rural health extension workers.",
     responsibilities: [
       "Curate, clean, and augment bilingual medical corpora in Amharic and Afaan Oromoo in compliance with patient privacy frameworks.",
       "Fine-tune parameter-efficient language models (LoRA/QLoRA) for clinical triage classification and emergency severity grading.",
@@ -125,7 +125,7 @@ export const JOB_OPENINGS: JobOpening[] = [
     ],
   },
   {
-    id: "job-adera-asr-03",
+    id: "job-trooface-cv-03",
     title: "Computer Vision Research Engineer (Biometrics & Identity)",
     startupSlug: "trooface",
     startupName: "TrooFace",
@@ -168,7 +168,7 @@ export const JOB_OPENINGS: JobOpening[] = [
     ],
   },
   {
-    id: "job-enku-gnn-04",
+    id: "job-birr-gnn-04",
     title: "Financial Market Machine Learning & Portfolio Modeler",
     startupSlug: "birr-gebeya",
     startupName: "Birr Gebeya",
@@ -211,7 +211,7 @@ export const JOB_OPENINGS: JobOpening[] = [
     ],
   },
   {
-    id: "job-sheba-edge-05",
+    id: "job-openpia-infra-05",
     title: "FinTech Platform & Cross-Border Payment Infrastructure Engineer",
     startupSlug: "openpia",
     startupName: "OpenPIA",
@@ -292,7 +292,7 @@ export const JOB_OPENINGS: JobOpening[] = [
     benefits: [
       "Fully sponsored fellowship by UNDP Ethiopia & timbuktoo hub.",
       "Access to high-performance GPU workstations.",
-      "Pathway to co-found or join Awash Climate as full-time Research Lead upon fellowship completion.",
+      "Pathway to co-found or join an accelerated UniPod venture as full-time Research Lead upon fellowship completion.",
       "Conference travel allowance.",
     ],
   },
