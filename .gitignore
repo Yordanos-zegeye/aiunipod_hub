@@ -38,6 +38,8 @@ coverage/
 .stylelintcache
 .cache/
 .vite/
+scratch/
+startupdata/*
 
 # Editor & IDE directories
 .vscode/*

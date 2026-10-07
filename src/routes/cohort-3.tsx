@@ -61,7 +61,7 @@ function Cohort3Page() {
   };
 
   return (
-    <div className="min-h-screen bg-background font-body text-foreground">
+    <div className="min-h-screen w-full max-w-full overflow-x-hidden bg-background font-body text-foreground">
       {/* Header Bar */}
       <header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur-md">
         <div className="mx-auto flex max-w-[1440px] items-center justify-between px-5 py-4 sm:px-8 lg:px-12">

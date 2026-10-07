@@ -321,7 +321,7 @@ export function AiSandboxShowcase() {
                   </div>
                 </div>
 
-                <div className="mt-6 grid grid-cols-3 gap-3 border-t border-primary/15 pt-5 text-center">
+                <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3 border-t border-primary/15 pt-5 text-center">
                   <div>
                     <p className="font-mono text-xs text-muted-foreground">Inference Latency</p>
                     <p className="font-display text-lg font-bold text-primary">
@@ -431,7 +431,7 @@ export function AiSandboxShowcase() {
                   </div>
                 </div>
 
-                <div className="mt-6 grid grid-cols-2 gap-4 border-t border-border pt-4 text-center">
+                <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4 border-t border-border pt-4 text-center">
                   <div>
                     <p className="text-xs text-muted-foreground">Classification Confidence</p>
                     <p className="font-display text-xl font-bold text-primary">
@@ -524,7 +524,7 @@ export function AiSandboxShowcase() {
                   </div>
                 </div>
 
-                <div className="mt-6 grid grid-cols-2 gap-4 border-t border-border pt-4 text-center">
+                <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4 border-t border-border pt-4 text-center">
                   <div>
                     <p className="text-xs text-muted-foreground">On-Device Inference</p>
                     <p className="font-mono text-sm font-bold text-foreground">

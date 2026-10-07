@@ -173,19 +173,59 @@
 }
 
 @layer base {
-  * {
+  *,
+  *::before,
+  *::after {
     border-color: var(--color-border);
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    max-width: 100%;
+    width: 100%;
+    overflow-x: hidden;
+    position: relative;
+    -webkit-overflow-scrolling: touch;
   }
 
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
     letter-spacing: 0;
+    min-width: 0;
+  }
+
+  #root,
+  #__root {
+    max-width: 100%;
+    width: 100%;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  img,
+  video,
+  canvas,
+  svg {
+    max-width: 100%;
+    height: auto;
+  }
+
+  pre,
+  code {
+    max-width: 100%;
+    overflow-x: auto;
+    word-break: break-word;
   }
 }
 
-html {
-  -webkit-overflow-scrolling: touch;
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 @utility story-link {

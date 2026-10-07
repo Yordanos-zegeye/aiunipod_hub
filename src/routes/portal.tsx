@@ -24,7 +24,9 @@ import {
   PanelLeftClose,
   PanelLeftOpen,
   Plus,
+  RotateCcw,
   Rocket,
+  Save,
   Shield,
   ShieldAlert,
   ShieldCheck,
@@ -39,25 +41,36 @@ import {
   X,
   XCircle,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
+import { DealBookEditor } from "@/components/portal/DealBookEditor";
+import { ThemeEditor } from "@/components/portal/ThemeEditor";
 import { Button } from "@/components/ui/button";
-import { STARTUPS, type Startup } from "@/data/startups";
+import {
+  getStartupBySlug,
+  resetStartupOverride,
+  saveStartupOverride,
+  STARTUPS,
+  type Startup,
+} from "@/data/startups";
 import { useAuth } from "@/lib/auth";
 
 export const Route = createFileRoute("/portal")({
   head: () => ({
     meta: [
       { title: "Startup Founder Portal — AI UNIPOD Ethiopia" },
-      { name: "description", content: "Manage your startup profile, pitch materials, funding asks, and investor permissions." },
+      {
+        name: "description",
+        content: "Manage your startup profile, pitch materials, funding asks, and investor permissions.",
+      },
       { name: "robots", content: "noindex" },
     ],
   }),
   component: StartupPortalPage,
 });
 
-type PortalTab = "overview" | "profile" | "pitch" | "permissions" | "theme";
+type PortalTab = "overview" | "editor" | "pitch" | "permissions" | "theme";
 
 export function StartupPortalPage() {
   const { user, switchDemoRole, logout } = useAuth();
@@ -66,7 +79,22 @@ export function StartupPortalPage() {
   // Find active startup: fallback to Sela Health
   const activeSlug = user?.startupSlug || "sela-health";
   const [selectedStartupSlug, setSelectedStartupSlug] = useState<string>(activeSlug);
-  const startup = STARTUPS.find((s) => s.slug === selectedStartupSlug) || STARTUPS[0]!;
+
+  // Dynamic startup form state
+  const [startup, setStartup] = useState<Startup>(
+    () => getStartupBySlug(selectedStartupSlug) || STARTUPS[0]!
+  );
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
+
+  // Sync state when tenant dropdown changes
+  useEffect(() => {
+    const loaded =
+      getStartupBySlug(selectedStartupSlug) ||
+      STARTUPS.find((s) => s.slug === selectedStartupSlug) ||
+      STARTUPS[0]!;
+    setStartup(loaded);
+    setHasUnsavedChanges(false);
+  }, [selectedStartupSlug]);
 
   const [activeTab, setActiveTab] = useState<PortalTab>("overview");
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -76,25 +104,25 @@ export function StartupPortalPage() {
   const [accessRequests, setAccessRequests] = useState([
     {
       id: "req-1",
-      investorName: "Vetted Investor",
-      organization: "Venture Capital Partner (investor@investor.com)",
-      section: "Q3 Financials & Projections (Investor-Only)",
+      investorName: "Vetted Institutional Investor",
+      organization: "Partech Africa (investor@partech.com)",
+      section: "Audited 3-Year Projections & Unit Economics",
       status: "APPROVED" as const,
       date: "Yesterday",
     },
     {
       id: "req-2",
-      investorName: "Angel Investor",
-      organization: "Angel Syndicate (angel@investor.com)",
-      section: "Confidential Pitch Deck v2.1 (Investor-Only)",
+      investorName: "Frontier Angel Syndicate",
+      organization: "Addis Angels Network (angel@addisangels.et)",
+      section: "Confidential Pitch Deck v2.1 & Term Sheet",
       status: "PENDING" as const,
       date: "3 hours ago",
     },
     {
       id: "req-3",
-      investorName: "Institutional Investor",
-      organization: "Global Frontier Tech",
-      section: "Model Weights & Benchmark Data",
+      investorName: "DFI Tech Fund",
+      organization: "Global Frontier Tech Partners",
+      section: "Sovereign Clinical Weights & Benchmark Data",
       status: "DENIED" as const,
       date: "5 days ago",
     },
@@ -103,12 +131,23 @@ export function StartupPortalPage() {
   // Section visibility permissions (PRD FR-13: public by default, can mark investor-only)
   const [sectionVisibility, setSectionVisibility] = useState<Record<string, "public" | "investor-only">>({
     overview: "public",
-    products: "public",
-    team: "public",
-    pitchDeck: "investor-only",
-    financials: "investor-only",
+    dealMemo: "public",
+    problemStatement: "public",
+    aiTechArchitecture: "public",
+    dataMoat: "public",
+    productsPortfolio: "public",
+    marketTAM: "public",
+    businessModel: "public",
     tractionMetrics: "public",
-    competitiveAdvantage: "investor-only",
+    aiBenchmarks: "public",
+    competitiveMoats: "investor-only",
+    teamComposition: "public",
+    socialImpact: "public",
+    financialProjections: "investor-only",
+    growthRoadmap: "public",
+    investmentAsk: "public",
+    diligenceVault: "investor-only",
+    riskManagement: "investor-only",
   });
 
   const toggleVisibility = (key: string) => {
@@ -126,6 +165,27 @@ export function StartupPortalPage() {
     toast.success(`Access request marked as ${action}`);
   };
 
+  const handleStartupChange = (updated: Startup) => {
+    setStartup(updated);
+    setHasUnsavedChanges(true);
+  };
+
+  const handleSaveStartup = () => {
+    saveStartupOverride(startup.slug, startup);
+    setHasUnsavedChanges(false);
+    toast.success(
+      `Saved all changes for ${startup.name}! Your public Deal Book profile is now live with the new data.`
+    );
+  };
+
+  const handleResetToBaseline = () => {
+    resetStartupOverride(startup.slug);
+    const baseline = STARTUPS.find((s) => s.slug === startup.slug) || STARTUPS[0]!;
+    setStartup(baseline);
+    setHasUnsavedChanges(false);
+    toast.info(`Reset ${startup.name} back to default living lab baseline.`);
+  };
+
   const isFounderOrEditor =
     user?.role === "STARTUP_ADMIN" || user?.role === "STARTUP_EDITOR" || user?.role === "SUPER_ADMIN";
 
@@ -141,15 +201,15 @@ export function StartupPortalPage() {
       badge: null,
     },
     {
-      id: "profile" as const,
-      label: "Intake Profile",
-      description: "Structured venture intake (FR-10)",
+      id: "editor" as const,
+      label: "Deal Book Intake (18 Sec)",
+      description: "Edit all 18 venture sections",
       icon: FileText,
       badge: `${startup.products.length} Products`,
     },
     {
       id: "pitch" as const,
-      label: "Pitch & Funding",
+      label: "Pitch & Funding Ask",
       description: "Deck v2.1 & terms (FR-11, 12)",
       icon: Wallet,
       badge: startup.investment_ask.round,
@@ -176,10 +236,16 @@ export function StartupPortalPage() {
   // ==========================================
   if (!isFounderOrEditor) {
     return (
-      <div className="min-h-screen bg-background font-body text-foreground antialiased selection:bg-primary selection:text-primary-foreground flex flex-col justify-between">
+      <div className="min-h-screen w-full max-w-full overflow-x-hidden bg-background font-body text-foreground antialiased selection:bg-primary selection:text-primary-foreground flex flex-col justify-between">
         <header className="border-b border-border/70 bg-card/60 backdrop-blur-md px-6 py-4 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2.5">
-            <img src="/aiunipod-logo.webp" alt="AI UNIPOD" width="130" height="32" className="h-7 w-auto object-contain" />
+            <img
+              src="/aiunipod-logo.webp"
+              alt="AI UNIPOD"
+              width="130"
+              height="32"
+              className="h-7 w-auto object-contain"
+            />
           </Link>
           <Button asChild variant="outline" size="sm" className="rounded-xl text-xs">
             <Link to="/">Back to Public Portal</Link>
@@ -194,7 +260,7 @@ export function StartupPortalPage() {
 
             <div className="mt-6 flex items-center justify-center gap-2">
               <span className="inline-flex items-center gap-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 px-3 py-1 text-xs font-bold text-blue-600 dark:text-blue-400">
-                <Shield className="size-3.5" /> Founder & Editor Portal
+                <Shield className="size-3.5" /> Founder &amp; Editor Portal
               </span>
             </div>
 
@@ -203,9 +269,13 @@ export function StartupPortalPage() {
             </h1>
 
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              This console is dedicated to active cohort startup founders and editors to manage profile intake, confidential materials, and investor access.
+              This console is dedicated to active cohort startup founders and editors to manage profile
+              intake, pitch materials, and investor access.
               {user ? (
-                <> You are currently signed in as <strong>{user.name}</strong> ({user.role}).</>
+                <>
+                  {" "}
+                  You are currently signed in as <strong>{user.name}</strong> ({user.role}).
+                </>
               ) : (
                 <> Please sign in with an authorized founder account to proceed.</>
               )}
@@ -248,7 +318,7 @@ export function StartupPortalPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background font-body text-foreground antialiased flex">
+    <div className="min-h-screen w-full max-w-full overflow-x-hidden bg-background font-body text-foreground antialiased flex">
       {/* ================================================== */}
       {/* 1. LEFT SIDEBAR (DESKTOP) */}
       {/* ================================================== */}
@@ -315,13 +385,17 @@ export function StartupPortalPage() {
                   type="button"
                   onClick={() => setActiveTab(item.id)}
                   title={sidebarCollapsed ? item.label : undefined}
-                  className={`w-full flex items-center gap-3 rounded-2xl px-3 py-2.5 text-xs font-semibold transition-all relative ${
+                  className={`w-full flex items-center gap-3 rounded-2xl px-3 py-2.5 text-xs font-semibold transition-all relative cursor-pointer ${
                     isActive
                       ? "bg-primary text-primary-foreground shadow-xs"
                       : "text-muted-foreground hover:bg-muted/60 hover:text-foreground"
                   }`}
                 >
-                  <Icon className={`size-4.5 shrink-0 ${isActive ? "text-primary-foreground" : "text-muted-foreground"}`} />
+                  <Icon
+                    className={`size-4.5 shrink-0 ${
+                      isActive ? "text-primary-foreground" : "text-muted-foreground"
+                    }`}
+                  />
                   {!sidebarCollapsed && (
                     <div className="flex flex-1 items-center justify-between text-left truncate">
                       <span className="truncate">{item.label}</span>
@@ -347,7 +421,7 @@ export function StartupPortalPage() {
           <div className="space-y-1 pt-3 border-t border-border/60">
             {!sidebarCollapsed && (
               <p className="px-3 text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-2">
-                Public Profile & Ecosystem
+                Public Profile &amp; Ecosystem
               </p>
             )}
 
@@ -355,7 +429,7 @@ export function StartupPortalPage() {
               to="/$startupSlug"
               params={{ startupSlug: startup.slug }}
               title="Live Public Profile"
-              className="w-full flex items-center gap-3 rounded-2xl px-3 py-2 text-xs font-medium text-primary hover:bg-primary/10 transition-all font-semibold"
+              className="w-full flex items-center gap-3 rounded-2xl px-3 py-2 text-xs font-semibold text-primary hover:bg-primary/10 transition-all"
             >
               <Eye className="size-4 shrink-0" />
               {!sidebarCollapsed && <span className="truncate flex-1">View Live Profile</span>}
@@ -411,8 +485,12 @@ export function StartupPortalPage() {
 
             {!sidebarCollapsed && (
               <div className="flex-1 min-w-0">
-                <p className="text-xs font-bold text-foreground truncate">{user?.name || "Startup Founder"}</p>
-                <p className="text-[10px] text-muted-foreground truncate">{user?.email || "founder@founder.com"}</p>
+                <p className="text-xs font-bold text-foreground truncate">
+                  {user?.name || "Startup Founder"}
+                </p>
+                <p className="text-[10px] text-muted-foreground truncate">
+                  {user?.email || "founder@founder.com"}
+                </p>
               </div>
             )}
 
@@ -423,7 +501,7 @@ export function StartupPortalPage() {
                   logout();
                   toast.info("Logged out from founder console");
                 }}
-                className="text-muted-foreground hover:text-destructive p-1 rounded-lg transition-colors"
+                className="text-muted-foreground hover:text-destructive p-1 rounded-lg transition-colors cursor-pointer"
                 title="Sign out"
               >
                 <LogOut className="size-3.5" />
@@ -460,7 +538,7 @@ export function StartupPortalPage() {
                 <button
                   type="button"
                   onClick={() => setMobileSidebarOpen(false)}
-                  className="rounded-xl p-1 text-muted-foreground hover:bg-muted"
+                  className="rounded-xl p-1 text-muted-foreground hover:bg-muted cursor-pointer"
                 >
                   <X className="size-5" />
                 </button>
@@ -478,7 +556,7 @@ export function StartupPortalPage() {
                         setActiveTab(item.id);
                         setMobileSidebarOpen(false);
                       }}
-                      className={`w-full flex items-center justify-between rounded-xl px-3 py-2.5 text-xs font-semibold ${
+                      className={`w-full flex items-center justify-between rounded-xl px-3 py-2.5 text-xs font-semibold cursor-pointer ${
                         isActive ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-muted"
                       }`}
                     >
@@ -502,14 +580,18 @@ export function StartupPortalPage() {
                   params={{ startupSlug: startup.slug }}
                   className="w-full flex items-center justify-between rounded-xl px-3 py-2 text-xs font-medium text-primary hover:bg-primary/10"
                 >
-                  <span className="flex items-center gap-2"><Eye className="size-4" /> Live Public Profile</span>
+                  <span className="flex items-center gap-2">
+                    <Eye className="size-4" /> Live Public Profile
+                  </span>
                   <ArrowUpRight className="size-3.5" />
                 </Link>
                 <Link
                   to="/startups"
                   className="w-full flex items-center justify-between rounded-xl px-3 py-2 text-xs font-medium text-muted-foreground hover:bg-muted"
                 >
-                  <span className="flex items-center gap-2"><Globe className="size-4" /> Startups Directory</span>
+                  <span className="flex items-center gap-2">
+                    <Globe className="size-4" /> Startups Directory
+                  </span>
                   <ArrowUpRight className="size-3.5" />
                 </Link>
               </div>
@@ -526,13 +608,15 @@ export function StartupPortalPage() {
                 />
                 <div className="text-left">
                   <p className="text-xs font-bold text-foreground">{user?.name || "Startup Founder"}</p>
-                  <p className="text-[10px] text-muted-foreground">{user?.email || "founder@founder.com"}</p>
+                  <p className="text-[10px] text-muted-foreground">
+                    {user?.email || "founder@founder.com"}
+                  </p>
                 </div>
               </div>
               <button
                 type="button"
                 onClick={() => logout()}
-                className="text-muted-foreground hover:text-destructive p-1"
+                className="text-muted-foreground hover:text-destructive p-1 cursor-pointer"
               >
                 <LogOut className="size-4" />
               </button>
@@ -544,14 +628,14 @@ export function StartupPortalPage() {
       {/* ================================================== */}
       {/* 3. MAIN DASHBOARD CONTENT AREA */}
       {/* ================================================== */}
-      <div className="flex-1 flex flex-col min-w-0">
+      <div className="flex-1 flex flex-col min-w-0 max-w-full overflow-x-hidden">
         {/* Top Header */}
-        <header className="h-18 border-b border-border/80 bg-card/60 backdrop-blur-md sticky top-0 z-20 px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
+        <header className="h-18 w-full max-w-full border-b border-border/80 bg-card/60 backdrop-blur-md sticky top-0 z-20 px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <button
               type="button"
               onClick={() => setMobileSidebarOpen(true)}
-              className="lg:hidden grid size-9 place-items-center rounded-xl border border-border text-muted-foreground hover:bg-muted hover:text-foreground"
+              className="lg:hidden grid size-9 place-items-center rounded-xl border border-border text-muted-foreground hover:bg-muted hover:text-foreground cursor-pointer"
             >
               <Menu className="size-5" />
             </button>
@@ -575,7 +659,11 @@ export function StartupPortalPage() {
                 value={selectedStartupSlug}
                 onChange={(e) => {
                   setSelectedStartupSlug(e.target.value);
-                  toast.success(`Switched tenant view to ${STARTUPS.find((s) => s.slug === e.target.value)?.name}`);
+                  toast.success(
+                    `Switched tenant view to ${
+                      STARTUPS.find((s) => s.slug === e.target.value)?.name
+                    }`
+                  );
                 }}
                 className="bg-transparent font-bold text-foreground focus:outline-hidden text-xs cursor-pointer"
               >
@@ -587,12 +675,23 @@ export function StartupPortalPage() {
               </select>
             </div>
 
+            {/* Unsaved indicator & Save Button in Header */}
+            {hasUnsavedChanges && (
+              <Button
+                size="sm"
+                onClick={handleSaveStartup}
+                className="rounded-xl text-xs h-9 gap-1.5 font-bold bg-primary text-primary-foreground shadow-xs animate-bounce"
+              >
+                <Save className="size-3.5" /> Save Changes
+              </Button>
+            )}
+
             {/* Role Demo Switchers */}
             <div className="hidden sm:flex items-center gap-1 rounded-2xl border border-border bg-card p-1 text-xs">
               <button
                 type="button"
                 onClick={() => switchDemoRole("startup_admin")}
-                className={`rounded-xl px-2.5 py-1 font-semibold transition-all ${
+                className={`rounded-xl px-2.5 py-1 font-semibold transition-all cursor-pointer ${
                   user?.role === "STARTUP_ADMIN"
                     ? "bg-primary text-primary-foreground shadow-2xs"
                     : "text-muted-foreground hover:text-foreground"
@@ -603,7 +702,7 @@ export function StartupPortalPage() {
               <button
                 type="button"
                 onClick={() => switchDemoRole("startup_editor")}
-                className={`rounded-xl px-2.5 py-1 font-semibold transition-all ${
+                className={`rounded-xl px-2.5 py-1 font-semibold transition-all cursor-pointer ${
                   user?.role === "STARTUP_EDITOR"
                     ? "bg-primary text-primary-foreground shadow-2xs"
                     : "text-muted-foreground hover:text-foreground"
@@ -617,7 +716,7 @@ export function StartupPortalPage() {
                   switchDemoRole("super_admin");
                   navigate({ to: "/admin" });
                 }}
-                className="rounded-xl px-2.5 py-1 font-semibold text-muted-foreground hover:text-foreground transition-all"
+                className="rounded-xl px-2.5 py-1 font-semibold text-muted-foreground hover:text-foreground transition-all cursor-pointer"
               >
                 Admin
               </button>
@@ -627,14 +726,19 @@ export function StartupPortalPage() {
                   switchDemoRole("investor_vetted");
                   navigate({ to: "/investor" });
                 }}
-                className="rounded-xl px-2.5 py-1 font-semibold text-muted-foreground hover:text-foreground transition-all"
+                className="rounded-xl px-2.5 py-1 font-semibold text-muted-foreground hover:text-foreground transition-all cursor-pointer"
               >
                 Investor
               </button>
             </div>
 
             {/* View Live Profile Button */}
-            <Button asChild size="sm" variant="outline" className="rounded-xl text-xs h-9 gap-1.5 font-semibold">
+            <Button
+              asChild
+              size="sm"
+              variant="outline"
+              className="rounded-xl text-xs h-9 gap-1.5 font-semibold"
+            >
               <Link to="/$startupSlug" params={{ startupSlug: startup.slug }} target="_blank">
                 <span className="hidden sm:inline">Live Profile</span> <Eye className="size-3.5" />
               </Link>
@@ -643,14 +747,14 @@ export function StartupPortalPage() {
         </header>
 
         {/* Main Canvas */}
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-[1600px] w-full mx-auto space-y-8">
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-[1600px] w-full max-w-full overflow-x-hidden min-w-0 mx-auto space-y-8">
           {/* Header Banner */}
           <div className="rounded-3xl border border-border/80 bg-gradient-to-br from-card via-card/90 to-muted/30 p-6 sm:p-8 shadow-xs relative overflow-hidden">
             <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
               <div className="space-y-2">
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="inline-flex items-center gap-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 px-3 py-1 text-xs font-bold text-blue-600 dark:text-blue-400">
-                    <Rocket className="size-3.5" /> Living Lab Venture
+                    <Rocket className="size-3.5" /> EAII Living Lab Venture
                   </span>
                   <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-bold text-primary">
                     {startup.sector}
@@ -658,23 +762,39 @@ export function StartupPortalPage() {
                   <span className="rounded-full border border-border bg-background/60 px-2.5 py-0.5 text-xs font-semibold text-muted-foreground">
                     HQ: {startup.location}
                   </span>
+                  {hasUnsavedChanges && (
+                    <span className="rounded-full bg-amber-500/20 text-amber-600 dark:text-amber-400 border border-amber-500/30 px-2.5 py-0.5 text-xs font-bold animate-pulse">
+                      Unsaved Changes
+                    </span>
+                  )}
                 </div>
 
                 <h1 className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
                   {startup.name} Founder Console
                 </h1>
                 <p className="text-xs sm:text-sm text-muted-foreground max-w-3xl leading-relaxed">
-                  {startup.tagline} · Structured venture intake (FR-10), pitch deck versioning (FR-11), and investor access controls (FR-14).
+                  {startup.tagline} · All 18 Deal Book sections can be customized and updated live on the public
+                  page.
                 </p>
               </div>
 
-              <div className="flex items-center gap-2 shrink-0">
+              <div className="flex flex-wrap items-center gap-2.5 shrink-0">
                 <Button
                   size="sm"
-                  onClick={() => setActiveTab("permissions")}
-                  className="rounded-xl text-xs h-10 gap-1.5 font-semibold bg-primary text-primary-foreground"
+                  onClick={handleSaveStartup}
+                  className="rounded-xl text-xs h-10 gap-1.5 font-bold bg-primary text-primary-foreground shadow-xs cursor-pointer hover:opacity-90"
                 >
-                  <Shield className="size-3.5" /> Diligence Requests ({pendingRequestsCount})
+                  <Save className="size-3.5" /> Save All Sections
+                </Button>
+
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={handleResetToBaseline}
+                  className="rounded-xl text-xs h-10 gap-1.5 text-muted-foreground hover:text-foreground cursor-pointer"
+                  title="Reset to default baseline"
+                >
+                  <RotateCcw className="size-3.5" /> Reset
                 </Button>
               </div>
             </div>
@@ -687,7 +807,9 @@ export function StartupPortalPage() {
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                 <div className="rounded-2xl border border-border bg-card p-5 shadow-2xs">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Investment Ask</span>
+                    <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                      Investment Ask
+                    </span>
                     <Wallet className="size-4 text-emerald-500" />
                   </div>
                   <p className="mt-2 font-display text-2xl font-bold text-foreground">
@@ -700,7 +822,9 @@ export function StartupPortalPage() {
 
                 <div className="rounded-2xl border border-border bg-card p-5 shadow-2xs">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Living Lab Program</span>
+                    <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                      Living Lab Program
+                    </span>
                     <Cpu className="size-4 text-purple-500" />
                   </div>
                   <p className="mt-2 font-display text-2xl font-bold text-foreground">
@@ -713,7 +837,9 @@ export function StartupPortalPage() {
 
                 <div className="rounded-2xl border border-border bg-card p-5 shadow-2xs">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Products & IP</span>
+                    <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                      Products &amp; IP
+                    </span>
                     <Layers className="size-4 text-blue-500" />
                   </div>
                   <p className="mt-2 font-display text-2xl font-bold text-foreground">
@@ -726,7 +852,9 @@ export function StartupPortalPage() {
 
                 <div className="rounded-2xl border border-border bg-card p-5 shadow-2xs">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Investor Diligence</span>
+                    <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                      Investor Diligence
+                    </span>
                     <ShieldCheck className="size-4 text-amber-500" />
                   </div>
                   <p className="mt-2 font-display text-2xl font-bold text-foreground">
@@ -747,11 +875,16 @@ export function StartupPortalPage() {
                         {startup.name} · Living Lab Cohort Status
                       </h3>
                       <p className="text-xs text-muted-foreground">
-                        Incubated under {startup.cohort || "Cohort 3"} with Ethiopian Artificial Intelligence Institute (EAII) infrastructure.
+                        Incubated under {startup.cohort || "Cohort 3"} with Ethiopian Artificial
+                        Intelligence Institute (EAII) sovereign infrastructure.
                       </p>
                     </div>
-                    <Button size="sm" variant="outline" onClick={() => setActiveTab("profile")} className="rounded-xl text-xs">
-                      Edit Profile
+                    <Button
+                      size="sm"
+                      onClick={() => setActiveTab("editor")}
+                      className="rounded-xl text-xs bg-primary text-primary-foreground font-semibold"
+                    >
+                      <FileText className="size-3.5 mr-1" /> Edit Deal Book
                     </Button>
                   </div>
 
@@ -763,7 +896,9 @@ export function StartupPortalPage() {
 
                     <div className="grid gap-4 sm:grid-cols-2 pt-2">
                       <div className="rounded-2xl border border-border bg-muted/20 p-4">
-                        <span className="font-semibold text-foreground text-xs block">Team Composition</span>
+                        <span className="font-semibold text-foreground text-xs block">
+                          Team Composition
+                        </span>
                         <span className="text-lg font-display font-bold text-foreground mt-1 block">
                           {startup.team_size} Full-Time Specialists
                         </span>
@@ -773,7 +908,9 @@ export function StartupPortalPage() {
                       </div>
 
                       <div className="rounded-2xl border border-border bg-muted/20 p-4">
-                        <span className="font-semibold text-foreground text-xs block">Planned Use of Funds</span>
+                        <span className="font-semibold text-foreground text-xs block">
+                          Planned Use of Funds
+                        </span>
                         <span className="text-xs text-foreground mt-1 block font-medium">
                           {startup.investment_ask.use_of_funds}
                         </span>
@@ -783,7 +920,9 @@ export function StartupPortalPage() {
                     {/* Official Channels */}
                     {startup.links && startup.links.length > 0 && (
                       <div className="pt-2 border-t border-border">
-                        <span className="font-semibold text-foreground text-xs block mb-2">Verified Channels:</span>
+                        <span className="font-semibold text-foreground text-xs block mb-2">
+                          Verified Channels:
+                        </span>
                         <div className="flex flex-wrap gap-2">
                           {startup.links.map((link) => (
                             <a
@@ -806,19 +945,40 @@ export function StartupPortalPage() {
 
                 {/* Quick Shortcuts & Navigation card */}
                 <div className="rounded-3xl border border-border bg-card p-6 shadow-xs space-y-4">
-                  <h3 className="font-display text-base font-bold text-foreground">Founder Quick Actions</h3>
-                  
+                  <h3 className="font-display text-base font-bold text-foreground">
+                    Founder Quick Actions
+                  </h3>
+
                   <div className="space-y-2">
                     <button
                       type="button"
+                      onClick={() => setActiveTab("editor")}
+                      className="w-full flex items-center justify-between p-3 rounded-2xl border border-primary/30 bg-primary/5 hover:bg-primary/10 text-left transition-all text-xs cursor-pointer"
+                    >
+                      <div className="flex items-center gap-2.5">
+                        <FileText className="size-4 text-primary" />
+                        <div>
+                          <p className="font-bold text-foreground">Deal Book Editor (18 Sec)</p>
+                          <p className="text-[11px] text-muted-foreground">
+                            Edit Problem, AI, TAM, Financials
+                          </p>
+                        </div>
+                      </div>
+                      <ChevronRight className="size-4 text-primary" />
+                    </button>
+
+                    <button
+                      type="button"
                       onClick={() => setActiveTab("pitch")}
-                      className="w-full flex items-center justify-between p-3 rounded-2xl border border-border/80 bg-background/50 hover:bg-muted/50 text-left transition-all text-xs"
+                      className="w-full flex items-center justify-between p-3 rounded-2xl border border-border/80 bg-background/50 hover:bg-muted/50 text-left transition-all text-xs cursor-pointer"
                     >
                       <div className="flex items-center gap-2.5">
                         <FileCheck className="size-4 text-emerald-600" />
                         <div>
                           <p className="font-semibold text-foreground">Pitch Deck Versioning</p>
-                          <p className="text-[11px] text-muted-foreground">{startup.name.replace(/\s+/g, '_')}_v2.1</p>
+                          <p className="text-[11px] text-muted-foreground">
+                            {startup.name.replace(/\s+/g, "_")}_v2.1
+                          </p>
                         </div>
                       </div>
                       <ChevronRight className="size-4 text-muted-foreground" />
@@ -827,13 +987,15 @@ export function StartupPortalPage() {
                     <button
                       type="button"
                       onClick={() => setActiveTab("permissions")}
-                      className="w-full flex items-center justify-between p-3 rounded-2xl border border-border/80 bg-background/50 hover:bg-muted/50 text-left transition-all text-xs"
+                      className="w-full flex items-center justify-between p-3 rounded-2xl border border-border/80 bg-background/50 hover:bg-muted/50 text-left transition-all text-xs cursor-pointer"
                     >
                       <div className="flex items-center gap-2.5">
                         <Lock className="size-4 text-amber-600" />
                         <div>
                           <p className="font-semibold text-foreground">Investor Permissions</p>
-                          <p className="text-[11px] text-muted-foreground">{pendingRequestsCount} awaiting review</p>
+                          <p className="text-[11px] text-muted-foreground">
+                            {pendingRequestsCount} awaiting review
+                          </p>
                         </div>
                       </div>
                       <ChevronRight className="size-4 text-muted-foreground" />
@@ -842,7 +1004,7 @@ export function StartupPortalPage() {
                     <button
                       type="button"
                       onClick={() => setActiveTab("theme")}
-                      className="w-full flex items-center justify-between p-3 rounded-2xl border border-border/80 bg-background/50 hover:bg-muted/50 text-left transition-all text-xs"
+                      className="w-full flex items-center justify-between p-3 rounded-2xl border border-border/80 bg-background/50 hover:bg-muted/50 text-left transition-all text-xs cursor-pointer"
                     >
                       <div className="flex items-center gap-2.5">
                         <Palette className="size-4 text-purple-600" />
@@ -859,151 +1021,15 @@ export function StartupPortalPage() {
             </div>
           )}
 
-          {/* TAB 2: STRUCTURED INTAKE & PROFILE */}
-          {activeTab === "profile" && (
-            <div key={startup.slug} className="space-y-6 animate-in fade-in duration-200">
-              <div className="rounded-3xl border border-border bg-card p-6 sm:p-8 shadow-xs space-y-6">
-                <div className="flex items-center justify-between border-b border-border pb-4">
-                  <div>
-                    <h3 className="font-display text-xl font-bold text-foreground">
-                      Structured Venture Intake — {startup.name}
-                    </h3>
-                    <p className="text-xs text-muted-foreground">
-                      Covers AI problem statement, data sources, market sizing, team composition, and risk analysis.
-                    </p>
-                  </div>
-                  <Button size="sm" onClick={() => toast.success("Intake profile changes saved!")} className="rounded-xl text-xs">
-                    Save Profile
-                  </Button>
-                </div>
-
-                <div className="grid gap-6 sm:grid-cols-2">
-                  <div>
-                    <label className="text-xs font-semibold text-foreground">Startup Name</label>
-                    <input
-                      type="text"
-                      defaultValue={startup.name}
-                      className="mt-1.5 w-full rounded-xl border border-border bg-background px-3.5 py-2 text-xs text-foreground focus:border-primary focus:outline-hidden"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="text-xs font-semibold text-foreground">Incubation Cohort</label>
-                    <select
-                      defaultValue={startup.cohort || "Cohort 3"}
-                      className="mt-1.5 w-full rounded-xl border border-border bg-background px-3.5 py-2 text-xs text-foreground focus:border-primary focus:outline-hidden"
-                    >
-                      <option value="Cohort 3">Cohort 3 (Active Incubation)</option>
-                      <option value="Cohort 2">Cohort 2 (Graduated)</option>
-                      <option value="Cohort 4">Cohort 4 (Upcoming)</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="text-xs font-semibold text-foreground">Sector / Vertical</label>
-                    <input
-                      type="text"
-                      defaultValue={startup.sector}
-                      className="mt-1.5 w-full rounded-xl border border-border bg-background px-3.5 py-2 text-xs text-foreground focus:border-primary focus:outline-hidden"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="text-xs font-semibold text-foreground">Founded Year</label>
-                    <input
-                      type="text"
-                      defaultValue={startup.founded}
-                      className="mt-1.5 w-full rounded-xl border border-border bg-background px-3.5 py-2 text-xs text-foreground focus:border-primary focus:outline-hidden"
-                    />
-                  </div>
-
-                  <div className="sm:col-span-2">
-                    <label className="text-xs font-semibold text-foreground">Tagline</label>
-                    <input
-                      type="text"
-                      defaultValue={startup.tagline}
-                      className="mt-1.5 w-full rounded-xl border border-border bg-background px-3.5 py-2 text-xs text-foreground focus:border-primary focus:outline-hidden"
-                    />
-                  </div>
-
-                  <div className="sm:col-span-2">
-                    <label className="text-xs font-semibold text-foreground">AI Solution & Technology Overview</label>
-                    <textarea
-                      rows={3}
-                      defaultValue={startup.description}
-                      className="mt-1.5 w-full rounded-xl border border-border bg-background p-3 text-xs text-foreground focus:border-primary focus:outline-hidden"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="text-xs font-semibold text-foreground">Headquarters & Living Lab Desk</label>
-                    <input
-                      type="text"
-                      defaultValue={startup.location}
-                      className="mt-1.5 w-full rounded-xl border border-border bg-background px-3.5 py-2 text-xs text-foreground focus:border-primary focus:outline-hidden"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="text-xs font-semibold text-foreground">Core Team Size</label>
-                    <input
-                      type="number"
-                      defaultValue={startup.team_size}
-                      className="mt-1.5 w-full rounded-xl border border-border bg-background px-3.5 py-2 text-xs text-foreground focus:border-primary focus:outline-hidden"
-                    />
-                  </div>
-                </div>
-
-                {/* Product Listings (FR-9) */}
-                <div className="pt-4 border-t border-border">
-                  <div className="flex items-center justify-between pb-3">
-                    <h4 className="font-display text-sm font-bold text-foreground">Products & Solutions ({startup.products.length})</h4>
-                    <Button size="sm" variant="outline" onClick={() => toast.info("Add product modal")} className="rounded-xl text-xs h-8">
-                      <Plus className="size-3 mr-1" /> Add Product
-                    </Button>
-                  </div>
-
-                  <div className="grid gap-3 sm:grid-cols-2">
-                    {startup.products.map((p, idx) => (
-                      <div key={idx} className="rounded-2xl border border-border bg-muted/20 p-4 space-y-1">
-                        <div className="flex items-center justify-between">
-                          <span className="font-semibold text-xs text-foreground">{p.name}</span>
-                          <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-bold text-primary">
-                            {p.stage}
-                          </span>
-                        </div>
-                        <p className="text-xs text-muted-foreground">{p.summary}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Official Links */}
-                {startup.links && startup.links.length > 0 && (
-                  <div className="pt-4 border-t border-border">
-                    <h4 className="font-display text-sm font-bold text-foreground mb-3">Official Web & Social Channels</h4>
-                    <div className="grid gap-3 sm:grid-cols-2">
-                      {startup.links.map((link, idx) => (
-                        <div key={idx} className="flex items-center justify-between rounded-xl border border-border bg-background p-3 text-xs">
-                          <div className="flex items-center gap-2">
-                            <Globe className="size-3.5 text-primary" />
-                            <span className="font-semibold text-foreground">{link.label}:</span>
-                            <span className="text-muted-foreground truncate max-w-[180px]">{link.url}</span>
-                          </div>
-                          <a
-                            href={link.url}
-                            target="_blank"
-                            rel="noreferrer noopener"
-                            className="text-primary hover:underline text-xs flex items-center gap-1"
-                          >
-                            Open <ExternalLink className="size-2.5" />
-                          </a>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
+          {/* TAB 2: DEAL BOOK INTAKE & 18-SECTION EDITOR */}
+          {activeTab === "editor" && (
+            <div key={startup.slug} className="animate-in fade-in duration-200">
+              <DealBookEditor
+                startup={startup}
+                onChange={handleStartupChange}
+                onSave={handleSaveStartup}
+                hasUnsavedChanges={hasUnsavedChanges}
+              />
             </div>
           )}
 
@@ -1016,7 +1042,9 @@ export function StartupPortalPage() {
                   <div className="flex items-center justify-between border-b border-border pb-4">
                     <div className="flex items-center gap-2">
                       <FileCheck className="size-4 text-primary" />
-                      <h3 className="font-display text-lg font-bold text-foreground">Pitch Deck Versioning (FR-11)</h3>
+                      <h3 className="font-display text-lg font-bold text-foreground">
+                        Pitch Deck Versioning (FR-11)
+                      </h3>
                     </div>
                     <span className="rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-xs font-bold text-emerald-600">
                       v2.1 Active
@@ -1024,22 +1052,32 @@ export function StartupPortalPage() {
                   </div>
 
                   <p className="text-xs text-muted-foreground">
-                    Pitch materials are served via short-lived, revocable access links (Non-Functional Security Requirement).
+                    Pitch materials are served via short-lived, revocable access links (Non-Functional
+                    Security Requirement).
                   </p>
 
                   <div className="rounded-2xl border border-dashed border-border bg-muted/20 p-6 text-center space-y-3">
                     <FileText className="size-8 text-primary mx-auto" />
                     <div>
                       <p className="font-bold text-xs text-foreground">
-                        {startup.name.replace(/\s+/g, '_')}_PitchDeck_{startup.investment_ask.round}_v2.1.pdf
+                        {startup.name.replace(/\s+/g, "_")}_PitchDeck_{startup.investment_ask.round}_v2.1.pdf
                       </p>
                       <p className="text-[11px] text-muted-foreground">14.2 MB · Updated 2 days ago</p>
                     </div>
                     <div className="flex justify-center gap-2 pt-2">
-                      <Button size="sm" variant="outline" className="rounded-xl text-xs h-8">
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => toast.info("Downloading institutional pitch deck dossier...")}
+                        className="rounded-xl text-xs h-8 cursor-pointer"
+                      >
                         Download Copy
                       </Button>
-                      <Button size="sm" onClick={() => toast.success("Uploaded new version simulation")} className="rounded-xl text-xs h-8 gap-1">
+                      <Button
+                        size="sm"
+                        onClick={() => toast.success("Uploaded new pitch deck v2.2 simulation")}
+                        className="rounded-xl text-xs h-8 gap-1 bg-primary text-primary-foreground font-semibold cursor-pointer"
+                      >
                         <Upload className="size-3" /> Upload Version
                       </Button>
                     </div>
@@ -1051,7 +1089,9 @@ export function StartupPortalPage() {
                   <div className="flex items-center justify-between border-b border-border pb-4">
                     <div className="flex items-center gap-2">
                       <Wallet className="size-4 text-emerald-600" />
-                      <h3 className="font-display text-lg font-bold text-foreground">Funding Needs & Terms (FR-12)</h3>
+                      <h3 className="font-display text-lg font-bold text-foreground">
+                        Funding Needs &amp; Terms (FR-12)
+                      </h3>
                     </div>
                     <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-bold text-primary">
                       {startup.investment_ask.round} Round
@@ -1062,24 +1102,79 @@ export function StartupPortalPage() {
                     <div>
                       <label className="font-semibold text-foreground">Investment Ask (USD)</label>
                       <input
-                        type="text"
-                        defaultValue={`$${startup.investment_ask.amount_usd.toLocaleString()}`}
-                        className="mt-1.5 w-full rounded-xl border border-border bg-background px-3.5 py-2 text-xs text-foreground"
+                        type="number"
+                        value={startup.investment_ask.amount_usd}
+                        onChange={(e) => {
+                          const val = parseFloat(e.target.value) || 0;
+                          handleStartupChange({
+                            ...startup,
+                            investment_ask: {
+                              ...startup.investment_ask,
+                              amount_usd: val,
+                            },
+                          });
+                        }}
+                        className="mt-1.5 w-full rounded-xl border border-border bg-background px-3.5 py-2 text-xs text-foreground font-mono font-bold"
                       />
+                    </div>
+
+                    <div>
+                      <label className="font-semibold text-foreground">Target Round</label>
+                      <select
+                        value={startup.investment_ask.round}
+                        onChange={(e) => {
+                          handleStartupChange({
+                            ...startup,
+                            investment_ask: {
+                              ...startup.investment_ask,
+                              round: e.target.value,
+                            },
+                          });
+                        }}
+                        className="mt-1.5 w-full rounded-xl border border-border bg-background px-3.5 py-2 text-xs text-foreground font-semibold"
+                      >
+                        <option value="Pre-Seed">Pre-Seed</option>
+                        <option value="Seed">Seed</option>
+                        <option value="Series A">Series A</option>
+                        <option value="Living Lab Pilot Grant">Living Lab Pilot Grant</option>
+                      </select>
                     </div>
 
                     <div>
                       <label className="font-semibold text-foreground">Planned Use of Funds</label>
                       <textarea
                         rows={3}
-                        defaultValue={startup.investment_ask.use_of_funds}
+                        value={startup.investment_ask.use_of_funds}
+                        onChange={(e) => {
+                          handleStartupChange({
+                            ...startup,
+                            investment_ask: {
+                              ...startup.investment_ask,
+                              use_of_funds: e.target.value,
+                            },
+                          });
+                        }}
                         className="mt-1.5 w-full rounded-xl border border-border bg-background p-3 text-xs text-foreground"
                       />
                     </div>
 
-                    <Button size="sm" onClick={() => toast.success("Investment ask updated!")} className="rounded-xl text-xs mt-2">
-                      Update Funding Terms
-                    </Button>
+                    <div className="flex items-center gap-2 pt-2">
+                      <Button
+                        size="sm"
+                        onClick={handleSaveStartup}
+                        className="rounded-xl text-xs bg-primary text-primary-foreground font-semibold"
+                      >
+                        Save Funding Terms
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => setActiveTab("editor")}
+                        className="rounded-xl text-xs"
+                      >
+                        Edit Full Allocation Breakdown →
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1092,9 +1187,12 @@ export function StartupPortalPage() {
               {/* Granular Section Visibility (FR-13) */}
               <div className="rounded-3xl border border-border bg-card p-6 sm:p-8 shadow-xs space-y-4">
                 <div className="border-b border-border pb-4">
-                  <h3 className="font-display text-lg font-bold text-foreground">Granular Section Visibility (FR-13)</h3>
+                  <h3 className="font-display text-lg font-bold text-foreground">
+                    Granular Section Visibility (FR-13)
+                  </h3>
                   <p className="text-xs text-muted-foreground">
-                    Per PRD Section 4.3 FR-13: All profile sections are public by default; you can mark sensitive sections as investor-only.
+                    Per PRD Section 4.3 FR-13: All profile sections are public by default; you can mark
+                    sensitive sections as investor-only.
                   </p>
                 </div>
 
@@ -1116,7 +1214,9 @@ export function StartupPortalPage() {
                           </p>
                           <span
                             className={`inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider ${
-                              isInvestorOnly ? "text-amber-600 dark:text-amber-400" : "text-emerald-600 dark:text-emerald-400"
+                              isInvestorOnly
+                                ? "text-amber-600 dark:text-amber-400"
+                                : "text-emerald-600 dark:text-emerald-400"
                             }`}
                           >
                             {isInvestorOnly ? <Lock className="size-3" /> : <Unlock className="size-3" />}
@@ -1128,7 +1228,7 @@ export function StartupPortalPage() {
                           size="sm"
                           variant="outline"
                           onClick={() => toggleVisibility(sectionKey)}
-                          className="rounded-xl text-[11px] h-8"
+                          className="rounded-xl text-[11px] h-8 cursor-pointer"
                         >
                           Toggle
                         </Button>
@@ -1141,9 +1241,12 @@ export function StartupPortalPage() {
               {/* Pending Investor Access Requests (FR-14) */}
               <div className="rounded-3xl border border-border bg-card p-6 sm:p-8 shadow-xs space-y-4">
                 <div className="border-b border-border pb-4">
-                  <h3 className="font-display text-lg font-bold text-foreground">Investor Access Requests (FR-14)</h3>
+                  <h3 className="font-display text-lg font-bold text-foreground">
+                    Investor Access Requests (FR-14)
+                  </h3>
                   <p className="text-xs text-muted-foreground">
-                    Per PRD Section 4.3 FR-14: Approve or deny investor requests for sections you've marked investor-only, and revoke access at any time.
+                    Per PRD Section 4.3 FR-14: Approve or deny investor requests for sections you've marked
+                    investor-only, and revoke access at any time.
                   </p>
                 </div>
 
@@ -1169,7 +1272,9 @@ export function StartupPortalPage() {
                             {req.status}
                           </span>
                         </div>
-                        <p className="text-xs text-muted-foreground">Requested: <strong>{req.section}</strong> · {req.date}</p>
+                        <p className="text-xs text-muted-foreground">
+                          Requested: <strong>{req.section}</strong> · {req.date}
+                        </p>
                       </div>
 
                       <div className="flex items-center gap-2 shrink-0">
@@ -1177,7 +1282,7 @@ export function StartupPortalPage() {
                           <Button
                             size="sm"
                             onClick={() => handleRequest(req.id, "APPROVED")}
-                            className="rounded-xl text-xs h-8 bg-emerald-600 text-white hover:bg-emerald-700 gap-1"
+                            className="rounded-xl text-xs h-8 bg-emerald-600 text-white hover:bg-emerald-700 gap-1 cursor-pointer"
                           >
                             <CheckCircle2 className="size-3.5" /> Approve Access
                           </Button>
@@ -1187,7 +1292,7 @@ export function StartupPortalPage() {
                             size="sm"
                             variant="destructive"
                             onClick={() => handleRequest(req.id, "DENIED")}
-                            className="rounded-xl text-xs h-8 gap-1"
+                            className="rounded-xl text-xs h-8 gap-1 cursor-pointer"
                           >
                             <XCircle className="size-3.5" /> Deny / Revoke
                           </Button>
@@ -1202,48 +1307,13 @@ export function StartupPortalPage() {
 
           {/* TAB 5: WHITE-LABEL THEME BUILDER */}
           {activeTab === "theme" && (
-            <div key={startup.slug} className="space-y-6 animate-in fade-in duration-200">
-              <div className="rounded-3xl border border-border bg-card p-6 sm:p-8 shadow-xs space-y-4">
-                <div className="flex items-center justify-between border-b border-border pb-4">
-                  <div>
-                    <h3 className="font-display text-xl font-bold text-foreground">White-Label Theming Engine (FR-6, FR-7)</h3>
-                    <p className="text-xs text-muted-foreground">
-                      Each startup's public page renders with its own brand colors, font, and radius tokens at runtime with WCAG luminance derivation.
-                    </p>
-                  </div>
-                  <Button asChild className="rounded-2xl text-xs">
-                    <Link to="/$startupSlug" params={{ startupSlug: startup.slug }} target="_blank">
-                      Preview Live Profile <ArrowUpRight className="ml-1 size-3.5" />
-                    </Link>
-                  </Button>
-                </div>
-
-                <div className="grid gap-4 sm:grid-cols-3 pt-2">
-                  <div className="rounded-2xl border border-border p-4 bg-muted/20">
-                    <p className="text-xs font-bold text-foreground">Primary Brand Color</p>
-                    <div className="mt-2 flex items-center gap-2">
-                      <div className="size-6 rounded-lg shadow-xs" style={{ backgroundColor: startup.theme.primary_color }} />
-                      <span className="font-mono text-xs font-semibold">{startup.theme.primary_color}</span>
-                    </div>
-                  </div>
-
-                  <div className="rounded-2xl border border-border p-4 bg-muted/20">
-                    <p className="text-xs font-bold text-foreground">Secondary Brand Color</p>
-                    <div className="mt-2 flex items-center gap-2">
-                      <div className="size-6 rounded-lg shadow-xs" style={{ backgroundColor: startup.theme.secondary_color }} />
-                      <span className="font-mono text-xs font-semibold">{startup.theme.secondary_color}</span>
-                    </div>
-                  </div>
-
-                  <div className="rounded-2xl border border-border p-4 bg-muted/20">
-                    <p className="text-xs font-bold text-foreground">Accent Color</p>
-                    <div className="mt-2 flex items-center gap-2">
-                      <div className="size-6 rounded-lg shadow-xs" style={{ backgroundColor: startup.theme.accent_color }} />
-                      <span className="font-mono text-xs font-semibold">{startup.theme.accent_color}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div key={startup.slug} className="animate-in fade-in duration-200">
+              <ThemeEditor
+                startupName={startup.name}
+                theme={startup.theme}
+                onChange={(updatedTheme) => handleStartupChange({ ...startup, theme: updatedTheme })}
+                onSave={handleSaveStartup}
+              />
             </div>
           )}
         </main>

@@ -123,7 +123,7 @@ export function LandingHeader() {
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.35, ease: "easeOut" }}
-      className={`fixed inset-x-0 top-0 z-50 py-3 sm:py-3.5 transition-[background-color,border-color,box-shadow] duration-200 ${
+      className={`fixed inset-x-0 top-0 z-50 w-full max-w-full overflow-x-hidden py-3 sm:py-3.5 transition-[background-color,border-color,box-shadow] duration-200 ${
         isScrolled
           ? "border-b border-border/80 bg-background/90 shadow-2xs backdrop-blur-md"
           : "border-b border-transparent bg-transparent"

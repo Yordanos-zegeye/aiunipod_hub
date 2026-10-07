@@ -353,7 +353,7 @@ function StartupJobsPage() {
     (searchQuery.trim() ? 1 : 0);
 
   return (
-    <div className="min-h-screen bg-background font-body text-foreground antialiased selection:bg-primary selection:text-primary-foreground">
+    <div className="min-h-screen w-full max-w-full overflow-x-hidden bg-background font-body text-foreground antialiased selection:bg-primary selection:text-primary-foreground">
       {/* 1. Global Navigation Header */}
       <LandingHeader />
 

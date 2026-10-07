@@ -121,15 +121,9 @@ export function PostJobModal({ isOpen, onClose, onJobCreated }: PostJobModalProp
       if (s.slug === "sela-health") {
         setDepartment("Clinical AI & Triage Systems");
         setLocation("Addis Ababa (EAII HQ) & Tikur Anbessa Hospital");
-      } else if (s.slug === "kuraz-agri") {
+      } else if (s.slug === "ethioagrisight") {
         setDepartment("Computer Vision & Remote Sensing");
-        setLocation("Addis Ababa (EAII HQ) & Hawassa Hub");
-      } else if (s.slug === "bionic-pod") {
-        setDepartment("Robotics & Embedded Hardware");
-        setLocation("Addis Ababa Living Lab & Fabrication Facility");
-      } else if (s.slug === "ethionlp") {
-        setDepartment("Large Language Models & Audio");
-        setLocation("Addis Ababa (EAII HQ) & AAU Campus");
+        setLocation("Addis Ababa (EAII HQ) & Adama Hub");
       }
     }
   };

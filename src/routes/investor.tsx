@@ -92,14 +92,14 @@ export function InvestorPortalPage() {
       pledgedAmount: 100000,
     },
     {
-      startupSlug: "kuraz-agri",
+      startupSlug: "ethioagrisight",
       stage: "Reviewing",
-      privateNotes: "Cooperative yield matching product looks defensible with satellite integrations in Hawassa.",
+      privateNotes: "Cooperative yield matching product looks defensible with satellite integrations in Oromia.",
     },
     {
-      startupSlug: "adera-labs",
+      startupSlug: "trooface",
       stage: "Watching",
-      privateNotes: "Early stage speech-to-text API. Following progress on government service line integrations.",
+      privateNotes: "Early stage biometric identity verification and Fayda KYC integration. Following progress on banking pilot.",
     },
   ]);
 
@@ -228,7 +228,7 @@ export function InvestorPortalPage() {
   // ==========================================
   if (!isInvestor) {
     return (
-      <div className="min-h-screen bg-background font-body text-foreground antialiased selection:bg-primary selection:text-primary-foreground flex flex-col justify-between">
+      <div className="min-h-screen w-full max-w-full overflow-x-hidden bg-background font-body text-foreground antialiased selection:bg-primary selection:text-primary-foreground flex flex-col justify-between">
         <header className="border-b border-border/70 bg-card/60 backdrop-blur-md px-6 py-4 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2.5">
             <img src="/aiunipod-logo.webp" alt="AI UNIPOD" width="130" height="32" className="h-7 w-auto object-contain" />
@@ -302,7 +302,7 @@ export function InvestorPortalPage() {
   const investorOrg = user?.investorProfile?.organization || "Novastar Ventures";
 
   return (
-    <div className="min-h-screen bg-background font-body text-foreground antialiased flex">
+    <div className="min-h-screen w-full max-w-full overflow-x-hidden bg-background font-body text-foreground antialiased flex">
       {/* ================================================== */}
       {/* 1. LEFT SIDEBAR (DESKTOP) */}
       {/* ================================================== */}
@@ -577,9 +577,9 @@ export function InvestorPortalPage() {
       {/* ================================================== */}
       {/* 3. MAIN DASHBOARD CONTENT AREA */}
       {/* ================================================== */}
-      <div className="flex-1 flex flex-col min-w-0">
+      <div className="flex-1 flex flex-col min-w-0 max-w-full overflow-x-hidden">
         {/* Top Header */}
-        <header className="h-18 border-b border-border/80 bg-card/60 backdrop-blur-md sticky top-0 z-20 px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
+        <header className="h-18 w-full max-w-full border-b border-border/80 bg-card/60 backdrop-blur-md sticky top-0 z-20 px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <button
               type="button"
@@ -659,7 +659,7 @@ export function InvestorPortalPage() {
         </header>
 
         {/* Main Canvas */}
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-[1600px] w-full mx-auto space-y-8">
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-[1600px] w-full max-w-full overflow-x-hidden min-w-0 mx-auto space-y-8">
           {/* Header Banner */}
           <div className="rounded-3xl border border-border/80 bg-gradient-to-br from-card via-card/90 to-muted/30 p-6 sm:p-8 shadow-xs relative overflow-hidden">
             <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">

@@ -7,6 +7,11 @@ export default defineConfig({
   resolve: {
     tsconfigPaths: true,
   },
+  server: {
+    watch: {
+      ignored: ["**/startupdata/**", "**/*.pdf", "**/node_modules/**", "**/.git/**"],
+    },
+  },
   plugins: [
     tailwindcss(),
     tanstackStart(),

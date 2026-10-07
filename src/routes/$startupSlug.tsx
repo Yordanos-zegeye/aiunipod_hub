@@ -44,7 +44,7 @@ import {
   Wallet,
   Zap,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 import { DynamicStartupLayout } from "@/components/white-label/DynamicStartupLayout";
@@ -146,7 +146,20 @@ const SDG_COLORS: Record<number, string> = {
 };
 
 function StartupProfilePage() {
-  const { startup } = Route.useLoaderData();
+  const loaderData = Route.useLoaderData();
+  const [startup, setStartup] = useState<Startup>(() => getStartupBySlug(loaderData.startup.slug) || loaderData.startup);
+
+  useEffect(() => {
+    const handleUpdate = (e: any) => {
+      if (e?.detail?.slug === loaderData.startup.slug) {
+        const fresh = getStartupBySlug(loaderData.startup.slug);
+        if (fresh) setStartup(fresh);
+      }
+    };
+    window.addEventListener("aiunipod_startup_updated", handleUpdate);
+    return () => window.removeEventListener("aiunipod_startup_updated", handleUpdate);
+  }, [loaderData.startup.slug]);
+
   const cohort = getStartupCohort(startup);
   const overallStage = getStartupStage(startup);
 
@@ -328,8 +341,8 @@ Verified by Ethiopian Artificial Intelligence Institute & UNDP timbuktoo.`;
         </div>
 
         {/* Key Telemetry Highlights Grid (Template Section 1 & 18) */}
-        <div className="mt-10 grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-6">
-          <div className="rounded-brand border border-brand-primary/15 bg-brand-surface p-4 shadow-sm shadow-brand-primary/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+        <div className="mt-10 grid gap-3 sm:gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-6">
+          <div className="rounded-brand border border-brand-primary/15 bg-brand-surface p-3 sm:p-4 min-w-0 overflow-hidden shadow-sm shadow-brand-primary/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
             <span className="text-[10px] font-bold uppercase tracking-wider text-brand-text/60 flex items-center gap-1">
               <Calendar className="size-3" /> Founded
             </span>
@@ -640,7 +653,7 @@ Verified by Ethiopian Artificial Intelligence Institute & UNDP timbuktoo.`;
                 </span>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <div className="rounded-brand bg-brand-primary/5 p-3.5 border border-brand-primary/10">
                   <span className="text-[10px] font-bold uppercase tracking-wider text-brand-text/60 block">Dataset Scale</span>
                   <span className="text-base font-bold text-brand-primary mt-1 block">{startup.ai_tech.dataset_size}</span>
@@ -1022,7 +1035,7 @@ Verified by Ethiopian Artificial Intelligence Institute & UNDP timbuktoo.`;
         )}
 
         {/* Team Diversity & Size Metrics */}
-        <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           <div className="rounded-brand border border-brand-primary/15 bg-brand-surface p-4 text-center">
             <span className="text-xs font-bold text-brand-text/60 uppercase">Total Employees</span>
             <span className="text-xl font-bold text-brand-text block mt-1">{startup.team_size} Staff</span>
@@ -1035,7 +1048,7 @@ Verified by Ethiopian Artificial Intelligence Institute & UNDP timbuktoo.`;
             </span>
           </div>
 
-          <div className="rounded-brand border border-brand-primary/15 bg-brand-surface p-4 text-center sm:col-span-2">
+          <div className="rounded-brand border border-brand-primary/15 bg-brand-surface p-4 text-center sm:col-span-2 lg:col-span-2">
             <span className="text-xs font-bold text-brand-text/60 uppercase">Inclusion &amp; Representation</span>
             <span className="text-sm font-semibold text-brand-primary block mt-1">
               {startup.impact?.women_youth_representation || "Inclusive founding team"}
@@ -1124,7 +1137,7 @@ Verified by Ethiopian Artificial Intelligence Institute & UNDP timbuktoo.`;
                       </p>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-2 pt-2 border-t border-brand-primary/10">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 border-t border-brand-primary/10">
                       <div>
                         <span className="text-[10px] text-brand-text/60 block">Gross Profit</span>
                         <span className="font-semibold text-brand-text">{currency.format(fy.gross_profit_usd)}</span>

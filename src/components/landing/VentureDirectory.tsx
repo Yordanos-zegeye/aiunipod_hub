@@ -13,7 +13,7 @@ import {
   Wallet,
   Zap,
 } from "lucide-react";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 
 import { Button } from "@/components/ui/button";
@@ -25,12 +25,22 @@ const currency = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 0,
 });
 
+function getStartupMonogram(name: string): string {
+  const parts = name.trim().split(/\s+/);
+  if (parts.length >= 2) {
+    return (parts[0][0] + parts[1][0]).toUpperCase();
+  }
+  return name.slice(0, 2).toUpperCase();
+}
+
 export function VentureDirectory() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedSector, setSelectedSector] = useState("All");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
 
-  const sectors = ["All", "Health AI", "AgriTech", "Language AI", "Fintech AI", "Climate AI", "Logistics AI", "Vision AI"];
+  const sectors = useMemo(() => {
+    return ["All", ...Array.from(new Set(STARTUPS.map((s) => s.sector)))];
+  }, []);
 
   const filteredStartups = STARTUPS.filter((startup) => {
     const matchesSector = selectedSector === "All" || startup.sector.toLowerCase() === selectedSector.toLowerCase();
@@ -198,27 +208,37 @@ export function VentureDirectory() {
                     }}
                   >
                     <div>
-                      <div className="flex items-start justify-between gap-4">
-                        <div className="flex flex-wrap items-center gap-1.5">
-                          <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
-                            {startup.sector}
-                          </span>
-                          <span className="rounded-full border border-primary/20 bg-primary/5 px-2 py-0.5 text-[10px] font-bold text-primary">
-                            {startup.cohort || "Cohort 3"}
-                          </span>
+                      <div className="flex items-start justify-between gap-3">
+                        <div className="flex items-center gap-3 min-w-0">
+                          <div
+                            className="flex size-11 shrink-0 items-center justify-center rounded-xl font-display text-sm font-extrabold text-white shadow-xs"
+                            style={{
+                              background: `linear-gradient(135deg, ${startup.theme.primary_color}, ${startup.theme.secondary_color || startup.theme.primary_color})`,
+                            }}
+                          >
+                            {getStartupMonogram(startup.name)}
+                          </div>
+                          <div className="min-w-0">
+                            <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-[11px] font-semibold text-primary truncate block max-w-[150px]">
+                              {startup.sector}
+                            </span>
+                            <span className="text-[10px] font-bold text-muted-foreground">
+                              {startup.cohort || "Cohort 3"}
+                            </span>
+                          </div>
                         </div>
-                        <span className="grid h-8 w-8 place-items-center rounded-full border border-border text-muted-foreground transition-all duration-200 group-hover:rotate-45 group-hover:border-primary group-hover:bg-primary group-hover:text-primary-foreground">
+                        <span className="grid h-8 w-8 place-items-center rounded-full border border-border text-muted-foreground transition-all duration-200 group-hover:rotate-45 group-hover:border-primary group-hover:bg-primary group-hover:text-primary-foreground shrink-0">
                           <ArrowUpRight className="size-4" />
                         </span>
                       </div>
 
-                      <h3 className="mt-5 font-display text-2xl font-bold tracking-tight text-foreground transition-colors group-hover:text-primary">
+                      <h3 className="mt-4 font-display text-xl font-bold tracking-tight text-foreground transition-colors group-hover:text-primary truncate">
                         {startup.name}
                       </h3>
-                      <p className="mt-1 text-sm font-medium text-foreground/80">
+                      <p className="mt-1 text-xs font-medium text-foreground/80 line-clamp-1">
                         {startup.tagline}
                       </p>
-                      <p className="mt-3 line-clamp-3 text-xs leading-relaxed text-muted-foreground">
+                      <p className="mt-2 line-clamp-3 text-xs leading-relaxed text-muted-foreground">
                         {startup.description}
                       </p>
 
@@ -276,9 +296,14 @@ export function VentureDirectory() {
                     <span className="font-display text-xs font-bold text-muted-foreground sm:text-sm">
                       0{index + 1}
                     </span>
-                    <span className="venture-icon transition-transform duration-200 group-hover:scale-110">
-                      <Sparkles className="size-4" />
-                    </span>
+                    <div
+                      className="flex size-9 shrink-0 items-center justify-center rounded-xl text-xs font-bold text-white shadow-xs transition-transform duration-200 group-hover:scale-110"
+                      style={{
+                        background: `linear-gradient(135deg, ${startup.theme.primary_color}, ${startup.theme.secondary_color || startup.theme.primary_color})`,
+                      }}
+                    >
+                      {getStartupMonogram(startup.name)}
+                    </div>
                     <div>
                       <h3 className="font-display text-lg font-bold text-foreground transition-colors group-hover:text-primary sm:text-xl">
                         {startup.name}

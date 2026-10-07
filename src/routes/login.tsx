@@ -89,7 +89,7 @@ function LoginPage() {
   };
 
   return (
-    <main className="portal-canvas min-h-screen overflow-hidden text-portal-foreground">
+    <main className="portal-canvas min-h-screen w-full max-w-full overflow-x-hidden text-portal-foreground">
       <div className="portal-grid" aria-hidden="true" />
       <div className="portal-shape portal-shape-ring" aria-hidden="true" />
       <div className="portal-shape portal-shape-wave" aria-hidden="true" />
@@ -134,7 +134,7 @@ function LoginPage() {
             <p className="text-[11px] font-bold uppercase tracking-wider text-portal-accent">
               One-Click Demo Roles:
             </p>
-            <div className="mt-2.5 grid grid-cols-3 gap-2">
+            <div className="mt-2.5 grid grid-cols-1 sm:grid-cols-3 gap-2">
               <button
                 type="button"
                 onClick={() => handleQuickDemo("super_admin")}

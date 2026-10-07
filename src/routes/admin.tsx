@@ -796,7 +796,7 @@ export function AdminDashboardPage() {
   // Access guard
   if (!isSuperAdmin) {
     return (
-      <div className="min-h-screen bg-background text-foreground flex flex-col justify-between">
+      <div className="min-h-screen w-full max-w-full overflow-x-hidden bg-background text-foreground flex flex-col justify-between">
         <header className="border-b border-border/70 py-4 px-6 sm:px-12 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
             <div className="size-8 rounded-xl bg-primary/10 grid place-items-center">
@@ -918,7 +918,7 @@ export function AdminDashboardPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-background font-body text-foreground antialiased flex">
+    <div className="min-h-screen w-full max-w-full overflow-x-hidden bg-background font-body text-foreground antialiased flex">
       {/* ================================================== */}
       {/* 1. LEFT SIDEBAR (DESKTOP) */}
       {/* ================================================== */}
@@ -1206,9 +1206,9 @@ export function AdminDashboardPage() {
       {/* ================================================== */}
       {/* 3. MAIN DASHBOARD CONTENT AREA */}
       {/* ================================================== */}
-      <div className="flex-1 flex flex-col min-w-0">
+      <div className="flex-1 flex flex-col min-w-0 max-w-full overflow-x-hidden">
         {/* Top Dashboard App Header */}
-        <header className="h-18 border-b border-border bg-card/60 backdrop-blur-md px-5 sm:px-8 flex items-center justify-between sticky top-0 z-20">
+        <header className="h-18 w-full max-w-full border-b border-border bg-card/60 backdrop-blur-md px-5 sm:px-8 flex items-center justify-between sticky top-0 z-20">
           <div className="flex items-center gap-4">
             <button
               type="button"
@@ -1292,7 +1292,7 @@ export function AdminDashboardPage() {
         </header>
 
         {/* Dynamic Main Workspace Container */}
-        <main className="flex-1 p-5 sm:p-8 lg:p-10 max-w-[1500px] w-full">
+        <main className="flex-1 p-5 sm:p-8 lg:p-10 max-w-[1500px] w-full max-w-full overflow-x-hidden min-w-0">
           {/* ================================================== */}
           {/* TAB 1: PORTFOLIO & COHORT STAGE ANALYTICS */}
           {/* ================================================== */}
@@ -1741,7 +1741,7 @@ export function AdminDashboardPage() {
                         </div>
 
                         {/* Mini Stat Summary Strip */}
-                        <div className="grid grid-cols-3 gap-2 pt-1 pb-1">
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1 pb-1">
                           <div className="rounded-xl border border-border/60 bg-muted/20 p-2.5 text-center">
                             <span className="text-[10px] uppercase font-bold text-muted-foreground">Capital Seek</span>
                             <p className="font-display font-bold text-sm text-primary tabular-nums">
@@ -1970,7 +1970,7 @@ export function AdminDashboardPage() {
                         </div>
 
                         {/* Cohort Velocity Badges */}
-                        <div className="grid grid-cols-2 gap-3 pt-1">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                           <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-3 text-xs space-y-1">
                             <div className="flex items-center justify-between">
                               <span className="font-bold text-foreground">Cohort 2 (Graduated)</span>
@@ -2370,7 +2370,7 @@ export function AdminDashboardPage() {
                           {cohort.description}
                         </p>
 
-                        <div className="grid grid-cols-2 gap-2 text-xs pt-1">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs pt-1">
                           <div className="rounded-xl border border-border bg-muted/20 p-2.5">
                             <p className="text-[10px] text-muted-foreground">Grant & Seed Pool</p>
                             <p className="font-bold text-foreground mt-0.5 text-xs truncate">{cohort.grantPool}</p>
@@ -2444,7 +2444,8 @@ export function AdminDashboardPage() {
                     </Button>
                   </div>
 
-                  <table className="w-full text-left text-xs">
+                  <div className="w-full max-w-full overflow-x-auto">
+                    <table className="w-full min-w-[650px] text-left text-xs">
                     <thead className="border-b border-border bg-muted/40 font-semibold text-muted-foreground uppercase text-[11px]">
                       <tr>
                         <th className="p-4 sm:p-5">Applicant & Founder</th>
@@ -2510,7 +2511,8 @@ export function AdminDashboardPage() {
                         </tr>
                       ))}
                     </tbody>
-                  </table>
+                    </table>
+                  </div>
                 </div>
               )}
             </div>
@@ -2572,7 +2574,8 @@ export function AdminDashboardPage() {
 
               {/* Startups Table (No Impersonate button) */}
               <div className="overflow-hidden rounded-3xl border border-border bg-card shadow-xs">
-                <table className="w-full text-left text-xs">
+                <div className="w-full max-w-full overflow-x-auto">
+                  <table className="w-full min-w-[650px] text-left text-xs">
                   <thead className="border-b border-border bg-muted/40 font-semibold text-muted-foreground uppercase text-[11px]">
                     <tr>
                       <th className="p-4 sm:p-5">Startup & Focus</th>
@@ -2626,6 +2629,7 @@ export function AdminDashboardPage() {
                 </table>
               </div>
             </div>
+            </div>
           )}
 
           {/* ================================================== */}
@@ -2645,7 +2649,8 @@ export function AdminDashboardPage() {
               </div>
 
               <div className="overflow-hidden rounded-3xl border border-border bg-card shadow-xs">
-                <table className="w-full text-left text-xs">
+                <div className="w-full max-w-full overflow-x-auto">
+                  <table className="w-full min-w-[650px] text-left text-xs">
                   <thead className="border-b border-border bg-muted/40 font-semibold text-muted-foreground uppercase text-[11px]">
                     <tr>
                       <th className="p-4 sm:p-5">Organization & Lead</th>
@@ -2710,6 +2715,7 @@ export function AdminDashboardPage() {
                 </table>
               </div>
             </div>
+            </div>
           )}
 
 
@@ -2731,7 +2737,8 @@ export function AdminDashboardPage() {
               </div>
 
               <div className="overflow-hidden rounded-3xl border border-border bg-card shadow-xs">
-                <table className="w-full text-left text-xs">
+                <div className="w-full max-w-full overflow-x-auto">
+                  <table className="w-full min-w-[650px] text-left text-xs">
                   <thead className="border-b border-border bg-muted/40 font-semibold text-muted-foreground uppercase text-[11px]">
                     <tr>
                       <th className="p-4 sm:p-5">Event Type</th>
@@ -2768,6 +2775,7 @@ export function AdminDashboardPage() {
                   </tbody>
                 </table>
               </div>
+            </div>
             </div>
           )}
         </main>
@@ -2815,7 +2823,7 @@ export function AdminDashboardPage() {
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="font-bold text-foreground block mb-1">Category</label>
                   <select
@@ -2845,7 +2853,7 @@ export function AdminDashboardPage() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="font-bold text-foreground block mb-1">Date</label>
                   <input
@@ -2877,7 +2885,7 @@ export function AdminDashboardPage() {
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="font-bold text-foreground block mb-1">Capacity (Seats)</label>
                   <input
@@ -2996,7 +3004,7 @@ export function AdminDashboardPage() {
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="font-bold text-foreground block mb-1">Edition Tag</label>
                   <input
@@ -3022,7 +3030,7 @@ export function AdminDashboardPage() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="font-bold text-foreground block mb-1">Application Deadline</label>
                   <input
@@ -3044,7 +3052,7 @@ export function AdminDashboardPage() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="font-bold text-foreground block mb-1">Grant & Seed Pool</label>
                   <input
@@ -3152,7 +3160,7 @@ export function AdminDashboardPage() {
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="font-bold text-foreground block mb-1">Sector Focus</label>
                   <select
@@ -3182,7 +3190,7 @@ export function AdminDashboardPage() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="font-bold text-foreground block mb-1">Assigned Cohort</label>
                   <select
@@ -3222,7 +3230,7 @@ export function AdminDashboardPage() {
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="font-bold text-foreground block mb-1">Lead Founder Name</label>
                   <input

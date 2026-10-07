@@ -102,12 +102,12 @@ export function DynamicStartupLayout({
       data-layout={resolved.layout}
       style={themeToCssVars(resolved)}
       className={cn(
-        "min-h-screen bg-brand-surface font-brand text-brand-text antialiased",
+        "min-h-screen w-full max-w-full overflow-x-hidden bg-brand-surface font-brand text-brand-text antialiased",
         className,
       )}
     >
       {/* 2-TIER STICKY INVESTOR HEADER */}
-      <header className="sticky top-0 z-40 border-b border-brand-primary/15 bg-brand-surface/90 backdrop-blur-md transition-all">
+      <header className="sticky top-0 z-40 w-full max-w-full border-b border-brand-primary/15 bg-brand-surface/90 backdrop-blur-md transition-all">
         {/* Tier 1: Main Brand, Navigation Pillars & Investor Actions */}
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
           {/* Left: Back to Hub + Startup Identity */}
@@ -291,10 +291,10 @@ export function DynamicStartupLayout({
 
         {/* Tier 2: Horizontal Scrollable Section Pills Strip (All 17 Sections) */}
         {nav.length > 0 && (
-          <div className="relative border-t border-brand-primary/10 bg-brand-surface/75 px-4 sm:px-6">
-            <div className="mx-auto max-w-7xl">
+          <div className="relative w-full max-w-full overflow-hidden border-t border-brand-primary/10 bg-brand-surface/75 px-4 sm:px-6">
+            <div className="mx-auto max-w-7xl w-full min-w-0">
               <nav
-                className="flex items-center gap-1.5 overflow-x-auto py-2 scroll-smooth"
+                className="flex items-center gap-1.5 overflow-x-auto py-2 scroll-smooth w-full no-scrollbar overscroll-x-contain"
                 style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
                 aria-label="Section shortcuts"
               >
@@ -337,7 +337,7 @@ export function DynamicStartupLayout({
               </Link>
             </div>
 
-            <div className="grid grid-cols-2 gap-1.5 py-3 text-xs max-h-[55vh] overflow-y-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 py-3 text-xs max-h-[55vh] overflow-y-auto">
               {nav.map((item) => (
                 <a
                   key={item.href}
@@ -384,9 +384,9 @@ export function DynamicStartupLayout({
         )}
       </header>
 
-      <main id="top">{children}</main>
+      <main id="top" className="w-full max-w-full overflow-x-hidden">{children}</main>
 
-      <footer className="mt-24 border-t border-brand-primary/15 bg-brand-secondary text-brand-secondary-foreground">
+      <footer className="mt-24 w-full max-w-full overflow-x-hidden border-t border-brand-primary/15 bg-brand-secondary text-brand-secondary-foreground">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 py-10 text-sm">
           {footer ?? (
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
