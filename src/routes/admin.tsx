@@ -3201,6 +3201,7 @@ export function AdminDashboardPage() {
                     <option value="Cohort 3">Cohort 3 (Active)</option>
                     <option value="Cohort 4">Cohort 4 (Upcoming)</option>
                     <option value="Cohort 2">Cohort 2 (Graduated)</option>
+                    <option value="Cohort 1">Cohort 1 (Alumni)</option>
                   </select>
                 </div>
 

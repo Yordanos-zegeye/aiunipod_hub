@@ -76,9 +76,9 @@ export function LandingHeader() {
 
   const navItems = [
     { label: "Startups", href: "/startups" },
+    { label: "Alumni", href: "/alumni" },
     { label: "Jobs", href: "/jobs" },
     { label: "Mission", href: "/#mission" },
-    { label: "Pillars", href: "/#pillars" },
     { label: "Cohort 3", href: "/cohort-3" },
     { label: "Investors", href: "/investor" },
   ];

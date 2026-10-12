@@ -54,6 +54,7 @@ import {
   STARTUPS,
   type Startup,
 } from "@/data/startups";
+import { ALUMNI_STARTUPS, saveAlumniOverride } from "@/data/alumni";
 import { useAuth } from "@/lib/auth";
 
 export const Route = createFileRoute("/portal")({
@@ -91,6 +92,7 @@ export function StartupPortalPage() {
     const loaded =
       getStartupBySlug(selectedStartupSlug) ||
       STARTUPS.find((s) => s.slug === selectedStartupSlug) ||
+      ALUMNI_STARTUPS.find((s) => s.slug === selectedStartupSlug) ||
       STARTUPS[0]!;
     setStartup(loaded);
     setHasUnsavedChanges(false);
@@ -172,6 +174,9 @@ export function StartupPortalPage() {
 
   const handleSaveStartup = () => {
     saveStartupOverride(startup.slug, startup);
+    if (ALUMNI_STARTUPS.some((a) => a.slug === startup.slug)) {
+      saveAlumniOverride(startup.slug, startup as any);
+    }
     setHasUnsavedChanges(false);
     toast.success(
       `Saved all changes for ${startup.name}! Your public Deal Book profile is now live with the new data.`
@@ -659,19 +664,27 @@ export function StartupPortalPage() {
                 value={selectedStartupSlug}
                 onChange={(e) => {
                   setSelectedStartupSlug(e.target.value);
-                  toast.success(
-                    `Switched tenant view to ${
-                      STARTUPS.find((s) => s.slug === e.target.value)?.name
-                    }`
-                  );
+                  const found =
+                    STARTUPS.find((s) => s.slug === e.target.value) ||
+                    ALUMNI_STARTUPS.find((s) => s.slug === e.target.value);
+                  toast.success(`Switched tenant view to ${found?.name}`);
                 }}
                 className="bg-transparent font-bold text-foreground focus:outline-hidden text-xs cursor-pointer"
               >
-                {STARTUPS.map((s) => (
-                  <option key={s.slug} value={s.slug}>
-                    {s.name} ({s.sector})
-                  </option>
-                ))}
+                <optgroup label="Incubated Startups (Cohort 3)">
+                  {STARTUPS.map((s) => (
+                    <option key={s.slug} value={s.slug}>
+                      {s.name} ({s.sector})
+                    </option>
+                  ))}
+                </optgroup>
+                <optgroup label="Graduated Alumni (Cohorts 1 & 2)">
+                  {ALUMNI_STARTUPS.map((s) => (
+                    <option key={s.slug} value={s.slug}>
+                      {s.name} ({s.cohort} Alumni)
+                    </option>
+                  ))}
+                </optgroup>
               </select>
             </div>
 

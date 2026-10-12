@@ -96,6 +96,11 @@ export function LandingFooter() {
                 </Link>
               </li>
               <li>
+                <Link to="/alumni" className="font-medium text-brand-blue transition-colors hover:underline">
+                  Alumni &amp; Graduates Network →
+                </Link>
+              </li>
+              <li>
                 <Link to="/jobs" className="font-medium text-brand-blue transition-colors hover:underline">
                   Jobs & Fellowships ({JOB_OPENINGS.length}) →
                 </Link>

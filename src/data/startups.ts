@@ -1,4 +1,5 @@
 import type { WhiteLabelSettings } from "@/lib/white-label";
+import { ALUMNI_STARTUPS, STORAGE_ALUMNI_PREFIX } from "./alumni";
 
 export type Product = {
   name: string;
@@ -6540,18 +6541,37 @@ export function getAllStartups(): Startup[] {
 
 export function getStartupBySlug(slug: string): Startup | undefined {
   const base = STARTUPS.find((s) => s.slug === slug);
-  if (!base) return undefined;
-  if (typeof window !== "undefined" && window.localStorage) {
-    try {
-      const stored = window.localStorage.getItem(STORAGE_PREFIX + slug);
-      if (stored) {
-        return { ...base, ...JSON.parse(stored) };
+  if (base) {
+    if (typeof window !== "undefined" && window.localStorage) {
+      try {
+        const stored = window.localStorage.getItem(STORAGE_PREFIX + slug);
+        if (stored) {
+          return { ...base, ...JSON.parse(stored) };
+        }
+      } catch {
+        // ignore
       }
-    } catch {
-      // ignore
     }
+    return base;
   }
-  return base;
+
+  // Check graduated alumni startups
+  const alumni = ALUMNI_STARTUPS.find((s) => s.slug === slug);
+  if (alumni) {
+    if (typeof window !== "undefined" && window.localStorage) {
+      try {
+        const stored = window.localStorage.getItem(STORAGE_ALUMNI_PREFIX + slug);
+        if (stored) {
+          return { ...alumni, ...JSON.parse(stored) };
+        }
+      } catch {
+        // ignore
+      }
+    }
+    return alumni;
+  }
+
+  return undefined;
 }
 
 const STAGE_ORDER: Record<string, number> = {

@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as StartupSlugRouteImport } from './routes/$startupSlug'
 import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AlumniRouteImport } from './routes/alumni'
 import { Route as Cohort3RouteImport } from './routes/cohort-3'
 import { Route as InvestorRouteImport } from './routes/investor'
 import { Route as JobsRouteImport } from './routes/jobs'
@@ -32,6 +33,11 @@ const StartupSlugRoute = StartupSlugRouteImport.update({
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AlumniRoute = AlumniRouteImport.update({
+  id: '/alumni',
+  path: '/alumni',
   getParentRoute: () => rootRouteImport,
 } as any)
 const Cohort3Route = Cohort3RouteImport.update({
@@ -69,6 +75,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$startupSlug': typeof StartupSlugRoute
   '/admin': typeof AdminRoute
+  '/alumni': typeof AlumniRoute
   '/cohort-3': typeof Cohort3Route
   '/investor': typeof InvestorRoute
   '/jobs': typeof JobsRoute
@@ -80,6 +87,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$startupSlug': typeof StartupSlugRoute
   '/admin': typeof AdminRoute
+  '/alumni': typeof AlumniRoute
   '/cohort-3': typeof Cohort3Route
   '/investor': typeof InvestorRoute
   '/jobs': typeof JobsRoute
@@ -92,6 +100,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/$startupSlug': typeof StartupSlugRoute
   '/admin': typeof AdminRoute
+  '/alumni': typeof AlumniRoute
   '/cohort-3': typeof Cohort3Route
   '/investor': typeof InvestorRoute
   '/jobs': typeof JobsRoute
@@ -105,6 +114,7 @@ export interface FileRouteTypes {
     | '/'
     | '/$startupSlug'
     | '/admin'
+    | '/alumni'
     | '/cohort-3'
     | '/investor'
     | '/jobs'
@@ -116,6 +126,7 @@ export interface FileRouteTypes {
     | '/'
     | '/$startupSlug'
     | '/admin'
+    | '/alumni'
     | '/cohort-3'
     | '/investor'
     | '/jobs'
@@ -127,6 +138,7 @@ export interface FileRouteTypes {
     | '/'
     | '/$startupSlug'
     | '/admin'
+    | '/alumni'
     | '/cohort-3'
     | '/investor'
     | '/jobs'
@@ -139,6 +151,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   StartupSlugRoute: typeof StartupSlugRoute
   AdminRoute: typeof AdminRoute
+  AlumniRoute: typeof AlumniRoute
   Cohort3Route: typeof Cohort3Route
   InvestorRoute: typeof InvestorRoute
   JobsRoute: typeof JobsRoute
@@ -168,6 +181,13 @@ declare module '@tanstack/react-router' {
       path: '/admin'
       fullPath: '/admin'
       preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/alumni': {
+      id: '/alumni'
+      path: '/alumni'
+      fullPath: '/alumni'
+      preLoaderRoute: typeof AlumniRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cohort-3': {
@@ -219,6 +239,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   StartupSlugRoute: StartupSlugRoute,
   AdminRoute: AdminRoute,
+  AlumniRoute: AlumniRoute,
   Cohort3Route: Cohort3Route,
   InvestorRoute: InvestorRoute,
   JobsRoute: JobsRoute,
