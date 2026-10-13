@@ -516,13 +516,12 @@ export function DealBookEditor({ startup, onChange, onSave, hasUnsavedChanges }:
               <div>
                 <label className="text-xs font-semibold text-foreground">Incubation Cohort</label>
                 <select
-                  value={startup.cohort || "Cohort 3"}
+                  value={startup.cohort || "Cohort 2"}
                   onChange={(e) => updateStartupField("cohort", e.target.value)}
                   className="mt-1.5 w-full rounded-xl border border-border bg-background px-3 py-2 text-xs text-foreground focus:border-primary focus:outline-hidden"
                 >
-                  <option value="Cohort 3">Cohort 3 (Current Living Lab)</option>
-                  <option value="Cohort 2">Cohort 2 (Graduated)</option>
-                  <option value="Cohort 1">Cohort 1 (Alumni)</option>
+                  <option value="Cohort 2">Cohort 2 (Active Living Lab)</option>
+                  <option value="Cohort 1">Cohort 1 (Graduated Alumni)</option>
                 </select>
               </div>
 

@@ -453,11 +453,11 @@ export function StartupPortalPage() {
 
             <Link
               to="/cohort-3"
-              title="Cohort 3"
+              title="Cohort Applications"
               className="w-full flex items-center gap-3 rounded-2xl px-3 py-2 text-xs font-medium text-muted-foreground hover:bg-muted/60 hover:text-foreground transition-all"
             >
               <GraduationCap className="size-4 shrink-0" />
-              {!sidebarCollapsed && <span className="truncate flex-1">Cohort 3 Applications</span>}
+              {!sidebarCollapsed && <span className="truncate flex-1">Cohort Applications</span>}
               {!sidebarCollapsed && <ArrowUpRight className="size-3 text-muted-foreground/60" />}
             </Link>
 
@@ -671,14 +671,14 @@ export function StartupPortalPage() {
                 }}
                 className="bg-transparent font-bold text-foreground focus:outline-hidden text-xs cursor-pointer"
               >
-                <optgroup label="Incubated Startups (Cohort 3)">
+                <optgroup label="Incubated Startups (Cohort 2 & 1)">
                   {STARTUPS.map((s) => (
                     <option key={s.slug} value={s.slug}>
-                      {s.name} ({s.sector})
+                      {s.name} ({s.cohort || "Cohort 2"} · {s.sector})
                     </option>
                   ))}
                 </optgroup>
-                <optgroup label="Graduated Alumni (Cohorts 1 & 2)">
+                <optgroup label="Graduated Alumni">
                   {ALUMNI_STARTUPS.map((s) => (
                     <option key={s.slug} value={s.slug}>
                       {s.name} ({s.cohort} Alumni)
@@ -841,7 +841,7 @@ export function StartupPortalPage() {
                     <Cpu className="size-4 text-purple-500" />
                   </div>
                   <p className="mt-2 font-display text-2xl font-bold text-foreground">
-                    {startup.cohort || "Cohort 3"}
+                    {startup.cohort || "Cohort 2"}
                   </p>
                   <p className="mt-1 text-[11px] text-emerald-600 font-semibold flex items-center gap-1">
                     <CheckCircle2 className="size-3" /> EAII Compute Allocated
@@ -888,7 +888,7 @@ export function StartupPortalPage() {
                         {startup.name} · Living Lab Cohort Status
                       </h3>
                       <p className="text-xs text-muted-foreground">
-                        Incubated under {startup.cohort || "Cohort 3"} with Ethiopian Artificial
+                        Incubated under {startup.cohort || "Cohort 2"} with Ethiopian Artificial
                         Intelligence Institute (EAII) sovereign infrastructure.
                       </p>
                     </div>

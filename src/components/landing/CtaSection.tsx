@@ -70,7 +70,7 @@ export function CtaSection() {
               <motion.div whileHover={{ scale: 1.04, y: -2 }} whileTap={{ scale: 0.97 }}>
                 <Button asChild size="lg" className="h-12 rounded-full bg-brand-blue px-7 text-sm font-semibold text-ink shadow-md hover:bg-brand-blue/90">
                   <Link to="/cohort-3">
-                    Apply for Cohort 3 <ArrowUpRight className="ml-1.5 size-4" />
+                    Apply for Incubation <ArrowUpRight className="ml-1.5 size-4" />
                   </Link>
                 </Button>
               </motion.div>

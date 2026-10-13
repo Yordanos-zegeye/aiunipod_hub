@@ -123,7 +123,7 @@ export function LandingHero() {
               >
                 <Link to="/cohort-3">
                   <Sparkles className="mr-2 size-4 text-amber-500" />
-                  Apply for Cohort 3
+                  Apply for Incubation
                 </Link>
               </Button>
             </motion.div>

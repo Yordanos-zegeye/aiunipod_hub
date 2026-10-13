@@ -79,7 +79,7 @@ export function LandingHeader() {
     { label: "Alumni", href: "/alumni" },
     { label: "Jobs", href: "/jobs" },
     { label: "Mission", href: "/#mission" },
-    { label: "Cohort 3", href: "/cohort-3" },
+    { label: "Incubation", href: "/cohort-3" },
     { label: "Investors", href: "/investor" },
   ];
 
@@ -353,7 +353,7 @@ export function LandingHeader() {
                 >
                   <Link to="/cohort-3">
                     <Sparkles className="mr-1.5 size-3.5 text-amber-500" />
-                    Apply Cohort 3
+                    Apply Now
                   </Link>
                 </Button>
               </motion.div>

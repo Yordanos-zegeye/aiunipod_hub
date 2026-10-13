@@ -35,28 +35,38 @@ function getStartupMonogram(name: string): string {
 
 export function VentureDirectory() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCohort, setSelectedCohort] = useState<"All" | "Cohort 2" | "Cohort 1">("All");
   const [selectedSector, setSelectedSector] = useState("All");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
 
-  const sectors = useMemo(() => {
-    return ["All", ...Array.from(new Set(STARTUPS.map((s) => s.sector)))];
+  // Curated landing page selection: featured startups across Cohort 1 & Cohort 2
+  const landingStartups = useMemo(() => {
+    const featured = STARTUPS.filter((s) => s.featured);
+    return featured.length > 0 ? featured : STARTUPS.slice(0, 8);
   }, []);
 
-  const filteredStartups = STARTUPS.filter((startup) => {
-    const matchesSector = selectedSector === "All" || startup.sector.toLowerCase() === selectedSector.toLowerCase();
-    const query = searchQuery.toLowerCase().trim();
-    const matchesSearch =
-      query === "" ||
-      startup.name.toLowerCase().includes(query) ||
-      startup.tagline.toLowerCase().includes(query) ||
-      startup.sector.toLowerCase().includes(query) ||
-      (startup.cohort || "").toLowerCase().includes(query) ||
-      startup.description.toLowerCase().includes(query) ||
-      startup.products.some((p) => p.name.toLowerCase().includes(query) || p.stage.toLowerCase().includes(query)) ||
-      startup.location.toLowerCase().includes(query);
+  const sectors = useMemo(() => {
+    return ["All", ...Array.from(new Set(landingStartups.map((s) => s.sector)))];
+  }, [landingStartups]);
 
-    return matchesSector && matchesSearch;
-  });
+  const filteredStartups = useMemo(() => {
+    return landingStartups.filter((startup) => {
+      const matchesCohort = selectedCohort === "All" || startup.cohort === selectedCohort;
+      const matchesSector = selectedSector === "All" || startup.sector.toLowerCase() === selectedSector.toLowerCase();
+      const query = searchQuery.toLowerCase().trim();
+      const matchesSearch =
+        query === "" ||
+        startup.name.toLowerCase().includes(query) ||
+        startup.tagline.toLowerCase().includes(query) ||
+        startup.sector.toLowerCase().includes(query) ||
+        (startup.cohort || "").toLowerCase().includes(query) ||
+        startup.description.toLowerCase().includes(query) ||
+        startup.products.some((p) => p.name.toLowerCase().includes(query) || p.stage.toLowerCase().includes(query)) ||
+        startup.location.toLowerCase().includes(query);
+
+      return matchesCohort && matchesSector && matchesSearch;
+    });
+  }, [landingStartups, selectedCohort, selectedSector, searchQuery]);
 
   return (
     <section id="directory" className="relative border-b border-border bg-background py-24 sm:py-32">
@@ -69,6 +79,10 @@ export function VentureDirectory() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
+            <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+              <Sparkles className="size-3.5" />
+              <span>Featured Showcase · Cohort 1 & Cohort 2</span>
+            </div>
             <h2 className="font-display text-4xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
               Ideas in motion.
             </h2>
@@ -81,12 +95,12 @@ export function VentureDirectory() {
             className="flex flex-col items-start gap-4 sm:items-end"
           >
             <p className="max-w-md text-sm leading-relaxed text-muted-foreground sm:text-right sm:text-base">
-              Explore {STARTUPS.length} vetted, investor-ready ventures currently accelerating within AI UNIPOD Ethiopia with bespoke white-labeled profiles.
+              Explore a curated selection of vetted, investor-ready ventures accelerating across Cohort 1 and Cohort 2 within AI UNIPOD Ethiopia.
             </p>
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
               <Button asChild variant="outline" className="rounded-full px-5 text-xs font-semibold shadow-xs">
                 <Link to="/startups">
-                  Full Startups Directory <ArrowUpRight className="ml-1.5 size-3.5" />
+                  Full Startups Directory ({STARTUPS.length}) <ArrowUpRight className="ml-1.5 size-3.5" />
                 </Link>
               </Button>
             </motion.div>
@@ -102,7 +116,7 @@ export function VentureDirectory() {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search ventures, models, or keywords..."
+              placeholder="Search featured ventures, models, or keywords..."
               className="h-10.5 w-full rounded-full border border-input bg-background pl-10 pr-4 text-sm text-foreground placeholder:text-muted-foreground outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary/20"
             />
             {searchQuery && (
@@ -116,8 +130,30 @@ export function VentureDirectory() {
             )}
           </div>
 
-          {/* Sector Filter Chips with Smooth Sliding Motion Layout Pill */}
+          {/* Cohort Tabs & Sector Filter Chips */}
           <div className="flex flex-wrap items-center gap-2">
+            {/* Cohort Pill Filters */}
+            <div className="flex items-center rounded-full border border-border bg-muted/40 p-1">
+              {(["All", "Cohort 2", "Cohort 1"] as const).map((cohort) => {
+                const isSelected = selectedCohort === cohort;
+                return (
+                  <button
+                    key={cohort}
+                    type="button"
+                    onClick={() => setSelectedCohort(cohort)}
+                    className={`rounded-full px-3 py-1 text-xs font-semibold transition-all ${
+                      isSelected
+                        ? "bg-background text-foreground shadow-xs"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    {cohort === "All" ? "All Cohorts" : cohort}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Sector Filter Chips */}
             {sectors.map((sector) => {
               const isSelected = selectedSector === sector;
               return (
@@ -174,13 +210,11 @@ export function VentureDirectory() {
         {/* Results Counter */}
         <div className="mt-4 flex items-center justify-between text-xs text-muted-foreground">
           <span>
-            Showing <strong className="text-foreground">{filteredStartups.length}</strong> of {STARTUPS.length} ventures
+            Showing <strong className="text-foreground">{filteredStartups.length}</strong> featured ventures (of {STARTUPS.length} total in directory)
           </span>
-          {selectedSector !== "All" && (
-            <span>
-              Filtered by: <strong className="text-primary">{selectedSector}</strong>
-            </span>
-          )}
+          <Link to="/startups" className="font-semibold text-primary hover:underline inline-flex items-center gap-1">
+            Browse all {STARTUPS.length} ventures <ArrowUpRight className="size-3" />
+          </Link>
         </div>
 
         {/* Grid View with Layout Animation */}
@@ -223,7 +257,7 @@ export function VentureDirectory() {
                               {startup.sector}
                             </span>
                             <span className="text-[10px] font-bold text-muted-foreground">
-                              {startup.cohort || "Cohort 3"}
+                              {startup.cohort || "Cohort 2"}
                             </span>
                           </div>
                         </div>

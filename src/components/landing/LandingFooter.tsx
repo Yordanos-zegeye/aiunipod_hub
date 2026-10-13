@@ -107,7 +107,7 @@ export function LandingFooter() {
               </li>
               <li>
                 <Link to="/cohort-3" className="transition-colors hover:text-on-ink">
-                  Apply for Cohort 3
+                  Apply for Incubation
                 </Link>
               </li>
               <li>
@@ -167,7 +167,7 @@ export function LandingFooter() {
               </Link>
               <span>·</span>
               <Link to="/cohort-3" className="hover:text-on-ink transition-colors">
-                Cohort 3 Applications
+                Incubation Intake
               </Link>
               <span>·</span>
               <Link to="/login" className="hover:text-on-ink transition-colors">

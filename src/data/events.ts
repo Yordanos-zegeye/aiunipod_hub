@@ -50,7 +50,7 @@ export const INITIAL_EVENTS: EcosystemEvent[] = [
   },
   {
     id: "evt-03",
-    title: "Cohort 3 Institutional Investor Demo Day",
+    title: "Cohort 2 Institutional Investor Demo Day",
     category: "Demo Day",
     date: "2026-11-20",
     time: "02:00 PM – 06:30 PM EAT",
@@ -60,7 +60,7 @@ export const INITIAL_EVENTS: EcosystemEvent[] = [
     capacity: 120,
     rsvpCount: 88,
     status: "PUBLISHED",
-    description: "Private diligence showcase featuring top 8 incubated Ethiopian AI ventures pitching to regional and pan-African venture investors with verified deal rooms.",
+    description: "Private diligence showcase featuring top incubated Ethiopian AI ventures pitching to regional and pan-African venture investors with verified deal rooms.",
     registrationUrl: "https://unipod.et/investor/demoday",
     tags: ["Deal Room", "Demo Day", "Venture Capital", "Timbuktoo"],
   },

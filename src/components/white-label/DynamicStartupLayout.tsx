@@ -399,7 +399,7 @@ export function DynamicStartupLayout({
               <div className="flex items-center gap-4 text-xs opacity-80">
                 <Link to="/startups" className="hover:underline">Startups Directory</Link>
                 <span>·</span>
-                <Link to="/cohort-3" className="hover:underline">Cohort 3</Link>
+                <Link to="/cohort-3" className="hover:underline">Incubation Intake</Link>
                 <span>·</span>
                 <Link to="/investor" className="hover:underline font-semibold">Investor Portal</Link>
               </div>

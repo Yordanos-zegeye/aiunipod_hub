@@ -1486,7 +1486,7 @@ Verified by Ethiopian Artificial Intelligence Institute & UNDP timbuktoo.`;
           </Link>
           <div className="flex items-center gap-4 text-xs text-brand-text/70">
             <Link to="/cohort-3" className="hover:text-brand-primary transition-colors">
-              Cohort 3 Incubation
+              Incubation Program
             </Link>
             <span>·</span>
             <Link to="/jobs" className="hover:text-brand-primary transition-colors">

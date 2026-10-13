@@ -108,7 +108,7 @@ function StartupsDirectoryPage() {
     return counts;
   }, [startupsList]);
 
-  const cohorts = ["All", "Cohort 3", "Cohort 2"];
+  const cohorts = ["All", "Cohort 2", "Cohort 1"];
   const stages = ["All", "Market", "Pilot", "Prototype", "Concept"];
   const rounds = ["All", "Seed", "Pre-seed", "Pre-Seed"];
   const locations = useMemo(() => {
@@ -138,7 +138,7 @@ function StartupsDirectoryPage() {
   const filteredStartups = useMemo(() => {
     return startupsList.filter((startup) => {
       // Cohort filter
-      if (selectedCohort !== "All" && (startup.cohort || "Cohort 3") !== selectedCohort) {
+      if (selectedCohort !== "All" && (startup.cohort || "Cohort 2") !== selectedCohort) {
         return false;
       }
 
@@ -770,7 +770,7 @@ function StartupsDirectoryPage() {
                             {startup.sector}
                           </span>
                           <span className="text-[10px] font-bold text-muted-foreground">
-                            {startup.cohort || "Cohort 3"}
+                            {startup.cohort || "Cohort 2"}
                           </span>
                         </div>
                       </td>
@@ -838,7 +838,7 @@ function StartupsDirectoryPage() {
                 </div>
                 <div className="flex flex-wrap items-center gap-3">
                   <Button asChild size="lg" className="rounded-full px-7">
-                    <a href="/#journey">Apply for Cohort 3</a>
+                    <a href="/#journey">Apply for Incubation</a>
                   </Button>
                   <Button asChild variant="outline" size="lg" className="rounded-full px-7">
                     <Link to="/login">Startup Sign In</Link>
@@ -888,7 +888,7 @@ function StartupsDirectoryPage() {
                     {previewStartup.sector}
                   </span>
                   <span className="rounded-full border border-primary/20 bg-primary/5 px-2.5 py-0.5 text-xs font-bold text-primary">
-                    {previewStartup.cohort || "Cohort 3"}
+                    {previewStartup.cohort || "Cohort 2"}
                   </span>
                   <span className="rounded-full border border-border px-2.5 py-0.5 text-xs font-medium text-muted-foreground">
                     {previewStartup.investment_ask.round} Round

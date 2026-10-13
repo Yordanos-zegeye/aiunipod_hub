@@ -143,6 +143,7 @@ export type Startup = {
   tagline: string;
   sector: string;
   cohort?: string;
+  featured?: boolean;
   description: string;
   location: string;
   operating_markets?: string[];
@@ -188,7 +189,8 @@ export const STARTUPS: Startup[] = [
       "legal_name": "SentriNova Technologies PLC.",
       "tagline": "Offline-first, curriculum-grounded AI tutoring platform for Ethiopian K-12 learners with speech AI and responsible governance",
       "sector": "EdTech AI",
-      "cohort": "Cohort 3",
+      "cohort": "Cohort 2",
+      "featured": true,
       "description": "SentriNova Technologies PLC is an AI and cybersecurity venture incorporated in Addis Ababa building MeklitAI, an offline-first, curriculum-grounded AI tutoring platform for Ethiopian K-12 learners. Designed to bridge the digital divide, MeklitAI delivers personalized, bilingual (Amharic and English) academic assistance that operates seamlessly on low-cost devices without continuous internet access. The company also advises enterprises and government bodies on responsible AI governance and ethical safety.",
       "location": "Addis Ababa, Ethiopia",
       "operating_markets": [
@@ -495,7 +497,8 @@ export const STARTUPS: Startup[] = [
       "legal_name": "Birr Gebeya Financial Technologies (Not registered)",
       "tagline": "AI-powered investment marketplace and digital securities platform for the Ethiopian Capital Market",
       "sector": "FinTech AI",
-      "cohort": "Cohort 3",
+      "cohort": "Cohort 2",
+      "featured": true,
       "description": "Birr Gebeya is an AI-powered digital securities marketplace designed to modernize and democratize access to Ethiopia's nascent capital and money markets. Investment opportunities across Ethiopian treasury bills, bonds, and equities are fragmented across institutions. Birr Gebeya leverages predictive risk modeling and automated market indexing to match retail and institutional investors with compliant financial products, driving financial inclusion and capital formation.",
       "location": "Addis Ababa, Ethiopia",
       "operating_markets": [
@@ -790,7 +793,7 @@ export const STARTUPS: Startup[] = [
       "legal_name": "Duka Finance",
       "tagline": "AI-driven personal finance and smart budgeting assistant for university students and young adults",
       "sector": "FinTech AI",
-      "cohort": "Cohort 3",
+      "cohort": "Cohort 2",
       "description": "Duka Finance is an intelligent mobile budgeting platform built for Ethiopian students and young adults navigating personal financial management. Rather than requiring manual bookkeeping, Duka parses SMS transaction alerts from telebirr, CBE Birr, and local banks to automatically categorize spending, detect recurring patterns, and generate real-time budgets in a clean bilingual interface optimized for Ethiopian payment behaviors.",
       "location": "Addis Ababa",
       "operating_markets": [
@@ -1076,7 +1079,7 @@ export const STARTUPS: Startup[] = [
       "legal_name": "Smart Scarecrow",
       "tagline": "Solar-powered edge ML sentinel with real-time pest detection and adaptive non-chemical deterrents",
       "sector": "AgriTech AI",
-      "cohort": "Cohort 3",
+      "cohort": "Cohort 2",
       "description": "Smart Scarecrow provides a solar-powered edge AI device that detects and actively deters crop-raiding wildlife and pests in smallholder Ethiopian farms. Utilizing continuous edge vision models and localized acoustic deterrents, the device eliminates reliance on toxic pesticides and dangerous manual night guarding, protecting high-value crop yields while operating completely off-grid with zero internet connectivity.",
       "location": "Addis Ababa, Ethiopia",
       "operating_markets": [
@@ -1376,7 +1379,7 @@ export const STARTUPS: Startup[] = [
       "legal_name": "Pride AI and Business Solutions",
       "tagline": "Advisory-led machine intelligence for institutional financial governance, compliance audits, and due diligence",
       "sector": "FinTech AI",
-      "cohort": "Cohort 3",
+      "cohort": "Cohort 2",
       "description": "Pride AI & Business Solutions is an advisory-led machine intelligence platform operating at the intersection of corporate financial governance, regulatory compliance, and multi-agent workflow automation. As a Google Cloud Partner, Pride AI deploys specialized AI suites that automate compliance audits, capital readiness due diligence, and enterprise risk management for financial institutions and cross-border enterprises.",
       "location": "Addis Ababa, Ethiopia",
       "operating_markets": [
@@ -1682,7 +1685,7 @@ export const STARTUPS: Startup[] = [
       "legal_name": "EthioXplore",
       "tagline": "AI-powered multilingual travel companion with personalized Ethiopian heritage itineraries and route navigation",
       "sector": "Tourism & Travel AI",
-      "cohort": "Cohort 3",
+      "cohort": "Cohort 2",
       "description": "EthioXplore is an AI-driven Ethiopian travel companion that transforms simple natural-language prompts into rich, actionable itineraries. Catering to international tourists, diaspora returnees, and local travelers, EthioXplore provides context-aware cultural recommendations, realistic domestic travel logistics, live currency calculation, and curated heritage guides across Ethiopia's iconic historical destinations.",
       "location": "Addis Ababa, Ethiopia",
       "operating_markets": [
@@ -1971,7 +1974,7 @@ export const STARTUPS: Startup[] = [
       "legal_name": "PIA NEXUS PLC.",
       "tagline": "Merchant of Record infrastructure enabling global and regional businesses to accept payments and sell into Ethiopia",
       "sector": "FinTech AI",
-      "cohort": "Cohort 3",
+      "cohort": "Cohort 2",
       "description": "OpenPIA is a Merchant of Record (MoR) and financial infrastructure platform that enables international and regional digital businesses to sell goods, services, and software subscriptions into Ethiopia and emerging African markets. Handling local currency conversions, telebirr/CBE payment gateways, tax compliance, and automated FX settlement, OpenPIA removes financial friction for global commerce.",
       "location": "Addis Ababa, Ethiopia",
       "operating_markets": [
@@ -2264,7 +2267,7 @@ export const STARTUPS: Startup[] = [
       "legal_name": "Smart Learn PLC",
       "tagline": "Offline-first AI learning platform helping secondary students master national curriculum exam preparation",
       "sector": "EdTech AI",
-      "cohort": "Cohort 3",
+      "cohort": "Cohort 2",
       "description": "SmartPrep is an inclusive, offline-first EdTech platform engineered to improve educational outcomes and national exam pass rates for Ethiopian Grade 9-12 students. Combining curriculum-aligned learning materials, automated mock exam generators, and localized AI tutoring, SmartPrep empowers students in regional and connectivity-constrained areas with high-quality academic support.",
       "location": "Addis Ababa",
       "operating_markets": [
@@ -2570,7 +2573,8 @@ export const STARTUPS: Startup[] = [
       "legal_name": "Abole Labs -- legal registration/name to be confirmed.",
       "tagline": "AI-powered digital agronomy infrastructure for coffee disease diagnosis, EUDR traceability, and fair trade",
       "sector": "AgriTech AI",
-      "cohort": "Cohort 3",
+      "cohort": "Cohort 2",
+      "featured": true,
       "description": "Dr. Buna, developed by Abole Labs, is an AgTech platform transforming Ethiopia's multi-billion dollar coffee value chain through computer vision disease diagnosis, digital origin traceability, and climate-smart agronomy intelligence. The platform empowers smallholder coffee farmers to verify bean quality, comply with EU deforestation regulations (EUDR), and access international specialty markets via QR-coded lot identities.",
       "location": "Addis Ababa, Ethiopia",
       "operating_markets": [
@@ -2874,7 +2878,7 @@ export const STARTUPS: Startup[] = [
       "legal_name": "Apex Innovators",
       "tagline": "AI- and IoT-driven precision agriculture system for automated irrigation telemetry and crop disease scanning",
       "sector": "AgriTech AI",
-      "cohort": "Cohort 3",
+      "cohort": "Cohort 2",
       "description": "AgroSmart AI, engineered by Apex Innovators, is an AI- and IoT-driven precision agriculture system designed for Ethiopian smallholders and commercial farms. By pairing solar-powered in-field soil sensors with edge AI algorithms and a mobile plant disease scanner, AgroSmart automates precision irrigation schedules, detects crop pathogens early, and conserves vital water resources.",
       "location": "Addis Ababa, Ethiopia",
       "operating_markets": [
@@ -3173,7 +3177,7 @@ export const STARTUPS: Startup[] = [
       "legal_name": "EthioAgriSight Technologies (Registration in progress)",
       "tagline": "Interactive spatial GeoAI platform translating satellite telemetry into parcel-level crop advisories and micro-insurance",
       "sector": "AgriTech AI",
-      "cohort": "Cohort 3",
+      "cohort": "Cohort 2",
       "description": "EthioAgriSight is an interactive spatial intelligence and digital farm-management platform translating multi-spectral satellite remote sensing and meteorological telemetry into parcel-level crop advisories. The platform empowers agricultural extension officers, commercial cooperatives, and micro-insurers with automated yield predictions, drought early warnings, and verified land-use records.",
       "location": "Addis Ababa, Ethiopia",
       "operating_markets": [
@@ -3476,7 +3480,7 @@ export const STARTUPS: Startup[] = [
       "legal_name": "Brand / Trading Name",
       "tagline": "AI-powered healthcare assistant for lab test interpretation, symptom triage, and medical care navigation",
       "sector": "HealthTech AI",
-      "cohort": "Cohort 3",
+      "cohort": "Cohort 2",
       "description": "HealUp is an AI-powered personal health companion engineered to demystify complex medical diagnostics for Ethiopian patients. By applying computer vision OCR and conversational clinical AI, HealUp translates dense laboratory test reports into clear, vernacular explanations, provides medication schedule tracking, and guides users on safe next steps with licensed healthcare providers.",
       "location": "Addis Ababa, Ethiopia",
       "operating_markets": [
@@ -3771,7 +3775,7 @@ export const STARTUPS: Startup[] = [
       "legal_name": "Tripways Technology One Partner Plc",
       "tagline": "AI-powered outdoor eco-tourism platform connecting hikers with vetted guides, trails, and safety telemetry",
       "sector": "Tourism & Travel AI",
-      "cohort": "Cohort 3",
+      "cohort": "Cohort 2",
       "description": "HikeHub, a product of Tripways Technology PLC, is an AI-powered hiking and outdoor eco-tourism platform connecting Ethiopian outdoor enthusiasts and international travelers with vetted community guides, certified organizers, and offline GPS trail mapping. HikeHub integrates trail difficulty modeling, weather telemetry, and automated group booking to grow Ethiopia's adventure tourism sector.",
       "location": "Addis Ababa, Ethiopia",
       "operating_markets": [
@@ -4063,7 +4067,7 @@ export const STARTUPS: Startup[] = [
       "legal_name": "Moon Solutions PLC",
       "tagline": "The intelligent, localized learning platform democratizing national university entrance exam preparation across Grade...",
       "sector": "EdTech AI",
-      "cohort": "Cohort 3",
+      "cohort": "Cohort 2",
       "description": "HuluLearn is an AI-powered, localized exam-preparation platform engineered to address Ethiopia's national Grade 12 examination crisis. HuluLearn delivers a multi-platform learning ecosystem comprising an offline-first Android app, a viral Telegram Mini App, and adaptive AI question banks that pinpoint student knowledge gaps and deliver step-by-step bilingual explanations.",
       "location": "Addis Ababa, Ethiopia",
       "operating_markets": [
@@ -4364,7 +4368,7 @@ export const STARTUPS: Startup[] = [
       "legal_name": "Knotify PLC / Ndoto Tech Labs",
       "tagline": "AI-powered multilingual parent engagement & adolescent reproductive health guidance platform",
       "sector": "HealthTech AI",
-      "cohort": "Cohort 3",
+      "cohort": "Cohort 2",
       "description": "Knotify, developed by Ndoto Tech Labs PLC, is an Ethiopian EdTech and HealthTech AI platform operating at the intersection of school-parent workflow automation and adolescent health equity. Utilizing an offline-first architecture with multilingual SMS and IVR channels, Knotify provides parents with verified academic tracking while equipping adolescents with confidential, culturally grounded reproductive health education.",
       "location": "Addis Ababa, Ethiopia",
       "operating_markets": [
@@ -4663,7 +4667,7 @@ export const STARTUPS: Startup[] = [
       "legal_name": "Meftihe AI PLC",
       "tagline": "Localized, offline-capable bilingual AI tutor for Ethiopian secondary students and university entrance prep",
       "sector": "EdTech AI",
-      "cohort": "Cohort 3",
+      "cohort": "Cohort 2",
       "description": "Meftihe AI PLC is an Ethiopian artificial intelligence startup transforming secondary and university entrance examination preparation. Built in response to historic national exam failure rates, Meftihe provides an affordable 24/7 bilingual (Amharic and English) AI tutor engineered specifically for the Ethiopian curriculum, operating seamlessly offline on low-cost smartphones.",
       "location": "Addis Ababa, Ethiopia",
       "operating_markets": [
@@ -4972,7 +4976,7 @@ export const STARTUPS: Startup[] = [
       "legal_name": "NOViQ Learning Technologies",
       "tagline": "Audio-visual adaptive learning platform grounded in the Ethiopian curriculum with personalized classes and analytics",
       "sector": "EdTech AI",
-      "cohort": "Cohort 3",
+      "cohort": "Cohort 2",
       "description": "NOViQ is an adaptive audio-visual learning platform tailored for Ethiopian secondary students in Grades 9 through 12. Replacing rote textbook memorization with interactive concept maps, animated micro-lessons, and personalized exam simulations, NOViQ enables students to master core STEM subjects at their own pace.",
       "location": "Addis Ababa, Ethiopia",
       "operating_markets": [
@@ -5271,7 +5275,7 @@ export const STARTUPS: Startup[] = [
       "legal_name": "Markova Technologies PLC",
       "tagline": "AI-powered preventive health companion fusing wearable biometric telemetry with localized nutritional intelligence",
       "sector": "HealthTech AI",
-      "cohort": "Cohort 3",
+      "cohort": "Cohort 2",
       "description": "NuraCare is an AI-powered personalized preventive health and biometric wellness platform engineered for the African continent. Fusing continuous physiological telemetry from commercial wearables with localized nutritional databases and lifestyle metrics, NuraCare provides predictive early warnings for cardiovascular and metabolic conditions.",
       "location": "Addis Ababa, Ethiopia",
       "operating_markets": [
@@ -5582,7 +5586,7 @@ export const STARTUPS: Startup[] = [
       "legal_name": "SHIFA -- Sustainable Health Initiatives for All",
       "tagline": "Offline-first clinical decision support empowering Ethiopian frontline health workers with verified triage answers",
       "sector": "HealthTech AI",
-      "cohort": "Cohort 3",
+      "cohort": "Cohort 2",
       "description": "SHIFA (Sustainable Health Initiatives for All) builds the SCIP clinical intelligence platform, an offline-first medical AI system providing frontline Ethiopian health extension workers with instant, verified triage guidance and evidence-based diagnostic support. The platform integrates localized disease guidelines and climate-health outbreak forecasting.",
       "location": "Addis Ababa, Ethiopia",
       "operating_markets": [
@@ -5883,7 +5887,7 @@ export const STARTUPS: Startup[] = [
       "legal_name": "Not yet registered (registration planned).",
       "tagline": "AI-powered digital identity verification and KYC for Ethiopia with Fayda ID OCR and facial liveness detection",
       "sector": "Computer Vision & RegTech",
-      "cohort": "Cohort 3",
+      "cohort": "Cohort 2",
       "description": "TrooFace is a production-ready digital identity verification and KYC (Know Your Customer) platform built specifically for the Ethiopian financial and telecom ecosystems. Combining Fayda National ID OCR, passport parsing, and high-accuracy facial biometric matching with active liveness detection, TrooFace enables banks and fintechs to onboard customers securely and eliminate fraud.",
       "location": "Addis Ababa, Ethiopia",
       "operating_markets": [
@@ -6182,7 +6186,8 @@ export const STARTUPS: Startup[] = [
       "legal_name": "Bessal Technology PLC",
       "tagline": "Assistive AI accessibility reader converting printed text, Ethiopian currency, and physical scenes to speech",
       "sector": "Assistive Tech AI",
-      "cohort": "Cohort 3",
+      "cohort": "Cohort 2",
+      "featured": true,
       "description": "VocalEye AI is an assistive technology platform engineered to empower visually impaired individuals across Ethiopia to independently read physical documents, recognize national currency, and navigate their surroundings. Combining high-accuracy OCR, real-time computer vision scene description, and natural Amharic text-to-speech, VocalEye brings autonomous accessibility to every smartphone.",
       "location": "Ethiopia (Addis Ababa)",
       "operating_markets": [
@@ -6508,7 +6513,1892 @@ export function getAllStartups(): Startup[] {
   if (typeof window !== "undefined" && window.localStorage) {
     try {
       const validSlugs = new Set(STARTUPS.map((s) => s.slug));
-      const keysToRemove: string[] = [];
+      const keysToRemove: string[] = [,
+  {
+    "slug": "tenaye-ai",
+    "name": "Tenaye AI",
+    "legal_name": "Tenaye Health Intelligence Technologies PLC",
+    "tagline": "Edge-deployable maternal ultrasound triage and chest X-ray screening for rural primary health clinics",
+    "sector": "HealthTech AI",
+    "cohort": "Cohort 1",
+    "featured": true,
+    "description": "Tenaye AI is an Addis Ababa-based healthcare venture from AI UNIPOD Cohort 1 deploying edge-inferencing computer vision to primary health posts across rural Oromia and Amhara. By embedding diagnostic models directly onto low-power handheld ultrasound and portable X-ray probes, Tenaye enables nurses to detect high-risk obstetric conditions and pulmonary diseases without network connectivity.",
+    "location": "Addis Ababa & Hawassa, Ethiopia",
+    "operating_markets": [
+        "Ethiopia (Primary: Oromia, Sidama, Amhara health posts)",
+        "Kenya (Rift Valley pilot)"
+    ],
+    "founded": "2024",
+    "team_size": 8,
+    "primary_contact": {
+        "name": "Dr. Selamawit Bekele",
+        "role": "Co-Founder & Chief Medical Officer",
+        "email": "selamawit@tenaye.ai",
+        "phone": "+251 91 234 5678"
+    },
+    "problem": {
+        "problem_statement": "Critical shortage of radiologists and sonographers in rural Ethiopia leaves 85% of maternal health centers without timely diagnostic triage.",
+        "target_affected": "Over 18 million expectant mothers and rural patients seeking acute respiratory or obstetric care at woreda health centers.",
+        "severity": "Preventable maternal and neonatal complications and delayed tuberculosis/pneumonia detection.",
+        "current_alternatives": "Traveling 40-120 km over dirt roads to zonal tertiary hospitals, resulting in dangerous delays.",
+        "why_alternatives_fail": "Prohibitive transportation costs, overloaded tertiary hospital queues, and absence of ultrasound specialists outside major cities."
+    },
+    "ai_tech": {
+        "technology_type": "Computer Vision & Edge Neuromorphic Inference",
+        "models_used": [
+            "Quantized MobileNetV4-Sonography",
+            "YOLOv10 Chest Screening",
+            "ONNX Edge Engine"
+        ],
+        "model_ownership": "Proprietary fine-tuned anatomical landmark detection models developed in collaboration with AAU College of Health Sciences.",
+        "system_architecture": "Offline edge deployment on tablet-connected handheld ultrasound with nightly mesh sync to EAII central telemetry.",
+        "proprietary_ip": "140,000+ localized verified ultrasound frames curated across Ethiopian clinical demographic cohorts.",
+        "data_sources": "EAII sovereign clinical dataset agreements and Black Lion Hospital clinical trials.",
+        "dataset_size": "185,000 anonymized maternal and pulmonary scans validated by Ethiopian radiologists.",
+        "data_rights": "Approved by National Health Research Ethics Review Board and Ministry of Health.",
+        "data_advantage": "Largest sovereign maternal sonography dataset tailored for African maternal epidemiology."
+    },
+    "market": {
+        "tam_usd": "$1.4B African primary healthcare and diagnostic imaging market",
+        "sam_usd": "$240M East African public and private primary clinic network",
+        "som_usd": "$18M reachable over 3 years across 4,200 Ethiopian health posts and regional centers",
+        "customer_segments": [
+            "Regional Health Bureaus & Ministry of Health",
+            "NGO maternal survival programs",
+            "Private rural diagnostic centers"
+        ],
+        "expansion_markets": [
+            "Kenya",
+            "Rwanda",
+            "Tanzania"
+        ],
+        "opportunity_narrative": "With national healthcare digitizing under Ethiopia's Health Sector Transformation Plan II, low-cost edge AI diagnostic screening represents an immediate, life-saving leapfrog opportunity."
+    },
+    "business_model": {
+        "revenue_model": "Annual B2G and B2B hardware-software bundle licenses with per-scan verification API subscriptions",
+        "pricing": "$120/month per clinic device inclusive of edge inference, telemetry updates, and clinical reporting support",
+        "arpu": "$1,440 annual contract value per health center",
+        "mrr_arr": "$18,500 MRR across pilot clinics",
+        "other_metrics": "84% gross software margin; 99.4% offline uptime"
+    },
+    "traction": {
+        "key_metric_value": "42,000+ Patients",
+        "key_metric_label": "Screened in Rural Clinical Pilots",
+        "active_deployments": "38 health posts across Hawassa, Jimma, and Adama rural woredas",
+        "key_partners": [
+            "Ministry of Health Ethiopia",
+            "AAU Black Lion Hospital",
+            "EAII Healthcare Lab"
+        ],
+        "major_milestones": [
+            "CE-equivalent national medical device advisory endorsement",
+            "Over 42,000 clinical scans processed with zero downtime",
+            "Winner of 2025 African Sovereign Health AI Innovation Award"
+        ]
+    },
+    "ai_performance": {
+        "primary_metric": "Obstetric Landmark Sensitivity & Specificity",
+        "current_performance": "94.2% sensitivity for placenta previa and fetal malpresentation",
+        "baseline_benchmark": "71.0% general practitioner visual assessment",
+        "improvement": "+23.2% diagnostic accuracy delta",
+        "latency": "140ms on-device edge inference",
+        "inference_cost": "$0.0012 per screening scan",
+        "validation": "Prospective clinical double-blind trial conducted with AAU Faculty of Medicine",
+        "scale": "Engineered to run seamlessly on low-cost $150 Android hardware"
+    },
+    "competitive_advantage": {
+        "main_competitors": [
+            "Butterfly Network (requires high cloud bandwidth)",
+            "Philips Lumify (high cost, manual interpretation)"
+        ],
+        "proprietary_moat": "Offline-first edge weights and sovereign Ethiopian clinical data corpus",
+        "local_expertise": "Deep integration with Woreda health officer workflows and local language audio feedback",
+        "distribution_moat": "Official pilot deployment agreement with Regional Health Bureaus"
+    },
+    "founders": [
+        {
+            "name": "Dr. Selamawit Bekele",
+            "role": "Co-Founder & CMO",
+            "background": "Obstetrician-gynecologist with 9 years of clinical practice and health systems research at AAU."
+        },
+        {
+            "name": "Yared Tadesse",
+            "role": "Co-Founder & Chief AI Architect",
+            "background": "Former EAII computer vision fellow; PhD candidate in biomedical image processing."
+        }
+    ],
+    "team_breakdown": {
+        "technical_team_size": 5,
+        "ai_data_science_size": 3,
+        "key_team_strength": "Exceptional synergy between clinical diagnostic specialists and edge AI hardware engineers."
+    },
+    "impact": {
+        "beneficiaries_reached": "42,000+ mothers and children",
+        "jobs_created": 14,
+        "women_youth_representation": "62% women clinical engineers and rural health trainers",
+        "sdgs": [
+            {
+                "number": 3,
+                "label": "Good Health and Well-Being"
+            },
+            {
+                "number": 10,
+                "label": "Reduced Inequalities"
+            }
+        ],
+        "impact_narrative": "Drastically reducing preventable maternal mortality across remote Ethiopian woredas through sovereign AI."
+    },
+    "products": [
+        {
+            "name": "Tenaye Ultrasound Assistant",
+            "summary": "Tablet-based edge computer vision application guiding mid-level health workers through obstetrical screening.",
+            "stage": "Market",
+            "target_customer": "Midwives, nurses, and rural clinical officers.",
+            "ai_functionality": "Real-time fetal position, gestational age, and placenta location edge bounding.",
+            "differentiation": "Zero internet dependency with bilingual Amharic and Afaan Oromoo audio cues."
+        },
+        {
+            "name": "Tenaye Tele-Radiology Edge Node",
+            "summary": "Portable X-ray computer vision unit flagging tuberculosis, pneumonia, and pleural effusion indicators.",
+            "stage": "Pilot",
+            "target_customer": "District hospitals and rural screening centers.",
+            "ai_functionality": "Deep convolutional heatmap classification for lung abnormalities.",
+            "differentiation": "Sub-second triage flagging with batch sync to central Ministry registries."
+        }
+    ],
+    "financials": {
+        "historical": "FY2024: $10,000 UNIPOD Cohort 1 Grant + $85,000 non-dilutive health innovation award.",
+        "projected": [
+            {
+                "year": "FY2025",
+                "revenue_usd": 280000,
+                "gross_profit_usd": 215000,
+                "gross_margin_pct": 77,
+                "operating_profit_usd": -12000,
+                "active_units": "65 Clinics"
+            },
+            {
+                "year": "FY2026",
+                "revenue_usd": 850000,
+                "gross_profit_usd": 680000,
+                "gross_margin_pct": 80,
+                "operating_profit_usd": 140000,
+                "active_units": "220 Clinics"
+            },
+            {
+                "year": "FY2027",
+                "revenue_usd": 2200000,
+                "gross_profit_usd": 1826000,
+                "gross_margin_pct": 83,
+                "operating_profit_usd": 620000,
+                "active_units": "600 Clinics"
+            }
+        ],
+        "unit_economics": "SaaS model with $1,440 ACV per clinic and 83% gross software margin."
+    },
+    "growth_plan": {
+        "product_growth": "Launch automated cardiac ejection fraction module and fetal heart rate Doppler AI.",
+        "customer_growth": "Scale across 350 government health centers in collaboration with regional health authorities.",
+        "geographic_expansion": "Expand to Kenyan cross-border pastoralist health initiatives.",
+        "ai_capability_expansion": "Federated on-device model training preserving patient biometric privacy."
+    },
+    "diligence_documents": [
+        {
+            "title": "Tenaye AI Clinical Validation Whitepaper",
+            "category": "Technical",
+            "file_type": "PDF",
+            "file_size": "3.4 MB",
+            "status": "Verified"
+        },
+        {
+            "title": "Tenaye AI Commercial Pro Forma Model",
+            "category": "Financials",
+            "file_type": "XLSX",
+            "file_size": "1.2 MB",
+            "status": "Available"
+        }
+    ],
+    "investment_ask": {
+        "amount_usd": 650000,
+        "round": "Seed",
+        "use_of_funds": "Manufacture 300 edge probe hubs, expand clinical pilots to 200 health posts, and pursue regional regulatory approvals.",
+        "preferred_instrument": "Equity or Convertible Note",
+        "current_funding": "AI UNIPOD Cohort 1 Grant & Seed Angel Syndicate",
+        "funds_breakdown": [
+            {
+                "category": "Hardware & Probe Sourcing",
+                "percentage": 40,
+                "amount_usd": 260000,
+                "description": "Bulk production of low-cost edge interface hardware"
+            },
+            {
+                "category": "Clinical Operations & Training",
+                "percentage": 30,
+                "amount_usd": 195000,
+                "description": "Nurses and midwives hands-on certification across 4 regions"
+            },
+            {
+                "category": "Edge AI R&D",
+                "percentage": 20,
+                "amount_usd": 130000,
+                "description": "Quantization for ultra-low power NPU microcontrollers"
+            },
+            {
+                "category": "Regulatory Compliance",
+                "percentage": 10,
+                "amount_usd": 65000,
+                "description": "National health authority clinical certification"
+            }
+        ]
+    },
+    "risks": [
+        {
+            "risk": "Supply chain delays for ultrasound hardware components.",
+            "severity": "Medium",
+            "mitigation": "Dual-sourcing certified probe manufacturers across Asia and Europe."
+        },
+        {
+            "risk": "Clinical worker hesitation in digital tooling adoption.",
+            "severity": "Low",
+            "mitigation": "Co-designing with Ethiopian Midwives Association with native voice prompts."
+        }
+    ],
+    "links": [
+        {
+            "label": "Official Website",
+            "url": "https://tenaye.ai"
+        },
+        {
+            "label": "Clinical Dossier",
+            "url": "https://tenaye.ai/clinical"
+        }
+    ],
+    "theme": {
+        "primary_color": "#0D9488",
+        "secondary_color": "#115E59",
+        "accent_color": "#F59E0B",
+        "surface_color": "#F0FDFA",
+        "text_color": "#134E4A",
+        "font_family": "system-ui, sans-serif",
+        "radius": "1rem",
+        "layout": "classic"
+    }
+},
+  {
+    "slug": "harar-crop-vision",
+    "name": "Harar Crop Vision",
+    "legal_name": "Harar Agrisystems Intelligence PLC",
+    "tagline": "Multimodal satellite remote sensing and smartphone computer vision for locust swarm and coffee rust early detection",
+    "sector": "AgriTech AI",
+    "cohort": "Cohort 1",
+    "featured": true,
+    "description": "Harar Crop Vision originated in AI UNIPOD Cohort 1 to protect Ethiopian coffee and cereal production from catastrophic pest and fungal outbreaks. Combining high-resolution European Space Agency Sentinel-2 multispectral imagery with field-level smartphone leaf computer vision, the platform provides predictive pest forecasts and curative advice directly to agricultural extension agents.",
+    "location": "Dire Dawa & Harar, Ethiopia",
+    "operating_markets": [
+        "Ethiopia (Harari, Oromia, Sidama coffee zones)",
+        "Somali Region pastoral borders"
+    ],
+    "founded": "2024",
+    "team_size": 7,
+    "primary_contact": {
+        "name": "Ahmed Mohammed",
+        "role": "Founder & Agricultural AI Director",
+        "email": "ahmed@hararcrop.com",
+        "phone": "+251 92 345 6789"
+    },
+    "problem": {
+        "problem_statement": "Coffee rust fungus and desert locust swarms inflict up to 35% crop losses annually, devastating smallholder incomes and Ethiopian export earnings.",
+        "target_affected": "5 million smallholder coffee and grain farmers across eastern and southern agricultural corridors.",
+        "severity": "Millions of dollars in lost foreign exchange and acute household food insecurity.",
+        "current_alternatives": "Manual visual crop scouting by under-resourced development agents after symptoms are already widespread.",
+        "why_alternatives_fail": "Scouting is slow, covers less than 5% of cropland, and detects fungal blight after spore dispersal."
+    },
+    "ai_tech": {
+        "technology_type": "Multispectral Remote Sensing & Computer Vision",
+        "models_used": [
+            "Sentinel-2 NDVI Time-Series Transformer",
+            "Vision Transformer CropNet",
+            "Locust Dispersal Simulation Engine"
+        ],
+        "model_ownership": "Proprietary disease phenotyping models calibrated on Ethiopian heirloom coffee varieties.",
+        "system_architecture": "Cloud pipeline processing satellite spectral bands combined with offline Android leaf-scanning application.",
+        "proprietary_ip": "65,000 georeferenced crop pathology images and multispectral reflectance signatures.",
+        "data_sources": "Ethiopian Coffee and Tea Authority and Ministry of Agriculture extension stations.",
+        "dataset_size": "12 years of meteorological data and 65,000 ground-truth coffee rust photographs.",
+        "data_rights": "Sovereign institutional research agreement with Haramaya University.",
+        "data_advantage": "Largest ground-truth dataset for indigenous Ethiopian heirloom Arabica coffee pathogens."
+    },
+    "market": {
+        "tam_usd": "$920M East African agritech and precision farming sector",
+        "sam_usd": "$180M Ethiopian coffee and grain cooperative market",
+        "som_usd": "$14M addressable across 120 primary coffee export unions and regional agriculture bureaus",
+        "customer_segments": [
+            "Coffee farmer cooperative unions",
+            "Commercial export plantations",
+            "Ministry of Agriculture Extension Division"
+        ],
+        "expansion_markets": [
+            "Kenya (Kirinyaga & Nyeri)",
+            "Rwanda"
+        ],
+        "opportunity_narrative": "Ethiopian coffee export revenues ($1.4B+) face unprecedented climate volatility; early blight detection is an indispensable national economic shield."
+    },
+    "business_model": {
+        "revenue_model": "B2B cooperative union enterprise licenses and per-hectare satellite monitoring subscriptions",
+        "pricing": "$2.50 per hectare per season for predictive satellite alerts; enterprise cooperative tier at $4,500/year",
+        "arpu": "$4,500 annual cooperative license",
+        "mrr_arr": "$22,000 MRR",
+        "other_metrics": "88% gross margin on software; 3.8x ROI delivered to participating unions"
+    },
+    "traction": {
+        "key_metric_value": "140,000 Hectares",
+        "key_metric_label": "Under Active Satellite Surveillance",
+        "active_deployments": "18 primary cooperative unions across Harar, Sidama, and Jimma",
+        "key_partners": [
+            "Ethiopian Coffee and Tea Authority",
+            "Haramaya University",
+            "EAII Agricultural Lab"
+        ],
+        "major_milestones": [
+            "Protected 140,000 hectares of specialty heirloom coffee",
+            "Achieved 14-day early warning accuracy for coffee berry disease",
+            "Commercial contract secured with Oromia Coffee Farmers Cooperative Union"
+        ]
+    },
+    "ai_performance": {
+        "primary_metric": "Early Outbreak Prediction F1-Score",
+        "current_performance": "91.8% F1-score for rust spore emergence 10-14 days prior to visible defoliation",
+        "baseline_benchmark": "64.2% traditional extension scouting",
+        "improvement": "+27.6% lead-time diagnostic advantage",
+        "latency": "1.2 seconds offline leaf image inference; 4-hour satellite swath refresh",
+        "inference_cost": "$0.0035 per field verification",
+        "validation": "Validated across two consecutive harvest seasons in Harar and Limmu coffee zones",
+        "scale": "Analyzes 10,000 sq km satellite tiles daily on GPU clusters"
+    },
+    "competitive_advantage": {
+        "main_competitors": [
+            "Plantix (generic global models, poor heirloom coffee accuracy)",
+            "Remote satellite generalists"
+        ],
+        "proprietary_moat": "Proprietary agronomic spectral signatures for Ethiopian altitude and soil chemistry",
+        "local_expertise": "Deep roots in Dire Dawa and Harar agricultural universities",
+        "distribution_moat": "Direct cooperative union distribution network bypassing retail CAC"
+    },
+    "founders": [
+        {
+            "name": "Ahmed Mohammed",
+            "role": "Founder & CEO",
+            "background": "MSc in Remote Sensing & GIS from Haramaya University; 8 years agronomist experience."
+        },
+        {
+            "name": "Bethelhem Kebede",
+            "role": "Lead Machine Learning Engineer",
+            "background": "Specialist in multispectral image segmentation; former EAII agritech fellow."
+        }
+    ],
+    "team_breakdown": {
+        "technical_team_size": 4,
+        "ai_data_science_size": 3,
+        "key_team_strength": "Deep domain agronomists paired with cutting-edge geospatial computer vision engineers."
+    },
+    "impact": {
+        "beneficiaries_reached": "32,000 smallholder farmer households",
+        "jobs_created": 11,
+        "women_youth_representation": "45% youth agricultural extension agents trained",
+        "sdgs": [
+            {
+                "number": 2,
+                "label": "Zero Hunger"
+            },
+            {
+                "number": 12,
+                "label": "Responsible Consumption and Production"
+            }
+        ],
+        "impact_narrative": "Securing Ethiopia's coffee heritage and smallholder livelihoods through predictive ecological intelligence."
+    },
+    "products": [
+        {
+            "name": "Harar RustScan Mobile",
+            "summary": "Offline smartphone diagnostic application for instant leaf-level fungal rust and leaf miner identification.",
+            "stage": "Market",
+            "target_customer": "Agricultural extension agents and coffee farmers.",
+            "ai_functionality": "On-device deep learning crop leaf disease classification.",
+            "differentiation": "Works 100% offline with native Afaan Oromoo and Amharic audio recommendations."
+        },
+        {
+            "name": "Harar Satellite Crop Telemetry",
+            "summary": "Web dashboard delivering vegetation index anomalies, locust migration trajectory vectors, and moisture stress indices.",
+            "stage": "Pilot",
+            "target_customer": "Cooperative union directors and export commercial plantations.",
+            "ai_functionality": "Multitemporal Sentinel satellite change detection and microclimate stress modeling.",
+            "differentiation": "Trained explicitly on Ethiopian altitude conditions and volcanic soil types."
+        }
+    ],
+    "financials": {
+        "historical": "FY2024: $10,000 UNIPOD Cohort 1 Grant + $50,000 agritech pilot revenue.",
+        "projected": [
+            {
+                "year": "FY2025",
+                "revenue_usd": 210000,
+                "gross_profit_usd": 178000,
+                "gross_margin_pct": 85,
+                "operating_profit_usd": 25000,
+                "active_units": "18 Cooperatives"
+            },
+            {
+                "year": "FY2026",
+                "revenue_usd": 680000,
+                "gross_profit_usd": 598000,
+                "gross_margin_pct": 88,
+                "operating_profit_usd": 165000,
+                "active_units": "55 Cooperatives"
+            },
+            {
+                "year": "FY2027",
+                "revenue_usd": 1750000,
+                "gross_profit_usd": 1557000,
+                "gross_margin_pct": 89,
+                "operating_profit_usd": 580000,
+                "active_units": "140 Cooperatives"
+            }
+        ],
+        "unit_economics": "High operating leverage with $4,500 ARR per cooperative union."
+    },
+    "growth_plan": {
+        "product_growth": "Deploy autonomous drone multispectral scouting pods for high-altitude steep terrain.",
+        "customer_growth": "Expand across 60 regional unions covering 800,000 hectares of specialty coffee.",
+        "geographic_expansion": "Pilot in Kenya's Mount Kenya coffee growing belt.",
+        "ai_capability_expansion": "Integrate weather radar feeds for sub-kilometer rain and humidity prediction."
+    },
+    "diligence_documents": [
+        {
+            "title": "Harar Crop Vision Technical Validation",
+            "category": "Technical",
+            "file_type": "PDF",
+            "file_size": "2.9 MB",
+            "status": "Verified"
+        },
+        {
+            "title": "Cooperative Union Commercial Traction Log",
+            "category": "Traction",
+            "file_type": "PDF",
+            "file_size": "1.5 MB",
+            "status": "Available"
+        }
+    ],
+    "investment_ask": {
+        "amount_usd": 450000,
+        "round": "Seed",
+        "use_of_funds": "Scale cooperative deployments, acquire commercial drone scouting gear, and integrate sub-meter radar feeds.",
+        "preferred_instrument": "Equity",
+        "current_funding": "AI UNIPOD Cohort 1 Seed Grant",
+        "funds_breakdown": [
+            {
+                "category": "Satellite Data & Compute Infrastructure",
+                "percentage": 35,
+                "amount_usd": 157500,
+                "description": "High-resolution commercial satellite tasking credits"
+            },
+            {
+                "category": "Field Cooperative Rollout",
+                "percentage": 35,
+                "amount_usd": 157500,
+                "description": "Extension officer training and smartphone distribution"
+            },
+            {
+                "category": "R&D & Drone Hardware",
+                "percentage": 20,
+                "amount_usd": 90000,
+                "description": "Multispectral payload calibration"
+            },
+            {
+                "category": "Operations & Admin",
+                "percentage": 10,
+                "amount_usd": 45000,
+                "description": "Corporate filings and regional agency compliance"
+            }
+        ]
+    },
+    "risks": [
+        {
+            "risk": "Extreme cloud cover during monsoon season obscuring optical satellites.",
+            "severity": "Medium",
+            "mitigation": "Synthesizing synthetic aperture radar (SAR) data that penetrates cloud cover."
+        },
+        {
+            "risk": "Low smartphone adoption among older smallholder farmers.",
+            "severity": "Low",
+            "mitigation": "Targeting youth extension scouts (DAs) who service hundreds of smallholders."
+        }
+    ],
+    "links": [
+        {
+            "label": "Official Website",
+            "url": "https://hararcrop.com"
+        },
+        {
+            "label": "Case Study",
+            "url": "https://hararcrop.com/cases"
+        }
+    ],
+    "theme": {
+        "primary_color": "#15803D",
+        "secondary_color": "#166534",
+        "accent_color": "#EAB308",
+        "surface_color": "#F0FDF4",
+        "text_color": "#14532D",
+        "font_family": "system-ui, sans-serif",
+        "radius": "1rem",
+        "layout": "classic"
+    }
+},
+  {
+    "slug": "geez-nlp",
+    "name": "Ge'ez NLP Labs",
+    "legal_name": "EthioLinguistic Cognitive Systems PLC",
+    "tagline": "Sovereign foundational tokenizers, OCR engines, and speech recognition for Amharic, Afaan Oromoo, and Tigrinya",
+    "sector": "Multilingual NLP",
+    "cohort": "Cohort 1",
+    "featured": true,
+    "description": "Born out of AI UNIPOD Cohort 1 in Addis Ababa, Ge'ez NLP Labs is the pioneer of sovereign foundational linguistic models for Ethiopian languages. Providing high-throughput optical character recognition (OCR), multilingual conversational LLMs, and voice transcription APIs, Ge'ez NLP enables commercial banks, government ministries, and fintech platforms to automate document workflows in vernacular scripts.",
+    "location": "Addis Ababa, Ethiopia",
+    "operating_markets": [
+        "Ethiopia (National)",
+        "Ethiopian diaspora fintech integrations across North America & Europe"
+    ],
+    "founded": "2024",
+    "team_size": 9,
+    "primary_contact": {
+        "name": "Nebil Tilahun",
+        "role": "Founder & Chief NLP Scientist",
+        "email": "nebil@geeznlp.et",
+        "phone": "+251 91 345 6789"
+    },
+    "problem": {
+        "problem_statement": "Global foundational AI models exhibit severe tokenization degradation (4x-6x cost inflation), hallucination, and poor character recognition on Ethiopic script (Fidel) and regional languages.",
+        "target_affected": "125 million Ethiopian citizens and thousands of institutions handling millions of paper documents and voice calls monthly in Amharic and Afaan Oromoo.",
+        "severity": "Financial exclusion, massive manual document processing backlogs, and astronomical API costs for local developers.",
+        "current_alternatives": "Legacy Tesseract OCR (poor handwriting and ancient font accuracy) and generic OpenAI/Anthropic APIs with inefficient tokenizers.",
+        "why_alternatives_fail": "Global LLMs split Amharic words into byte-fallback tokens, making processing slow, inaccurate, and 500% more expensive."
+    },
+    "ai_tech": {
+        "technology_type": "Foundational NLP, Custom Tokenizers & Speech Synthesis",
+        "models_used": [
+            "EthioBPE-32k Native Tokenizer",
+            "Ge'ezVision Transformer OCR",
+            "AfaanNet Acoustic Transformer STT"
+        ],
+        "model_ownership": "100% proprietary pre-trained tokenizers and fine-tuned language representation weights.",
+        "system_architecture": "High-throughput sovereign inference cluster hosted on EAII A100 GPU nodes with on-premises enterprise deployability.",
+        "proprietary_ip": "3.2B tokens of curated legal, banking, historical, and dialectical text across Amharic, Afaan Oromoo, and Tigrinya.",
+        "data_sources": "National Archives, legal gazettes, bank transaction slips, and radio broadcast transcripts.",
+        "dataset_size": "3.2B clean vernacular text tokens; 4,200 hours of synchronized bilingual audio recordings.",
+        "data_rights": "Sovereign licensing and academic cooperation agreement with Addis Ababa University Department of Linguistics.",
+        "data_advantage": "The most extensive verified Ethiopic linguistic benchmark corpus in existence."
+    },
+    "market": {
+        "tam_usd": "$850M African language AI and enterprise document intelligence market",
+        "sam_usd": "$120M Ethiopian commercial banking, telecom, and public sector digitization",
+        "som_usd": "$16M across top 10 Ethiopian commercial banks and federal agencies",
+        "customer_segments": [
+            "Commercial Banks (CBE, Awash, Dashen)",
+            "Ethio Telecom & Safaricom Ethiopia",
+            "Government Agencies and Courts"
+        ],
+        "expansion_markets": [
+            "Eritrea (Tigrinya language)",
+            "East African multilingual customer support"
+        ],
+        "opportunity_narrative": "As National ID (Fayda) and digital banking expand to 60M+ citizens, sovereign language infrastructure is mandatory for customer onboarding and fraud intelligence."
+    },
+    "business_model": {
+        "revenue_model": "API consumption-based pricing ($ per 1,000 pages / audio minutes) and on-premises air-gapped enterprise bank licenses",
+        "pricing": "$0.02 per page OCR; $0.05 per minute voice transcription; Enterprise bank license at $48,000/year",
+        "arpu": "$32,000 enterprise annual contract value",
+        "mrr_arr": "$34,000 MRR",
+        "other_metrics": "91% gross margin on API; negative net churn among institutional banking clients"
+    },
+    "traction": {
+        "key_metric_value": "14.5M Pages",
+        "key_metric_label": "Processed with Sovereign Ge'ez OCR",
+        "active_deployments": "Live in production at 3 major Ethiopian commercial banks and 2 federal registries",
+        "key_partners": [
+            "Commercial Bank of Ethiopia (Innovation Wing)",
+            "EAII Sovereign Compute Lab",
+            "AAU Linguistics Department"
+        ],
+        "major_milestones": [
+            "14.5 million bank KYC slips and title deeds digitized",
+            "Achieved 98.4% character accuracy on handwritten Amharic slips",
+            "Reduced token cost by 74% compared to standard global LLM gateways"
+        ]
+    },
+    "ai_performance": {
+        "primary_metric": "Ethiopic Character Recognition Accuracy (CER)",
+        "current_performance": "98.4% character accuracy on historical and modern Ethiopian typography",
+        "baseline_benchmark": "79.2% Tesseract 5.0 / Google Cloud Vision on low-contrast photocopies",
+        "improvement": "+19.2% accuracy delta",
+        "latency": "45ms per page batch processing on local GPU nodes",
+        "inference_cost": "$0.0018 per document page",
+        "validation": "Benchmarked against Ministry of Justice archival deeds across 1970-2024",
+        "scale": "Inference throughput capable of 250 pages/second on dedicated EAII nodes"
+    },
+    "competitive_advantage": {
+        "main_competitors": [
+            "Global cloud OCR (Google, AWS Textract - lacking Geez character morphology)",
+            "Generic overseas NLP engines"
+        ],
+        "proprietary_moat": "Custom byte-pair encoding tokenizer calibrated specifically for Ethiopian phonetic syllabary",
+        "local_expertise": "Engineered by leading native linguists and computational philologists",
+        "distribution_moat": "Air-gapped on-premise deployment capacity required by central bank security regulations"
+    },
+    "founders": [
+        {
+            "name": "Nebil Tilahun",
+            "role": "Founder & Lead NLP Architect",
+            "background": "Former researcher at Edinburgh University Speech Group; 10 years specializing in Low-Resource African NLP."
+        },
+        {
+            "name": "Rahel Girma",
+            "role": "Co-Founder & VP Engineering",
+            "background": "Ex-senior software architect at Ethio Telecom; specialist in high-concurrency microservices."
+        }
+    ],
+    "team_breakdown": {
+        "technical_team_size": 6,
+        "ai_data_science_size": 3,
+        "key_team_strength": "World-class low-resource NLP research coupled with enterprise-grade fintech banking integration skills."
+    },
+    "impact": {
+        "beneficiaries_reached": "3.8M citizens using automated banking services",
+        "jobs_created": 16,
+        "women_youth_representation": "55% women data annotators and computational linguists",
+        "sdgs": [
+            {
+                "number": 9,
+                "label": "Industry, Innovation and Infrastructure"
+            },
+            {
+                "number": 8,
+                "label": "Decent Work and Economic Growth"
+            }
+        ],
+        "impact_narrative": "Democratizing digital access for millions of vernacular-speaking Ethiopians by bridging the global AI language divide."
+    },
+    "products": [
+        {
+            "name": "Ge'ezOCR Document Intelligence",
+            "summary": "Enterprise OCR and document parsing API for Amharic and Afaan Oromoo ID cards, cheques, and land deeds.",
+            "stage": "Market",
+            "target_customer": "Banks, microfinance institutions, and municipal administrative registries.",
+            "ai_functionality": "Multilingual bounding-box layout parsing and handwriting script recognition.",
+            "differentiation": "Understands cursive Ethiopic script, faded stamp imprints, and noisy photocopy artifacts."
+        },
+        {
+            "name": "SenedSpeech Vernacular STT/TTS",
+            "summary": "Speech-to-text and text-to-speech engine powering voice IVR and customer support bots in Ethiopian languages.",
+            "stage": "Pilot",
+            "target_customer": "Telecom call centers, financial hotline support, and rural information kiosks.",
+            "ai_functionality": "Acoustic transformer modeling trained on authentic Ethiopian regional accents.",
+            "differentiation": "Zero latency on local hosting nodes with natural phonetic cadence."
+        }
+    ],
+    "financials": {
+        "historical": "FY2024: $10,000 UNIPOD Cohort 1 Grant + $120,000 enterprise bank pilot revenue.",
+        "projected": [
+            {
+                "year": "FY2025",
+                "revenue_usd": 390000,
+                "gross_profit_usd": 351000,
+                "gross_margin_pct": 90,
+                "operating_profit_usd": 85000,
+                "active_units": "8 Bank Contracts"
+            },
+            {
+                "year": "FY2026",
+                "revenue_usd": 1100000,
+                "gross_profit_usd": 1001000,
+                "gross_margin_pct": 91,
+                "operating_profit_usd": 380000,
+                "active_units": "22 Enterprise Clients"
+            },
+            {
+                "year": "FY2027",
+                "revenue_usd": 2800000,
+                "gross_profit_usd": 2576000,
+                "gross_margin_pct": 92,
+                "operating_profit_usd": 1120000,
+                "active_units": "50 Enterprise Clients"
+            }
+        ],
+        "unit_economics": "91% gross software margin with sticky multi-year enterprise on-premise renewals."
+    },
+    "growth_plan": {
+        "product_growth": "Release Sened-LLM 7B open-weights model for local software developers.",
+        "customer_growth": "Expand to all 31 commercial banks in Ethiopia and national court digitization project.",
+        "geographic_expansion": "Deploy Tigrinya and Somali language variants across regional states.",
+        "ai_capability_expansion": "Train multi-speaker voice cloning for educational audiobook synthesis."
+    },
+    "diligence_documents": [
+        {
+            "title": "Ge'ez NLP Benchmark Paper & Empirical Test Suite",
+            "category": "Technical",
+            "file_type": "PDF",
+            "file_size": "4.1 MB",
+            "status": "Verified"
+        },
+        {
+            "title": "Commercial Bank Production Audit & SOC2 Attestation",
+            "category": "Regulatory & Impact",
+            "file_type": "PDF",
+            "file_size": "2.2 MB",
+            "status": "Verified"
+        }
+    ],
+    "investment_ask": {
+        "amount_usd": 750000,
+        "round": "Seed",
+        "use_of_funds": "Acquire dedicated H100 GPU compute nodes, build automated speech annotation pipelines, and expand enterprise sales team.",
+        "preferred_instrument": "Equity",
+        "current_funding": "AI UNIPOD Cohort 1 Grant & Commercial Bank License Retainers",
+        "funds_breakdown": [
+            {
+                "category": "High-Performance GPU Cluster Capacity",
+                "percentage": 45,
+                "amount_usd": 337500,
+                "description": "Procure sovereign on-premises GPU capacity and training runs"
+            },
+            {
+                "category": "Linguistic Annotation & Corpus Expansion",
+                "percentage": 25,
+                "amount_usd": 187500,
+                "description": "Audio recording and transcription in Afaan Oromoo and Tigrinya"
+            },
+            {
+                "category": "Enterprise Fintech Sales Engineering",
+                "percentage": 20,
+                "amount_usd": 150000,
+                "description": "Core banking system integration engineers"
+            },
+            {
+                "category": "Operations & Intellectual Property",
+                "percentage": 10,
+                "amount_usd": 75000,
+                "description": "Patent and sovereign data covenant filings"
+            }
+        ]
+    },
+    "risks": [
+        {
+            "risk": "Rapid release of multilingual updates by international mega-labs (OpenAI/Google).",
+            "severity": "Medium",
+            "mitigation": "Our local air-gapped security, verified bank data rights, and 70% cheaper unit economics maintain an insurmountable local moat."
+        },
+        {
+            "risk": "Shortage of specialized computational linguists in regional dialects.",
+            "severity": "Low",
+            "mitigation": "Formal internship and training pipeline established with AAU Department of Linguistics."
+        }
+    ],
+    "links": [
+        {
+            "label": "Official Website",
+            "url": "https://geeznlp.et"
+        },
+        {
+            "label": "Developer API Docs",
+            "url": "https://docs.geeznlp.et"
+        }
+    ],
+    "theme": {
+        "primary_color": "#4F46E5",
+        "secondary_color": "#3730A3",
+        "accent_color": "#06B6D4",
+        "surface_color": "#EEF2FF",
+        "text_color": "#1E1B4B",
+        "font_family": "system-ui, sans-serif",
+        "radius": "1rem",
+        "layout": "classic"
+    }
+},
+  {
+    "slug": "sheger-transit",
+    "name": "Sheger Transit AI",
+    "legal_name": "Sheger Intelligent Mobility Technologies PLC",
+    "tagline": "Dynamic municipal bus fleet dispatch, real-time route optimization, and passenger flow prediction for Addis Ababa",
+    "sector": "Smart Mobility & Logistics",
+    "cohort": "Cohort 1",
+    "featured": true,
+    "description": "Incubated in AI UNIPOD Cohort 1, Sheger Transit AI modernizes public mass transit across Addis Ababa's crowded transport corridors. Deploying lightweight computer vision passenger counters and graph-based dynamic route dispatch algorithms, the platform reduces commuter wait times by 32% and slashes municipal bus fleet fuel waste.",
+    "location": "Addis Ababa, Ethiopia",
+    "operating_markets": [
+        "Addis Ababa (Primary: Anbessa Bus & Sheger Bus routes)",
+        "Bishoftu corridor"
+    ],
+    "founded": "2024",
+    "team_size": 7,
+    "primary_contact": {
+        "name": "Dawit Abebe",
+        "role": "Co-Founder & Transport Systems Lead",
+        "email": "dawit@shegertransit.et",
+        "phone": "+251 91 456 7890"
+    },
+    "problem": {
+        "problem_statement": "Commuters in Addis Ababa endure 45 to 90-minute wait times during peak hours while hundreds of municipal buses sit idle or bottlenecked along congested arteries.",
+        "target_affected": "Over 2.8 million daily public transit commuters in the capital city.",
+        "severity": "Millions of lost economic work-hours, urban gridlock, and excessive diesel fuel burn.",
+        "current_alternatives": "Static paper timetable schedules drawn up decades ago and manual paper ticket counting at bus depots.",
+        "why_alternatives_fail": "Static schedules cannot adapt to sudden rainstorms, road closures, or fluctuating passenger spikes at major terminals."
+    },
+    "ai_tech": {
+        "technology_type": "Graph Optimization & Computer Vision Telematics",
+        "models_used": [
+            "Graph Neural Network Route Optimizer",
+            "Edge Passenger Counting Vision Model",
+            "Spatio-Temporal Demand Predictor"
+        ],
+        "model_ownership": "Proprietary traffic congestion prediction and passenger boarding estimation models.",
+        "system_architecture": "On-bus Raspberry Pi edge vision sensors connected via 4G telemetry to central municipal dispatch cloud.",
+        "proprietary_ip": "Over 8 million passenger boarding timestamp data points mapped across 124 Addis Ababa bus routes.",
+        "data_sources": "Anbessa City Bus Enterprise telematics and city traffic management center cameras.",
+        "dataset_size": "18 months of GPS telemetry, passenger boarding density, and roadway average velocity.",
+        "data_rights": "MOU signed with Addis Ababa Transport Bureau and Anbessa Bus Enterprise.",
+        "data_advantage": "The only high-fidelity passenger demand dataset for the Ethiopian capital."
+    },
+    "market": {
+        "tam_usd": "$420M East African urban mobility and transit telematics market",
+        "sam_usd": "$65M Ethiopian public bus, minibus taxi, and light rail ecosystem",
+        "som_usd": "$8.5M municipal bus and corporate shuttle fleet contracts in Addis Ababa",
+        "customer_segments": [
+            "Addis Ababa Transport Bureau & Anbessa Bus Enterprise",
+            "Corporate commuter fleet operators",
+            "Minibus taxi associations"
+        ],
+        "expansion_markets": [
+            "Nairobi (Matatu corridor tracking)",
+            "Dar es Salaam (BRT system)"
+        ],
+        "opportunity_narrative": "As Addis Ababa expands infrastructure, intelligent dynamic dispatch maximizes the throughput of existing bus fleets without requiring billions in new bus purchases."
+    },
+    "business_model": {
+        "revenue_model": "Monthly SaaS subscription per connected bus vehicle plus revenue share on fuel savings",
+        "pricing": "$35/month per bus for edge telematics and dispatch optimization; passenger mobile app ad revenue",
+        "arpu": "$420 annual per-vehicle fee",
+        "mrr_arr": "$16,800 MRR",
+        "other_metrics": "76% gross margin; demonstrated 18% fuel cost reduction for partner depots"
+    },
+    "traction": {
+        "key_metric_value": "420 Buses",
+        "key_metric_label": "Under Real-Time Dynamic Dispatch",
+        "active_deployments": "Deployed on 420 Anbessa and Sheger municipal buses across 4 key Addis Ababa terminals",
+        "key_partners": [
+            "Addis Ababa City Administration Transport Bureau",
+            "Anbessa City Bus Enterprise",
+            "EAII Smart Mobility Lab"
+        ],
+        "major_milestones": [
+            "Reduced average passenger queue time by 32% across test terminals",
+            "Over 120,000 daily commuters served through optimized bus intervals",
+            "Winner of National Sustainable Urban Mobility Tech Grant 2025"
+        ]
+    },
+    "ai_performance": {
+        "primary_metric": "Passenger Arrival Prediction Accuracy (MAPE)",
+        "current_performance": "8.4% Mean Absolute Percentage Error for 30-minute passenger surge forecasting",
+        "baseline_benchmark": "31.5% historical static dispatch estimates",
+        "improvement": "+23.1% demand forecasting accuracy",
+        "latency": "1.8 seconds network-wide fleet redistribution recalculation",
+        "inference_cost": "$0.0004 per bus telematics packet",
+        "validation": "Validated during peak morning rush hours across Megenagna, Stadium, and Tor Hailoch terminals",
+        "scale": "Scalable to 5,000 simultaneous transit nodes across the Addis metropolitan area"
+    },
+    "competitive_advantage": {
+        "main_competitors": [
+            "Standard GPS tracking companies (telematics without predictive AI dispatch)",
+            "Generic foreign fleet software"
+        ],
+        "proprietary_moat": "Localized urban graph models accommodating Addis Ababa's irregular minibus interaction patterns",
+        "local_expertise": "Built in close daily coordination with municipal transit depot dispatchers",
+        "distribution_moat": "Direct municipal partnership agreement with Anbessa City Bus Enterprise"
+    },
+    "founders": [
+        {
+            "name": "Dawit Abebe",
+            "role": "Co-Founder & CEO",
+            "background": "MSc in Urban Transportation Engineering; 7 years experience in municipal infrastructure planning."
+        },
+        {
+            "name": "Abel Getachew",
+            "role": "Co-Founder & Chief AI Engineer",
+            "background": "Former researcher at EAII Smart Systems group; expert in graph neural networks and routing algorithms."
+        }
+    ],
+    "team_breakdown": {
+        "technical_team_size": 4,
+        "ai_data_science_size": 3,
+        "key_team_strength": "Intersection of urban transport civil engineers and machine learning systems architects."
+    },
+    "impact": {
+        "beneficiaries_reached": "120,000+ daily public transit commuters",
+        "jobs_created": 12,
+        "women_youth_representation": "48% youth technical team members",
+        "sdgs": [
+            {
+                "number": 11,
+                "label": "Sustainable Cities and Communities"
+            },
+            {
+                "number": 13,
+                "label": "Climate Action"
+            }
+        ],
+        "impact_narrative": "Reducing urban pollution and reclaiming wasted commuting hours for Ethiopian working families."
+    },
+    "products": [
+        {
+            "name": "Sheger Dispatch Commander",
+            "summary": "Cloud dispatch console providing municipal depot directors with real-time bus reallocation recommendations.",
+            "stage": "Market",
+            "target_customer": "Municipal bus depot managers and city transport bureau directors.",
+            "ai_functionality": "Dynamic fleet schedule recalculation based on live terminal passenger queues.",
+            "differentiation": "Directly factors in local traffic congestion choke-points and weather disruptions."
+        },
+        {
+            "name": "Anbessa Passenger Flow Sensor",
+            "summary": "Edge-computed ceiling camera sensor counting passenger entry and exit volume with 97% privacy-preserving accuracy.",
+            "stage": "Pilot",
+            "target_customer": "Transit fleet maintenance and auditing teams.",
+            "ai_functionality": "Anonymous bounding box headcount without saving facial biometric images.",
+            "differentiation": "Runs on ultra-low-power $35 microchips with offline edge tallying."
+        }
+    ],
+    "financials": {
+        "historical": "FY2024: $10,000 UNIPOD Cohort 1 Grant + $45,000 municipal pilot funding.",
+        "projected": [
+            {
+                "year": "FY2025",
+                "revenue_usd": 195000,
+                "gross_profit_usd": 148000,
+                "gross_margin_pct": 76,
+                "operating_profit_usd": 18000,
+                "active_units": "420 Buses"
+            },
+            {
+                "year": "FY2026",
+                "revenue_usd": 540000,
+                "gross_profit_usd": 421000,
+                "gross_margin_pct": 78,
+                "operating_profit_usd": 130000,
+                "active_units": "1,100 Buses"
+            },
+            {
+                "year": "FY2027",
+                "revenue_usd": 1400000,
+                "gross_profit_usd": 1120000,
+                "gross_margin_pct": 80,
+                "operating_profit_usd": 460000,
+                "active_units": "2,800 Buses"
+            }
+        ],
+        "unit_economics": "$420 annual revenue per bus vehicle with 76% gross software margins."
+    },
+    "growth_plan": {
+        "product_growth": "Release consumer mobile app with live bus ETA countdown and seat availability index.",
+        "customer_growth": "Equip all 1,200 municipal buses in Addis Ababa and onboard private corporate staff shuttles.",
+        "geographic_expansion": "Pilot transit corridor tracking in Hawassa and Bahir Dar.",
+        "ai_capability_expansion": "Integrate light rail arrival coordination to eliminate intermodal bottlenecks."
+    },
+    "diligence_documents": [
+        {
+            "title": "Sheger Transit Pilot Impact Evaluation",
+            "category": "Technical",
+            "file_type": "PDF",
+            "file_size": "3.2 MB",
+            "status": "Verified"
+        },
+        {
+            "title": "Municipal Fleet Contract & Service Agreement",
+            "category": "Regulatory & Impact",
+            "file_type": "PDF",
+            "file_size": "1.8 MB",
+            "status": "Available"
+        }
+    ],
+    "investment_ask": {
+        "amount_usd": 600000,
+        "round": "Seed",
+        "use_of_funds": "Manufacture 1,000 passenger flow edge units, launch consumer ETA mobile app, and scale technical support team.",
+        "preferred_instrument": "Equity",
+        "current_funding": "AI UNIPOD Cohort 1 Grant & City Pilot Subsidies",
+        "funds_breakdown": [
+            {
+                "category": "Edge Sensor Unit Production",
+                "percentage": 40,
+                "amount_usd": 240000,
+                "description": "Procure and assemble 1,000 on-bus edge telematics sensors"
+            },
+            {
+                "category": "Software Platform & Consumer App",
+                "percentage": 30,
+                "amount_usd": 180000,
+                "description": "Scale cloud microservices and build consumer mobile app"
+            },
+            {
+                "category": "Depot Field Engineering",
+                "percentage": 20,
+                "amount_usd": 120000,
+                "description": "On-site depot installation and dispatcher training staff"
+            },
+            {
+                "category": "Compliance & Safety Operations",
+                "percentage": 10,
+                "amount_usd": 60000,
+                "description": "Transport bureau regulatory compliance filings"
+            }
+        ]
+    },
+    "risks": [
+        {
+            "risk": "Cellular data connectivity dropouts in underground or dense concrete terminals.",
+            "severity": "Medium",
+            "mitigation": "Edge units buffer GPS and passenger counts locally and burst-sync at the next open stop."
+        },
+        {
+            "risk": "Vandalism or tampering with on-bus sensor hardware.",
+            "severity": "Low",
+            "mitigation": "Enclosed inside hardened tamper-proof ceiling chassis behind bus fare collection booth."
+        }
+    ],
+    "links": [
+        {
+            "label": "Official Website",
+            "url": "https://shegertransit.et"
+        },
+        {
+            "label": "Transit Dashboard",
+            "url": "https://dashboard.shegertransit.et"
+        }
+    ],
+    "theme": {
+        "primary_color": "#2563EB",
+        "secondary_color": "#1D4ED8",
+        "accent_color": "#F97316",
+        "surface_color": "#EFF6FF",
+        "text_color": "#1E3A8A",
+        "font_family": "system-ui, sans-serif",
+        "radius": "1rem",
+        "layout": "classic"
+    }
+},
+  {
+    "slug": "bluenile-grid",
+    "name": "BlueNile Grid AI",
+    "legal_name": "Abay Energy Intelligence Technologies PLC",
+    "tagline": "Predictive renewable mini-grid balancing, solar irradiance forecasting, and commercial demand-response automation",
+    "sector": "Climate & Energy AI",
+    "cohort": "Cohort 1",
+    "featured": false,
+    "description": "Formed in AI UNIPOD Cohort 1, BlueNile Grid AI delivers cognitive energy dispatch software for decentralized solar-hydro mini-grids and industrial manufacturing parks in Ethiopia. By forecasting solar irradiance and river runoff, the platform optimizes battery energy storage systems (BESS) and prevents costly industrial power brownouts.",
+    "location": "Bahir Dar & Addis Ababa, Ethiopia",
+    "operating_markets": [
+        "Ethiopia (Amhara, Oromia solar mini-grids, industrial parks)",
+        "East Africa off-grid zones"
+    ],
+    "founded": "2024",
+    "team_size": 6,
+    "primary_contact": {
+        "name": "Eng. Henok Alemu",
+        "role": "Founder & Grid Technology Director",
+        "email": "henok@bluenilegrid.et",
+        "phone": "+251 91 567 8901"
+    },
+    "problem": {
+        "problem_statement": "Decentralized solar mini-grids and industrial parks suffer from frequent battery degradation, inverter tripping, and 24% energy loss due to unpredictable cloud cover and uncoordinated factory machinery loads.",
+        "target_affected": "Off-grid rural communities, agro-processing facilities, and light manufacturing industrial parks.",
+        "severity": "Expensive diesel backup generator usage, shortened lithium battery lifespan, and industrial downtime.",
+        "current_alternatives": "Manual circuit breaker switching and static time-of-day battery discharge rules.",
+        "why_alternatives_fail": "Static rules fail to anticipate sudden monsoon cloud coverage or simultaneous motor startups across manufacturing plants."
+    },
+    "ai_tech": {
+        "technology_type": "Predictive Energy Dispatch & Microgrid Machine Learning",
+        "models_used": [
+            "Solar Irradiance LSTM Predictor",
+            "Reinforcement Learning Battery Dispatcher",
+            "Transient Load Forecaster"
+        ],
+        "model_ownership": "Proprietary hybrid physics-informed neural network models for microgrid stability.",
+        "system_architecture": "Edge edge-controllers deployed in mini-grid substations communicating via Modbus/TCP with solar inverters.",
+        "proprietary_ip": "Over 5 million real-time voltage, solar flux, and battery telemetry readings from operational Ethiopian mini-grids.",
+        "data_sources": "Ethiopian Electric Utility (EEU) pilot sites and National Meteorological Agency weather feeds.",
+        "dataset_size": "24 months of high-frequency electrical telemetry from 14 operational solar mini-grids.",
+        "data_rights": "Approved research and commercial pilot protocol with Ministry of Water and Energy.",
+        "data_advantage": "Calibrated explicitly for high-elevation equatorial solar dynamics and monsoon cloud behavior."
+    },
+    "market": {
+        "tam_usd": "$780M Sub-Saharan African mini-grid and industrial energy management market",
+        "sam_usd": "$110M Ethiopian off-grid rural electrification and industrial park operations",
+        "som_usd": "$12M across 150 planned government mini-grids and private commercial agro-processors",
+        "customer_segments": [
+            "Mini-grid developers & EPC contractors",
+            "Industrial park facility managers",
+            "Ministry of Water & Energy rural electrification projects"
+        ],
+        "expansion_markets": [
+            "Uganda",
+            "Rwanda",
+            "Kenya"
+        ],
+        "opportunity_narrative": "As Ethiopia accelerates rural electrification under the National Electrification Program 2.0, intelligent mini-grid software ensures private capital achieves strong investment returns."
+    },
+    "business_model": {
+        "revenue_model": "Per-kilowatt-peak (kWp) monthly SaaS licensing on managed solar installations plus efficiency performance fee",
+        "pricing": "$0.80 per kWp per month managed capacity; $350/month per mini-grid installation",
+        "arpu": "$4,200 annual contract value per mini-grid facility",
+        "mrr_arr": "$14,000 MRR",
+        "other_metrics": "82% gross software margins; verified 22% reduction in diesel generator runtime"
+    },
+    "traction": {
+        "key_metric_value": "14 Mini-Grids",
+        "key_metric_label": "Under Autonomous AI Optimization",
+        "active_deployments": "14 operational mini-grids across Amhara and Oromia providing continuous electricity to 28,000 residents",
+        "key_partners": [
+            "Ethiopian Electric Utility (EEU)",
+            "Ministry of Water and Energy",
+            "EAII Energy Computing Lab"
+        ],
+        "major_milestones": [
+            "Cut diesel generator fuel burn by 22% across partner commercial mini-grids",
+            "Extended battery asset lifetime by an estimated 2.4 years through optimized thermal cycling",
+            "Selected by African Clean Energy Technical Assistance Facility as leading microgrid AI software"
+        ]
+    },
+    "ai_performance": {
+        "primary_metric": "15-Minute Solar Irradiance Forecasting RMSE",
+        "current_performance": "7.1% Root Mean Square Error on next-hour solar output prediction",
+        "baseline_benchmark": "24.8% persistence baseline forecasting",
+        "improvement": "+17.7% predictive stability improvement",
+        "latency": "80ms edge decision cycle on Modbus substation controller",
+        "inference_cost": "$0.0002 per battery dispatch cycle",
+        "validation": "Benchmarked over a complete 12-month annual cycle covering both Kiremt (monsoon) and Bega (dry) seasons",
+        "scale": "Engineered to coordinate up to 25 MW of aggregated distributed energy resources"
+    },
+    "competitive_advantage": {
+        "main_competitors": [
+            "Global microgrid software (Homer Energy, Schneider Electric - prohibitively expensive, cloud-reliant)",
+            "Manual electrical relays"
+        ],
+        "proprietary_moat": "Offline-first edge controllers capable of operating during complete telecommunication blackouts",
+        "local_expertise": "Built by electrical engineers trained in Bahir Dar and Addis Ababa University energy labs",
+        "distribution_moat": "Preferred technology partner status for national mini-grid electrification tenders"
+    },
+    "founders": [
+        {
+            "name": "Eng. Henok Alemu",
+            "role": "Founder & CEO",
+            "background": "MSc in Renewable Energy Electrical Engineering from Bahir Dar University; 8 years microgrid design."
+        },
+        {
+            "name": "Meron Kassaye",
+            "role": "Chief Data Scientist",
+            "background": "Specialist in reinforcement learning for industrial process control; former EAII energy research scholar."
+        }
+    ],
+    "team_breakdown": {
+        "technical_team_size": 4,
+        "ai_data_science_size": 2,
+        "key_team_strength": "Deep power systems engineering expertise combined with reinforcement learning practitioners."
+    },
+    "impact": {
+        "beneficiaries_reached": "28,000 rural citizens electrified",
+        "jobs_created": 9,
+        "women_youth_representation": "40% female electrical engineers",
+        "sdgs": [
+            {
+                "number": 7,
+                "label": "Affordable and Clean Energy"
+            },
+            {
+                "number": 13,
+                "label": "Climate Action"
+            }
+        ],
+        "impact_narrative": "Powering rural African transformation through dependable, zero-carbon sovereign microgrid intelligence."
+    },
+    "products": [
+        {
+            "name": "GridSense Edge Controller",
+            "summary": "Hardware-agnostic industrial edge box interfacing with solar inverters to execute sub-second load balancing.",
+            "stage": "Market",
+            "target_customer": "Solar mini-grid operators and off-grid factory facility managers.",
+            "ai_functionality": "On-site reinforcement learning battery charge/discharge optimization.",
+            "differentiation": "Never trips off during internet blackouts; integrates seamlessly with Chinese and European inverters."
+        },
+        {
+            "name": "HydroForecast Basin Model",
+            "summary": "Hydrological forecasting platform projecting seasonal water inflow for micro-hydroelectric generation.",
+            "stage": "Pilot",
+            "target_customer": "Regional water and energy authorities.",
+            "ai_functionality": "Satellite rainfall precipitation and catchment terrain runoff prediction.",
+            "differentiation": "Calibrated for Blue Nile and Rift Valley river basin topography."
+        }
+    ],
+    "financials": {
+        "historical": "FY2024: $10,000 UNIPOD Cohort 1 Grant + $38,000 commercial mini-grid software fees.",
+        "projected": [
+            {
+                "year": "FY2025",
+                "revenue_usd": 165000,
+                "gross_profit_usd": 135000,
+                "gross_margin_pct": 82,
+                "operating_profit_usd": 15000,
+                "active_units": "14 Mini-Grids"
+            },
+            {
+                "year": "FY2026",
+                "revenue_usd": 480000,
+                "gross_profit_usd": 403000,
+                "gross_margin_pct": 84,
+                "operating_profit_usd": 120000,
+                "active_units": "45 Mini-Grids"
+            },
+            {
+                "year": "FY2027",
+                "revenue_usd": 1250000,
+                "gross_profit_usd": 1062000,
+                "gross_margin_pct": 85,
+                "operating_profit_usd": 410000,
+                "active_units": "120 Mini-Grids"
+            }
+        ],
+        "unit_economics": "$4,200 annual revenue per mini-grid with 82% software margins."
+    },
+    "growth_plan": {
+        "product_growth": "Launch automated machinery demand-response smart switches for grain mills and water pumps.",
+        "customer_growth": "Deploy across 60 government solar mini-grids under national rural electrification program.",
+        "geographic_expansion": "Pilot in neighboring Somaliland and South Sudan border trade centers.",
+        "ai_capability_expansion": "Integrate synthetic radar cloud detection for 5-minute ultra-short-term solar ramping alerts."
+    },
+    "diligence_documents": [
+        {
+            "title": "BlueNile Grid Mini-Grid Efficiency Audit",
+            "category": "Technical",
+            "file_type": "PDF",
+            "file_size": "2.7 MB",
+            "status": "Verified"
+        },
+        {
+            "title": "Commercial Energy SaaS Financial Projections",
+            "category": "Financials",
+            "file_type": "XLSX",
+            "file_size": "1.0 MB",
+            "status": "Available"
+        }
+    ],
+    "investment_ask": {
+        "amount_usd": 550000,
+        "round": "Seed",
+        "use_of_funds": "Produce 100 GridSense edge controllers, hire regional integration engineers, and integrate high-resolution weather satellite feeds.",
+        "preferred_instrument": "Equity or Blended Climate Finance",
+        "current_funding": "AI UNIPOD Cohort 1 Grant & Mini-Grid Retainers",
+        "funds_breakdown": [
+            {
+                "category": "Controller Hardware Sourcing & Assembly",
+                "percentage": 35,
+                "amount_usd": 192500,
+                "description": "Manufacture ruggedized industrial Din-rail edge devices"
+            },
+            {
+                "category": "Field Integration & Utility Pilots",
+                "percentage": 35,
+                "amount_usd": 192500,
+                "description": "Deployment across 45 regional substation sites"
+            },
+            {
+                "category": "AI Energy Dispatch R&D",
+                "percentage": 20,
+                "amount_usd": 110000,
+                "description": "Multi-agent grid stabilization algorithm optimization"
+            },
+            {
+                "category": "Administration & IP Filings",
+                "percentage": 10,
+                "amount_usd": 55000,
+                "description": "Patent protection and energy regulatory certifications"
+            }
+        ]
+    },
+    "risks": [
+        {
+            "risk": "Regulatory delays in private energy tariff collection approvals.",
+            "severity": "Medium",
+            "mitigation": "Partnering directly with licensed public utility concessionaires (EEU)."
+        },
+        {
+            "risk": "Extreme lightning surges damaging substation edge controllers.",
+            "severity": "Low",
+            "mitigation": "Industrial opto-isolated interfaces and surge protection standard on all units."
+        }
+    ],
+    "links": [
+        {
+            "label": "Official Website",
+            "url": "https://bluenilegrid.et"
+        },
+        {
+            "label": "Technical Overview",
+            "url": "https://bluenilegrid.et/tech"
+        }
+    ],
+    "theme": {
+        "primary_color": "#0284C7",
+        "secondary_color": "#0369A1",
+        "accent_color": "#10B981",
+        "surface_color": "#F0F9FF",
+        "text_color": "#0C4A6E",
+        "font_family": "system-ui, sans-serif",
+        "radius": "1rem",
+        "layout": "classic"
+    }
+},
+  {
+    "slug": "merkato-intelligence",
+    "name": "Merkato Intelligence",
+    "legal_name": "Merkato Commercial Data & Pricing Labs PLC",
+    "tagline": "Wholesale grain and commodity spot-price forecasting with SMS-based market intelligence for cooperative unions",
+    "sector": "Commerce & Supply Chain AI",
+    "cohort": "Cohort 1",
+    "featured": false,
+    "description": "Launched in AI UNIPOD Cohort 1, Merkato Intelligence operates Africa's largest crowdsourced and satellite-verified commodity pricing oracle for open-air wholesale markets. Processing thousands of daily spot transactions across Addis Ababa's Merkato and regional trading hubs, the platform provides predictive fair-market pricing to cooperative unions, food processors, and smallholder aggregators.",
+    "location": "Addis Ababa & Adama, Ethiopia",
+    "operating_markets": [
+        "Ethiopia (Addis Ababa Merkato, Adama, Shashemene, Jimma)",
+        "Djibouti grain import corridor"
+    ],
+    "founded": "2024",
+    "team_size": 7,
+    "primary_contact": {
+        "name": "Tewodros Kassahun",
+        "role": "Founder & Commercial Operations Lead",
+        "email": "tewodros@merkatointelligence.com",
+        "phone": "+251 91 678 9012"
+    },
+    "problem": {
+        "problem_statement": "Extreme price opacity, informal merchant cartels, and unpredictable grain inflation cost farmers and food processors 15-30% in margin losses each season.",
+        "target_affected": "14 million agricultural producers, 8,000 grain wholesalers, and national food manufacturing enterprises.",
+        "severity": "Severe food inflation volatility, supply chain hoarding, and unequal bargaining power for rural producers.",
+        "current_alternatives": "Word-of-mouth phone calls to middlemen brokers (Delalas) who charge extortionate hidden markups.",
+        "why_alternatives_fail": "Brokers deliberately provide outdated or manipulated price quotes to exploit information asymmetry."
+    },
+    "ai_tech": {
+        "technology_type": "Commodity Time-Series Forecasting & NLP SMS Parsing",
+        "models_used": [
+            "Temporal Fusion Transformer (TFT)",
+            "Crowdsourced SMS Dialect Entity Parser",
+            "Multimodal Transport Anomaly Detector"
+        ],
+        "model_ownership": "Proprietary econometric forecasting models tuned on Ethiopian seasonal harvest and transport logistics.",
+        "system_architecture": "USSD/SMS gateway integrated with centralized machine learning prediction backend on EAII compute infrastructure.",
+        "proprietary_ip": "Over 4.5 million daily verified commodity transaction records across 42 agricultural staple crops.",
+        "data_sources": "Merchant union transaction logs, transport checkpoints, and verified field price scout reports.",
+        "dataset_size": "10 years of historical wholesale grain, pulse, and oilseed pricing across 28 Ethiopian markets.",
+        "data_rights": "Data partnerships with Agricultural Transformation Institute (ATI) and Grain Wholesalers Association.",
+        "data_advantage": "The only real-time, daily granular pricing dataset for informal African wholesale marketplaces."
+    },
+    "market": {
+        "tam_usd": "$640M East African agricultural supply chain finance and intelligence market",
+        "sam_usd": "$95M Ethiopian commodity trading, food processing, and wholesale trade market",
+        "som_usd": "$11M across commercial food manufacturing enterprises, banks, and cooperative unions",
+        "customer_segments": [
+            "Agricultural cooperative unions",
+            "Food & beverage processing enterprises",
+            "Commodity export aggregators",
+            "Commercial banks offering ag-lending"
+        ],
+        "expansion_markets": [
+            "Sudan (grain corridors)",
+            "Kenya (cross-border pulse trade)"
+        ],
+        "opportunity_narrative": "As Ethiopia modernizes wholesale distribution under the Ethiopian Commodity Exchange (ECX) reform, reliable algorithmic spot pricing is the bedrock of modern trade finance."
+    },
+    "business_model": {
+        "revenue_model": "B2B enterprise API subscriptions for food processors and banks; low-cost SMS/USSD subscriptions for farmer cooperatives",
+        "pricing": "$250/month per commercial food processor enterprise seat; ETB 50/month per farmer cooperative union phone",
+        "arpu": "$3,000 annual enterprise contract value",
+        "mrr_arr": "$19,500 MRR",
+        "other_metrics": "86% gross software margin; verified 9% procurement savings for participating food factories"
+    },
+    "traction": {
+        "key_metric_value": "ETB 1.2B+",
+        "key_metric_label": "Commodity Value Traded Using Price Guidance",
+        "active_deployments": "Active in 12 major Ethiopian wholesale markets covering teff, wheat, maize, and sesame",
+        "key_partners": [
+            "Agricultural Transformation Institute (ATI)",
+            "Ethiopian Grain Trade Enterprise",
+            "EAII Economic Modeling Wing"
+        ],
+        "major_milestones": [
+            "Tracked over 1.2 Billion ETB in wholesale transactions",
+            "Over 65,000 registered farmers and merchants receiving weekly SMS price alerts",
+            "Selected by UN World Food Programme as trusted procurement pricing benchmark"
+        ]
+    },
+    "ai_performance": {
+        "primary_metric": "14-Day Grain Spot Price Forecast Accuracy",
+        "current_performance": "92.6% directional accuracy for next 14-day wholesale teff and wheat price movements",
+        "baseline_benchmark": "68.2% historical linear moving average",
+        "improvement": "+24.4% forecasting accuracy delta",
+        "latency": "120ms API response time; sub-2-second USSD query turnaround",
+        "inference_cost": "$0.0008 per USSD pricing lookup",
+        "validation": "Continuously back-tested against audited physical transactions at Merkato and Adama depots",
+        "scale": "Engineered to handle 50,000 concurrent SMS/USSD inbound queries"
+    },
+    "competitive_advantage": {
+        "main_competitors": [
+            "Informal telephone brokers (delalas)",
+            "Generic national radio broadcast reports (weekly, delayed)"
+        ],
+        "proprietary_moat": "Daily verified ground-truth transaction network incentivized through micro-rewards",
+        "local_expertise": "Deep cultural trust and understanding of Merkato merchant guild dynamics",
+        "distribution_moat": "Official USSD telecom shortcode operational across Ethio Telecom and Safaricom"
+    },
+    "founders": [
+        {
+            "name": "Tewodros Kassahun",
+            "role": "Founder & CEO",
+            "background": "Former commodity trader and econometrician; 10 years experience in Ethiopian agricultural logistics."
+        },
+        {
+            "name": "Lydia Mekonnen",
+            "role": "Chief Data Architect",
+            "background": "Specialist in time-series machine learning and NLP; former senior developer at Ministry of Innovation & Technology."
+        }
+    ],
+    "team_breakdown": {
+        "technical_team_size": 4,
+        "ai_data_science_size": 3,
+        "key_team_strength": "Rare combination of veteran Merkato commodity traders and high-performance machine learning engineers."
+    },
+    "impact": {
+        "beneficiaries_reached": "65,000+ smallholder farmers and food producers",
+        "jobs_created": 14,
+        "women_youth_representation": "50% women market data enumerators and software developers",
+        "sdgs": [
+            {
+                "number": 8,
+                "label": "Decent Work and Economic Growth"
+            },
+            {
+                "number": 12,
+                "label": "Responsible Consumption and Production"
+            }
+        ],
+        "impact_narrative": "Eradicating predatory price exploitation in traditional African trade through transparent, sovereign algorithmic intelligence."
+    },
+    "products": [
+        {
+            "name": "Merkato PricePulse SMS Engine",
+            "summary": "Lightweight USSD and SMS service delivering daily localized spot prices and 7-day trend forecasts to feature phones.",
+            "stage": "Market",
+            "target_customer": "Smallholder farmer cooperative leaders, grain aggregators, and rural traders.",
+            "ai_functionality": "Natural language Amharic and Afaan Oromoo query understanding via SMS shortcode.",
+            "differentiation": "Zero internet or smartphone required; instant responses on basic $15 mobile handsets."
+        },
+        {
+            "name": "Union Inventory Predictor",
+            "summary": "Enterprise web dashboard for commercial flour mills and edible oil processors optimizing procurement timing.",
+            "stage": "Pilot",
+            "target_customer": "Commercial food manufacturers and wholesale commodity exporters.",
+            "ai_functionality": "Multivariate commodity price forecasting factoring in fuel costs, rainfall, and foreign exchange.",
+            "differentiation": "Directly calibrated to Ethiopian import-export supply chain realities."
+        }
+    ],
+    "financials": {
+        "historical": "FY2024: $10,000 UNIPOD Cohort 1 Grant + $55,000 B2B enterprise client subscriptions.",
+        "projected": [
+            {
+                "year": "FY2025",
+                "revenue_usd": 230000,
+                "gross_profit_usd": 197000,
+                "gross_margin_pct": 86,
+                "operating_profit_usd": 35000,
+                "active_units": "12 Markets"
+            },
+            {
+                "year": "FY2026",
+                "revenue_usd": 690000,
+                "gross_profit_usd": 600000,
+                "gross_margin_pct": 87,
+                "operating_profit_usd": 195000,
+                "active_units": "35 Markets"
+            },
+            {
+                "year": "FY2027",
+                "revenue_usd": 1800000,
+                "gross_profit_usd": 1584000,
+                "gross_margin_pct": 88,
+                "operating_profit_usd": 640000,
+                "active_units": "80 Markets"
+            }
+        ],
+        "unit_economics": "$3,000 annual contract value per enterprise seat with 86% gross software margins."
+    },
+    "growth_plan": {
+        "product_growth": "Launch trade credit scoring module for banks lending against warehouse commodity receipts.",
+        "customer_growth": "Expand coverage to all 40 major agricultural aggregation hubs across Ethiopia.",
+        "geographic_expansion": "Pilot cross-border livestock and grain tracking with Kenya and Djibouti.",
+        "ai_capability_expansion": "Incorporate satellite harvest yield forecasts into macroeconomic commodity price engines."
+    },
+    "diligence_documents": [
+        {
+            "title": "Merkato Intelligence Price Accuracy & Predictive Audit",
+            "category": "Technical",
+            "file_type": "PDF",
+            "file_size": "3.1 MB",
+            "status": "Verified"
+        },
+        {
+            "title": "Enterprise Commercial Contracts & Traction Dossier",
+            "category": "Traction",
+            "file_type": "PDF",
+            "file_size": "1.4 MB",
+            "status": "Available"
+        }
+    ],
+    "investment_ask": {
+        "amount_usd": 400000,
+        "round": "Seed",
+        "use_of_funds": "Scale USSD telecom bandwidth, expand field price verification network to 25 secondary markets, and hire enterprise sales engineers.",
+        "preferred_instrument": "Equity",
+        "current_funding": "AI UNIPOD Cohort 1 Grant & Enterprise SaaS Revenue",
+        "funds_breakdown": [
+            {
+                "category": "Market Enumeration & Field Network",
+                "percentage": 40,
+                "amount_usd": 160000,
+                "description": "Expand ground-truth price auditing across 25 regional markets"
+            },
+            {
+                "category": "Telecom Gateway & Infrastructure",
+                "percentage": 30,
+                "amount_usd": 120000,
+                "description": "USSD/SMS shortcode telecom throughput and cloud servers"
+            },
+            {
+                "category": "Enterprise Sales Engineering",
+                "percentage": 20,
+                "amount_usd": 80000,
+                "description": "Integrations for commercial food manufacturing clients"
+            },
+            {
+                "category": "Operations & Administration",
+                "percentage": 10,
+                "amount_usd": 40000,
+                "description": "Legal compliance and regulatory filings"
+            }
+        ]
+    },
+    "risks": [
+        {
+            "risk": "Hostile resistance from entrenched informal broker cartels.",
+            "severity": "Medium",
+            "mitigation": "Partnering with licensed municipal market administrations and offering brokers digitized workflow tools."
+        },
+        {
+            "risk": "Fluctuations in telecom USSD connectivity rates.",
+            "severity": "Low",
+            "mitigation": "Direct revenue-sharing agreement with Ethio Telecom and Safaricom."
+        }
+    ],
+    "links": [
+        {
+            "label": "Official Website",
+            "url": "https://merkatointelligence.com"
+        },
+        {
+            "label": "Market Terminal",
+            "url": "https://merkatointelligence.com/terminal"
+        }
+    ],
+    "theme": {
+        "primary_color": "#D97706",
+        "secondary_color": "#B45309",
+        "accent_color": "#2563EB",
+        "surface_color": "#FFFBEB",
+        "text_color": "#78350F",
+        "font_family": "system-ui, sans-serif",
+        "radius": "1rem",
+        "layout": "classic"
+    }
+},
+  {
+    "slug": "fith-ai",
+    "name": "Fith AI",
+    "legal_name": "Fith Legal Cognitive Technologies PLC",
+    "tagline": "Semantic search and regulatory compliance engine for Ethiopian Federal Proclamations, directives, and court rulings",
+    "sector": "LegalTech & GovTech AI",
+    "cohort": "Cohort 1",
+    "featured": false,
+    "description": "Incubated in AI UNIPOD Cohort 1, Fith AI transforms Ethiopian legal research and corporate compliance through sovereign semantic search. Digitizing thousands of Federal Proclamations, Council of Ministers regulations, and Cassation Division binding precedents in Amharic and English, Fith AI enables law firms, commercial banks, and government agencies to query laws with zero hallucination.",
+    "location": "Addis Ababa, Ethiopia",
+    "operating_markets": [
+        "Ethiopia (Federal and Regional Courts, Law Firms, Commercial Banks)"
+    ],
+    "founded": "2024",
+    "team_size": 6,
+    "primary_contact": {
+        "name": "Ermias Girma",
+        "role": "Co-Founder & Chief Legal Architect",
+        "email": "ermias@fith.ai",
+        "phone": "+251 91 789 0123"
+    },
+    "problem": {
+        "problem_statement": "Ethiopian legal professionals spend up to 18 hours per week manually searching disorganized paper Gazettes and conflicting proclamation amendments, causing critical regulatory compliance errors.",
+        "target_affected": "Over 12,000 licensed advocates, 30 commercial banks, and all federal ministries and judicial institutions.",
+        "severity": "Millions in regulatory fines, stalled business registrations, and delayed court judgments.",
+        "current_alternatives": "Unindexed PDF collections, personal physical libraries of printed Negarit Gazettes, and fragmented Telegram channels.",
+        "why_alternatives_fail": "No existing tool cross-references amended articles, repealed proclamations, or binding supreme court cassation rulings in Amharic."
+    },
+    "ai_tech": {
+        "technology_type": "Retrieval-Augmented Generation (RAG) & Legal NLP",
+        "models_used": [
+            "FithLegal-Bilingual RAG Pipeline",
+            "Hierarchical Article Chunking Engine",
+            "Citation Verification Guardrail"
+        ],
+        "model_ownership": "Proprietary bilingual legal ontology and citation-grounded verification model.",
+        "system_architecture": "Air-gapped on-premises and private sovereign cloud deployment ensuring client attorney-client privilege.",
+        "proprietary_ip": "Complete structured and cross-referenced corpus of all Ethiopian Federal Negarit Gazettes from 1991 to 2026.",
+        "data_sources": "Federal Negarit Gazette archives, Supreme Court Cassation Decisions (Volumes 1-26), and Ministerial directives.",
+        "dataset_size": "Over 1,400 Federal Proclamations, 550 Regulations, and 8,500 binding Cassation rulings.",
+        "data_rights": "Public judicial and legislative records curated and structured under national open-access legal research conventions.",
+        "data_advantage": "The only fully digitized, cross-referenced, and amended legal knowledge graph in Ethiopia."
+    },
+    "market": {
+        "tam_usd": "$380M African legal tech and regulatory compliance software market",
+        "sam_usd": "$52M Ethiopian corporate legal departments, commercial banks, and law firms",
+        "som_usd": "$6.8M addressable across top 100 law firms, 30 banks, and government regulatory agencies",
+        "customer_segments": [
+            "Commercial Law Firms & Advocates",
+            "Bank Legal & Compliance Departments",
+            "Federal Ministries & Judicial Courts"
+        ],
+        "expansion_markets": [
+            "Regional State Supreme Courts (Oromia, Amhara, Tigray regional laws)"
+        ],
+        "opportunity_narrative": "As Ethiopia prepares for the Ethiopian Securities Exchange (ESX) and WTO accession, corporate compliance demands modern automated legal intelligence."
+    },
+    "business_model": {
+        "revenue_model": "Per-seat monthly SaaS subscription for law firms and annual enterprise on-premises licenses for commercial banks",
+        "pricing": "Advocate Tier: ETB 1,800/month per seat; Enterprise Bank Tier: $18,000/year unlimited seats with on-premises isolation",
+        "arpu": "$1,200 annual average revenue per organizational account",
+        "mrr_arr": "$15,200 MRR",
+        "other_metrics": "89% gross software margin; 96% annual renewal rate"
+    },
+    "traction": {
+        "key_metric_value": "8,500+ Rulings",
+        "key_metric_label": "Indexed Supreme Court Cassation Precedents",
+        "active_deployments": "In active daily use by over 240 licensed advocates and 4 corporate bank legal departments",
+        "key_partners": [
+            "Ethiopian Federal Bar Association",
+            "AAU School of Law",
+            "EAII Sovereign NLP Lab"
+        ],
+        "major_milestones": [
+            "Digitized all 26 volumes of Supreme Court Cassation Division binding rulings",
+            "Reduced legal research time from 14 hours to under 8 minutes per brief",
+            "Adopted by Ministry of Justice legal reform research team"
+        ]
+    },
+    "ai_performance": {
+        "primary_metric": "Legal Retrieval Precision & Zero-Hallucination Rate",
+        "current_performance": "99.2% verified citation accuracy with strict hallucination-blocking guardrails",
+        "baseline_benchmark": "62.4% standard commercial LLM legal retrieval",
+        "improvement": "+36.8% citation precision delta",
+        "latency": "1.4 seconds semantic retrieval and citation linking",
+        "inference_cost": "$0.0042 per legal research query",
+        "validation": "Audited by panel of Ethiopian Supreme Court retired judges and senior advocates",
+        "scale": "Processes up to 100 concurrent deep legal research briefs per second"
+    },
+    "competitive_advantage": {
+        "main_competitors": [
+            "Manual physical library research",
+            "Generic foreign legal AI (LexisNexis - zero coverage of Ethiopian law)"
+        ],
+        "proprietary_moat": "Complete proprietary cross-amendment legal graph tracking which specific proclamation clauses are active or repealed",
+        "local_expertise": "Built by practicing Ethiopian advocates and AAU Law faculty",
+        "distribution_moat": "Official partnership with the Federal Bar Association"
+    },
+    "founders": [
+        {
+            "name": "Ermias Girma",
+            "role": "Co-Founder & CEO",
+            "background": "LL.M. in International Commercial Law from AAU; 9 years as corporate legal counsel."
+        },
+        {
+            "name": "Natnael Tadesse",
+            "role": "Chief Technology Officer",
+            "background": "Specialist in Information Retrieval and RAG architectures; former EAII natural language processing lead."
+        }
+    ],
+    "team_breakdown": {
+        "technical_team_size": 3,
+        "ai_data_science_size": 3,
+        "key_team_strength": "Exceptional fusion of experienced Ethiopian litigation attorneys and advanced retrieval AI engineers."
+    },
+    "impact": {
+        "beneficiaries_reached": "240+ advocates and thousands of court litigants",
+        "jobs_created": 10,
+        "women_youth_representation": "50% women legal researchers and software engineers",
+        "sdgs": [
+            {
+                "number": 16,
+                "label": "Peace, Justice and Strong Institutions"
+            },
+            {
+                "number": 9,
+                "label": "Industry, Innovation and Infrastructure"
+            }
+        ],
+        "impact_narrative": "Strengthening the rule of law and transparency across the Ethiopian justice system through sovereign AI."
+    },
+    "products": [
+        {
+            "name": "Fith Proclamation Engine",
+            "summary": "Semantic search engine for Ethiopian federal laws, retrieving relevant articles with full amendment history.",
+            "stage": "Market",
+            "target_customer": "Law firms, in-house corporate legal teams, and law professors.",
+            "ai_functionality": "Bilingual legal semantic embedding and active clause validation.",
+            "differentiation": "Immediately highlights whether a specific sub-article has been repealed or superseded."
+        },
+        {
+            "name": "Fith Contract Auditor",
+            "summary": "AI contract review application checking drafts against mandatory provisions of the Ethiopian Commercial Code.",
+            "stage": "Pilot",
+            "target_customer": "Corporate transactional attorneys and procurement officers.",
+            "ai_functionality": "Automated clause risk classification and statutory compliance scoring.",
+            "differentiation": "Trained explicitly on 2021 Revised Commercial Code of Ethiopia."
+        }
+    ],
+    "financials": {
+        "historical": "FY2024: $10,000 UNIPOD Cohort 1 Grant + $42,000 law firm subscription revenue.",
+        "projected": [
+            {
+                "year": "FY2025",
+                "revenue_usd": 180000,
+                "gross_profit_usd": 160000,
+                "gross_margin_pct": 89,
+                "operating_profit_usd": 28000,
+                "active_units": "85 Law Firms"
+            },
+            {
+                "year": "FY2026",
+                "revenue_usd": 520000,
+                "gross_profit_usd": 468000,
+                "gross_margin_pct": 90,
+                "operating_profit_usd": 155000,
+                "active_units": "240 Law Firms"
+            },
+            {
+                "year": "FY2027",
+                "revenue_usd": 1350000,
+                "gross_profit_usd": 1228000,
+                "gross_margin_pct": 91,
+                "operating_profit_usd": 490000,
+                "active_units": "550 Law Firms"
+            }
+        ],
+        "unit_economics": "$1,200 annual revenue per firm account with 89% gross software margins."
+    },
+    "growth_plan": {
+        "product_growth": "Release court precedent prediction analytics and automated litigation brief drafting assistant.",
+        "customer_growth": "Equip all 30 commercial banks and onboard federal ministry legal directorates.",
+        "geographic_expansion": "Index regional state gazettes starting with Oromia and Amhara regions.",
+        "ai_capability_expansion": "Integrate bilingual legal translation between Amharic, Afaan Oromoo, and English."
+    },
+    "diligence_documents": [
+        {
+            "title": "Fith AI Legal Retrieval Precision Benchmark",
+            "category": "Technical",
+            "file_type": "PDF",
+            "file_size": "2.6 MB",
+            "status": "Verified"
+        },
+        {
+            "title": "Law Firm Adoption & User Testimonials",
+            "category": "Traction",
+            "file_type": "PDF",
+            "file_size": "1.3 MB",
+            "status": "Available"
+        }
+    ],
+    "investment_ask": {
+        "amount_usd": 500000,
+        "round": "Seed",
+        "use_of_funds": "Digitize and index all 11 regional state proclamations, expand enterprise bank sales engineering, and enhance RAG guardrails.",
+        "preferred_instrument": "Equity",
+        "current_funding": "AI UNIPOD Cohort 1 Grant & Law Firm SaaS Revenue",
+        "funds_breakdown": [
+            {
+                "category": "Regional Law Digitization & Legal Annotation",
+                "percentage": 35,
+                "amount_usd": 175000,
+                "description": "Ingest regional state gazettes and cassation archives"
+            },
+            {
+                "category": "Enterprise Bank Security & Integration",
+                "percentage": 35,
+                "amount_usd": 175000,
+                "description": "Air-gapped on-premise deployments for financial institutions"
+            },
+            {
+                "category": "NLP Model Engineering & Evaluation",
+                "percentage": 20,
+                "amount_usd": 100000,
+                "description": "Bilingual legal embedding model fine-tuning"
+            },
+            {
+                "category": "Bar Association Marketing & Legal Operations",
+                "percentage": 10,
+                "amount_usd": 50000,
+                "description": "Continuing legal education webinars and compliance"
+            }
+        ]
+    },
+    "risks": [
+        {
+            "risk": "Complex and conflicting regional proclamation interpretations.",
+            "severity": "Medium",
+            "mitigation": "Maintaining strict citations pointing directly to official Gazette PDF page scans."
+        },
+        {
+            "risk": "Slow institutional procurement cycles in public justice sector.",
+            "severity": "Low",
+            "mitigation": "Immediate commercial revenue focus on private law firms and commercial banks."
+        }
+    ],
+    "links": [
+        {
+            "label": "Official Website",
+            "url": "https://fith.ai"
+        },
+        {
+            "label": "Legal Search Demo",
+            "url": "https://search.fith.ai"
+        }
+    ],
+    "theme": {
+        "primary_color": "#7C3AED",
+        "secondary_color": "#6D28D9",
+        "accent_color": "#EC4899",
+        "surface_color": "#F5F3FF",
+        "text_color": "#4C1D95",
+        "font_family": "system-ui, sans-serif",
+        "radius": "1rem",
+        "layout": "classic"
+    }
+}
+];
       for (let i = 0; i < window.localStorage.length; i++) {
         const key = window.localStorage.key(i);
         if (key && key.startsWith(STORAGE_PREFIX)) {
@@ -6593,5 +8483,5 @@ export function getStartupStage(startup: Startup): "Concept" | "Prototype" | "Pi
 }
 
 export function getStartupCohort(startup: Startup): string {
-  return startup.cohort || "Cohort 3";
+  return startup.cohort || "Cohort 2";
 }

@@ -411,11 +411,11 @@ export function InvestorPortalPage() {
 
             <Link
               to="/cohort-3"
-              title="Cohort 3"
+              title="Cohort Pipeline"
               className="w-full flex items-center gap-3 rounded-2xl px-3 py-2 text-xs font-medium text-muted-foreground hover:bg-muted/60 hover:text-foreground transition-all"
             >
               <GraduationCap className="size-4 shrink-0" />
-              {!sidebarCollapsed && <span className="truncate flex-1">Cohort 3 Pipeline</span>}
+              {!sidebarCollapsed && <span className="truncate flex-1">Cohort Pipeline</span>}
               {!sidebarCollapsed && <ArrowUpRight className="size-3 text-muted-foreground/60" />}
             </Link>
 
@@ -963,7 +963,7 @@ export function InvestorPortalPage() {
                               {s.sector}
                             </span>
                             <span className="rounded-full border border-primary/20 bg-primary/5 px-2 py-0.5 text-[10px] font-bold text-primary">
-                              {s.cohort || "Cohort 3"}
+                              {s.cohort || "Cohort 2"}
                             </span>
                           </div>
                           <span className="text-xs text-muted-foreground">{s.location}</span>

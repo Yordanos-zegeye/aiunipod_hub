@@ -375,7 +375,7 @@ export function ThemeEditor({ startupName, theme, onChange, onSave }: ThemeEdito
                     borderRadius: theme.radius || "0.75rem",
                   }}
                 >
-                  Cohort 3 · EAII Living Lab
+                  Cohort 2 · EAII Living Lab
                 </span>
               </div>
 

@@ -219,7 +219,7 @@ export function AdminDashboardPage() {
       time: "12m ago",
       tag: "PILOT",
       stage: "Pilot",
-      cohort: "Cohort 3",
+      cohort: "Cohort 2",
     },
     {
       id: "feed-2",
@@ -228,16 +228,16 @@ export function AdminDashboardPage() {
       time: "45m ago",
       tag: "MARKET",
       stage: "Market",
-      cohort: "Cohort 3",
+      cohort: "Cohort 2",
     },
     {
       id: "feed-3",
-      title: "Cohort 4 Intake Application Received",
-      desc: "Geomap Ethiopia AI submitted proposal for Cohort 4 (Climate & Earth Observation).",
+      title: "Cohort Intake Proposal Received",
+      desc: "Geomap Ethiopia AI submitted proposal for Living Lab acceleration.",
       time: "2h ago",
       tag: "INTAKE",
       stage: "Concept",
-      cohort: "Cohort 4",
+      cohort: "Cohort 2",
     },
     {
       id: "feed-4",
@@ -246,7 +246,7 @@ export function AdminDashboardPage() {
       time: "3h ago",
       tag: "INVESTOR",
       stage: "Market",
-      cohort: "Cohort 3",
+      cohort: "Cohort 2",
     },
     {
       id: "feed-5",
@@ -255,7 +255,7 @@ export function AdminDashboardPage() {
       time: "5h ago",
       tag: "MARKET",
       stage: "Market",
-      cohort: "Cohort 3",
+      cohort: "Cohort 2",
     },
     {
       id: "feed-6",
@@ -264,7 +264,7 @@ export function AdminDashboardPage() {
       time: "1d ago",
       tag: "PILOT",
       stage: "Pilot",
-      cohort: "Cohort 3",
+      cohort: "Cohort 2",
     },
   ]);
 
@@ -440,7 +440,7 @@ export function AdminDashboardPage() {
   const [isProvisionModalOpen, setIsProvisionModalOpen] = useState(false);
   const [newStartupName, setNewStartupName] = useState("");
   const [newStartupSector, setNewStartupSector] = useState("Health AI");
-  const [newStartupCohort, setNewStartupCohort] = useState("Cohort 3");
+  const [newStartupCohort, setNewStartupCohort] = useState("Cohort 2");
   const [newStartupStage, setNewStartupStage] = useState<"Concept" | "Prototype" | "Pilot" | "Market">("Prototype");
   const [newStartupTagline, setNewStartupTagline] = useState("");
   const [newStartupLocation, setNewStartupLocation] = useState("Addis Ababa, Ethiopia");
@@ -624,7 +624,7 @@ export function AdminDashboardPage() {
     {
       id: "log-3",
       actor: "Admin User",
-      action: "Reviewed Cohort 3 application: MeklitAI (Score: 94/100)",
+      action: "Reviewed Cohort 2 application: MeklitAI (Score: 94/100)",
       time: "2 hours ago",
       type: "COHORT" as const,
     },
@@ -685,9 +685,8 @@ export function AdminDashboardPage() {
   );
   const totalJobsCreated = startupsList.reduce((acc, s) => acc + s.team_size, 0);
 
-  const cohort3Startups = startupsList.filter((s) => getStartupCohort(s) === "Cohort 3");
   const cohort2Startups = startupsList.filter((s) => getStartupCohort(s) === "Cohort 2");
-  const cohort4Startups = startupsList.filter((s) => getStartupCohort(s) === "Cohort 4");
+  const cohort1Startups = startupsList.filter((s) => getStartupCohort(s) === "Cohort 1");
 
   // Overview Tab Filtered Startups
   const overviewFilteredStartups = startupsList.filter((s) => {
@@ -698,18 +697,18 @@ export function AdminDashboardPage() {
   // Non-technical Chart 1: Stage progression by cohort data
   const cohortStageChartData = [
     {
-      cohort: "Cohort 3 (Active)",
-      Market: cohort3Startups.filter((s) => getStartupStage(s) === "Market").length,
-      Pilot: cohort3Startups.filter((s) => getStartupStage(s) === "Pilot").length,
-      Prototype: cohort3Startups.filter((s) => getStartupStage(s) === "Prototype").length,
-      Concept: cohort3Startups.filter((s) => getStartupStage(s) === "Concept").length,
-    },
-    {
-      cohort: "Cohort 2 (Graduated)",
+      cohort: "Cohort 2 (Active)",
       Market: cohort2Startups.filter((s) => getStartupStage(s) === "Market").length,
       Pilot: cohort2Startups.filter((s) => getStartupStage(s) === "Pilot").length,
       Prototype: cohort2Startups.filter((s) => getStartupStage(s) === "Prototype").length,
       Concept: cohort2Startups.filter((s) => getStartupStage(s) === "Concept").length,
+    },
+    {
+      cohort: "Cohort 1 (Graduated)",
+      Market: cohort1Startups.filter((s) => getStartupStage(s) === "Market").length,
+      Pilot: cohort1Startups.filter((s) => getStartupStage(s) === "Pilot").length,
+      Prototype: cohort1Startups.filter((s) => getStartupStage(s) === "Prototype").length,
+      Concept: cohort1Startups.filter((s) => getStartupStage(s) === "Concept").length,
     },
   ];
 
@@ -757,38 +756,38 @@ export function AdminDashboardPage() {
   const sovereignRadarData = [
     {
       metric: "Local Language Data",
-      Cohort2: 70,
-      Cohort3: 95,
+      Cohort1: 70,
+      Cohort2: 95,
       fullMark: 100,
     },
     {
       metric: "Field Pilot Scale",
-      Cohort2: 85,
-      Cohort3: 92,
+      Cohort1: 85,
+      Cohort2: 92,
       fullMark: 100,
     },
     {
       metric: "Commercial Contracts",
-      Cohort2: 95,
-      Cohort3: 65,
+      Cohort1: 95,
+      Cohort2: 65,
       fullMark: 100,
     },
     {
       metric: "Sovereign IP & Code",
-      Cohort2: 78,
-      Cohort3: 88,
+      Cohort1: 78,
+      Cohort2: 88,
       fullMark: 100,
     },
     {
       metric: "AI Talent Density",
-      Cohort2: 82,
-      Cohort3: 90,
+      Cohort1: 82,
+      Cohort2: 90,
       fullMark: 100,
     },
     {
       metric: "Gov & Institutional Links",
-      Cohort2: 88,
-      Cohort3: 96,
+      Cohort1: 88,
+      Cohort2: 96,
       fullMark: 100,
     },
   ];
@@ -1964,7 +1963,7 @@ export function AdminDashboardPage() {
                               </h4>
                             </div>
                             <p className="text-xs text-muted-foreground mt-0.5">
-                              Comparing commercial maturity graduation between Cohort 2 (graduated) and Cohort 3 (active).
+                              Comparing commercial maturity graduation between Cohort 1 (graduated) and Cohort 2 (active).
                             </p>
                           </div>
                         </div>
@@ -1973,25 +1972,25 @@ export function AdminDashboardPage() {
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                           <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-3 text-xs space-y-1">
                             <div className="flex items-center justify-between">
-                              <span className="font-bold text-foreground">Cohort 2 (Graduated)</span>
+                              <span className="font-bold text-foreground">Cohort 1 (Graduated)</span>
                               <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-600">
-                                67% Market Rate
+                                71% Market Rate
                               </span>
                             </div>
                             <p className="text-[11px] text-muted-foreground">
-                              2 of 3 ventures reached sustainable recurring revenue and multi-zone deployments.
+                              5 of 7 foundational ventures reached recurring commercial contracts and municipal deployments.
                             </p>
                           </div>
 
                           <div className="rounded-2xl border border-primary/20 bg-primary/5 p-3 text-xs space-y-1">
                             <div className="flex items-center justify-between">
-                              <span className="font-bold text-foreground">Cohort 3 (Active)</span>
+                              <span className="font-bold text-foreground">Cohort 2 (Active)</span>
                               <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-primary/15 text-primary">
-                                80% Field Pilots
+                                85% Field Pilots
                               </span>
                             </div>
                             <p className="text-[11px] text-muted-foreground">
-                              4 of 5 ventures deployed live across 40+ clinical posts and credit unions in 2026.
+                              21 ventures accelerating live across 40+ healthcare posts, agriculture unions, and credit cooperatives in 2026.
                             </p>
                           </div>
                         </div>
@@ -2035,7 +2034,7 @@ export function AdminDashboardPage() {
                       </div>
 
                       <div className="pt-3 border-t border-border text-xs text-muted-foreground flex items-center justify-between">
-                        <span>Cohort 3 Velocity: <strong className="text-foreground">+40% faster pilot entry</strong></span>
+                        <span>Cohort 2 Velocity: <strong className="text-foreground">+40% faster pilot entry</strong></span>
                         <span className="text-primary font-semibold">Demo Day: Q4 2026</span>
                       </div>
                     </div>
@@ -2074,15 +2073,15 @@ export function AdminDashboardPage() {
                                 tick={{ fill: "currentColor", fontSize: 9 }}
                               />
                               <Radar
-                                name="Cohort 3 (Active)"
-                                dataKey="Cohort3"
+                                name="Cohort 2 (Active)"
+                                dataKey="Cohort2"
                                 stroke="#0EA5E9"
                                 fill="#0EA5E9"
                                 fillOpacity={0.35}
                               />
                               <Radar
-                                name="Cohort 2 (Graduated)"
-                                dataKey="Cohort2"
+                                name="Cohort 1 (Graduated)"
+                                dataKey="Cohort1"
                                 stroke="#10B981"
                                 fill="#10B981"
                                 fillOpacity={0.25}
@@ -3198,10 +3197,8 @@ export function AdminDashboardPage() {
                     onChange={(e) => setNewStartupCohort(e.target.value)}
                     className="w-full rounded-xl border border-border bg-muted/20 px-3 py-2 text-xs text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 font-medium"
                   >
-                    <option value="Cohort 3">Cohort 3 (Active)</option>
-                    <option value="Cohort 4">Cohort 4 (Upcoming)</option>
-                    <option value="Cohort 2">Cohort 2 (Graduated)</option>
-                    <option value="Cohort 1">Cohort 1 (Alumni)</option>
+                    <option value="Cohort 2">Cohort 2 (Active Incubation)</option>
+                    <option value="Cohort 1">Cohort 1 (Graduated Alumni)</option>
                   </select>
                 </div>
 

@@ -22,9 +22,9 @@ import { LandingFooter } from "@/components/landing/LandingFooter";
 import { Button } from "@/components/ui/button";
 import { STARTUPS } from "@/data/startups";
 
-const TITLE = "Apply for Cohort 3 Incubation — AI UNIPOD Ethiopia";
+const TITLE = "Apply for Living Lab Incubation — AI UNIPOD Ethiopia";
 const DESCRIPTION =
-  "Apply for Cohort 3 of AI UNIPOD Ethiopia. Selected ventures receive high-performance GPU workstations compute, up to $5,000 seed grants, and living lab incubation.";
+  "Apply for living lab incubation at AI UNIPOD Ethiopia. Selected ventures receive high-performance GPU workstations compute, seed grant funding, and living lab incubation.";
 
 export const Route = createFileRoute("/cohort-3")({
   head: () => ({
@@ -101,7 +101,7 @@ function Cohort3Page() {
         {/* Hero Banner */}
         <div className="max-w-3xl">
           <h1 className="font-display text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-            Cohort 3 Application
+            Incubation Intake Application
           </h1>
           <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
             Join the next generation of African founders transforming research and local data into scalable AI solutions.
@@ -183,7 +183,7 @@ function Cohort3Page() {
           </div>
         </div>
 
-        {/* Currently Incubated Cohort 3 Ventures */}
+        {/* Currently Incubated Cohort 2 Ventures */}
         <div className="mt-14 space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div>
@@ -191,7 +191,7 @@ function Cohort3Page() {
                 <Rocket className="size-3.5" /> Active Living Lab Roster
               </span>
               <h2 className="mt-2 font-display text-2xl sm:text-3xl font-bold text-foreground">
-                Currently Incubated in Cohort 3 ({STARTUPS.filter((s) => s.cohort === "Cohort 3").length} Ventures)
+                Currently Incubated in Cohort 2 ({STARTUPS.filter((s) => s.cohort === "Cohort 2").length} Ventures)
               </h2>
               <p className="mt-1 text-xs text-muted-foreground">
                 Explore sovereign AI teams accelerating at the EAII living lab facility in Addis Ababa.
@@ -205,7 +205,7 @@ function Cohort3Page() {
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {STARTUPS.filter((s) => s.cohort === "Cohort 3").map((startup) => (
+            {STARTUPS.filter((s) => s.cohort === "Cohort 2").map((startup) => (
               <div
                 key={startup.slug}
                 className="rounded-2xl border border-border bg-card p-5 shadow-xs flex flex-col justify-between transition-all hover:border-primary/40 hover:shadow-md"
@@ -258,7 +258,7 @@ function Cohort3Page() {
                 Application Received!
               </h2>
               <p className="mx-auto mt-3 max-w-lg text-sm text-muted-foreground">
-                Thank you, <strong>{formData.founderName || "Founder"}</strong>. Your application for <strong>{formData.teamName || "your venture"}</strong> has been registered in the AI UNIPOD Cohort 3 intake pipeline.
+                Thank you, <strong>{formData.founderName || "Founder"}</strong>. Your application for <strong>{formData.teamName || "your venture"}</strong> has been registered in the AI UNIPOD intake pipeline.
               </p>
               <div className="mt-8 flex justify-center gap-4">
                 <Button onClick={() => setSubmitted(false)} variant="outline" className="rounded-full">
@@ -407,7 +407,7 @@ function Cohort3Page() {
                   Applications are reviewed on a rolling basis. Priority given to inclusive and female-led teams.
                 </p>
                 <Button type="submit" size="lg" className="rounded-full px-8 font-semibold">
-                  Submit Cohort 3 Application <ArrowRight className="ml-2 size-4" />
+                  Submit Application <ArrowRight className="ml-2 size-4" />
                 </Button>
               </div>
             </form>

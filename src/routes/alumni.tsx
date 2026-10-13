@@ -222,7 +222,7 @@ export function AlumniPage() {
                 </Button>
                 <Button asChild variant="outline" size="lg" className="rounded-full px-6 font-semibold">
                   <Link to="/cohort-3">
-                    Apply for Cohort 3 Incubation <ArrowUpRight className="ml-1 size-4" />
+                    Apply for Incubation <ArrowUpRight className="ml-1 size-4" />
                   </Link>
                 </Button>
               </div>
@@ -794,7 +794,7 @@ export function AlumniPage() {
         </section>
 
         {/* ========================================================= */}
-        {/* CALL TO ACTION: CONNECT AS ALUMNI OR APPLY TO COHORT 3    */}
+        {/* CALL TO ACTION: CONNECT AS ALUMNI OR APPLY TO INCUBATION    */}
         {/* ========================================================= */}
         <section className="border-t border-border bg-gradient-to-br from-card via-card/90 to-primary/5 py-16 sm:py-20">
           <div className="mx-auto max-w-[1200px] px-5 sm:px-8 text-center">
@@ -805,13 +805,13 @@ export function AlumniPage() {
               Ready to Follow in Their Footsteps?
             </h2>
             <p className="mt-3 max-w-2xl mx-auto text-sm text-muted-foreground leading-relaxed">
-              Join Cohort 3 of AI UNIPOD Ethiopia. Gain sovereign high-performance GPU workstations compute,
-              up to $5,000 in prototype seed funding, and world-class living lab mentorship from EAII, AAU, and timbuktoo.
+              Join the next AI UNIPOD Ethiopia incubation cycle. Gain sovereign high-performance GPU workstations compute,
+              up to $10,000 in equity-free seed grants, and world-class living lab mentorship from EAII, AAU, and timbuktoo.
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
               <Button asChild size="lg" className="rounded-full px-7 font-semibold shadow-sm">
                 <Link to="/cohort-3">
-                  Apply for Cohort 3 Incubation <ArrowUpRight className="ml-1 size-4" />
+                  Apply for Incubation <ArrowUpRight className="ml-1 size-4" />
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg" className="rounded-full px-7 font-semibold">
@@ -908,7 +908,7 @@ export function AlumniPage() {
 
                 <div className="rounded-xl border border-primary/30 bg-primary/5 p-4">
                   <h4 className="font-bold text-primary text-xs uppercase tracking-wider flex items-center gap-1.5">
-                    <Lightbulb className="size-3.5" /> Founder Advice for Cohort 3 Teams
+                    <Lightbulb className="size-3.5" /> Founder Advice for New Incubated Teams
                   </h4>
                   <p className="mt-1.5 text-foreground italic">
                     "{selectedStoryAlumni.founder_journey.advice_to_cohort3}"
