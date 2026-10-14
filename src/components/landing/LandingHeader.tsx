@@ -141,6 +141,8 @@ export function LandingHeader() {
               width="144"
               height="36"
               decoding="async"
+              // @ts-expect-error fetchpriority is a valid HTML attribute
+              fetchpriority="high"
               className="h-8 w-auto sm:h-9 object-contain"
             />
           </Link>

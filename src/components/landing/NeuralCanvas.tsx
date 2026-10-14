@@ -16,7 +16,7 @@ export function NeuralCanvas() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext("2d", { alpha: true });
+    const ctx = canvas.getContext("2d", { alpha: true, desynchronized: true });
     if (!ctx) return;
 
     let animationFrameId: number | null = null;
@@ -88,19 +88,21 @@ export function NeuralCanvas() {
         if (node.y < 0) node.y = height;
         else if (node.y > height) node.y = 0;
 
-        // Mouse interactive nudge
+        // Mouse interactive nudge (squared-distance avoids expensive sqrt)
         const dx = node.x - mouseX;
         const dy = node.y - mouseY;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 120 && dist > 0) {
+        const distSq = dx * dx + dy * dy;
+        if (distSq < 14400 && distSq > 0) { // 120² = 14400
+          const dist = Math.sqrt(distSq);
           const force = (120 - dist) / 120;
           node.x += (dx / dist) * force * 1.5;
           node.y += (dy / dist) * force * 1.5;
         }
       }
 
-      // Draw connections
+      // Draw connections — use squared distance to skip sqrt for the rejection test
       const maxDistance = 145;
+      const maxDistSq = maxDistance * maxDistance; // 21025
       for (let i = 0; i < nodes.length; i++) {
         const a = nodes[i];
         if (!a) continue;
@@ -109,9 +111,11 @@ export function NeuralCanvas() {
           if (!b) continue;
           const dx = a.x - b.x;
           const dy = a.y - b.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
+          const distSq = dx * dx + dy * dy;
 
-          if (dist < maxDistance) {
+          if (distSq < maxDistSq) {
+            // Only compute sqrt when we know the pair is within range
+            const dist = Math.sqrt(distSq);
             const alpha = (1 - dist / maxDistance) * 0.22;
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
@@ -120,7 +124,7 @@ export function NeuralCanvas() {
             ctx.lineWidth = 0.9;
             ctx.stroke();
 
-            // Synaptic signal pulse along connections (optimized vector drawing without expensive shadowBlur)
+            // Synaptic signal pulse along connections
             if ((i + j + Math.floor(tick * 3)) % 17 === 0) {
               const progress = (Math.sin(tick * 2 + i) + 1) / 2;
               const px = a.x + (b.x - a.x) * progress;

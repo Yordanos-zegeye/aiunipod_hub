@@ -1,16 +1,20 @@
+import { lazy, Suspense } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 
-import { CtaSection } from "@/components/landing/CtaSection";
-import { DynamicMarquee } from "@/components/landing/DynamicMarquee";
-import { EcosystemImpact } from "@/components/landing/EcosystemImpact";
-import { FaqSection } from "@/components/landing/FaqSection";
-import { LandingFooter } from "@/components/landing/LandingFooter";
+// ─── Critical above-the-fold: eagerly loaded ───────────────────────────────
 import { LandingHeader } from "@/components/landing/LandingHeader";
 import { LandingHero } from "@/components/landing/LandingHero";
-import { MissionSection } from "@/components/landing/MissionSection";
+import { DynamicMarquee } from "@/components/landing/DynamicMarquee";
 import { ScrollProgress } from "@/components/landing/ScrollProgress";
-import { StrategicPillars } from "@/components/landing/StrategicPillars";
-import { VentureDirectory } from "@/components/landing/VentureDirectory";
+
+// ─── Below-the-fold: lazy-loaded so initial JS bundle stays small ──────────
+const MissionSection   = lazy(() => import("@/components/landing/MissionSection").then(m => ({ default: m.MissionSection })));
+const StrategicPillars = lazy(() => import("@/components/landing/StrategicPillars").then(m => ({ default: m.StrategicPillars })));
+const VentureDirectory = lazy(() => import("@/components/landing/VentureDirectory").then(m => ({ default: m.VentureDirectory })));
+const EcosystemImpact  = lazy(() => import("@/components/landing/EcosystemImpact").then(m => ({ default: m.EcosystemImpact })));
+const FaqSection       = lazy(() => import("@/components/landing/FaqSection").then(m => ({ default: m.FaqSection })));
+const CtaSection       = lazy(() => import("@/components/landing/CtaSection").then(m => ({ default: m.CtaSection })));
+const LandingFooter    = lazy(() => import("@/components/landing/LandingFooter").then(m => ({ default: m.LandingFooter })));
 
 const TITLE = "AI UNIPOD Ethiopia — Powered by timbuktoo Initiative";
 const DESCRIPTION =
@@ -30,43 +34,60 @@ export const Route = createFileRoute("/")({
   component: LandingPage,
 });
 
+/** Minimal section-level skeleton shown while a lazy chunk loads */
+function SectionSkeleton() {
+  return (
+    <div className="w-full py-24 sm:py-32 flex items-center justify-center" aria-hidden="true">
+      <span className="h-1.5 w-16 rounded-full bg-border animate-pulse" />
+    </div>
+  );
+}
+
 function LandingPage() {
   return (
     <div className="min-h-screen overflow-x-hidden bg-background font-body text-foreground antialiased selection:bg-primary selection:text-primary-foreground">
       {/* Scroll Progress Bar */}
       <ScrollProgress />
 
-      {/* 1. Glassmorphic Header & Mobile Drawer */}
+      {/* 1. Glassmorphic Header & Mobile Drawer — critical, always eager */}
       <LandingHeader />
 
       <main>
-        {/* 2. Hero with Generative Neural Canvas + Spline 3D + Telemetry */}
+        {/* 2. Hero — critical, always eager */}
         <LandingHero />
 
-        {/* 3. High-Tech Partner & Domain Marquee */}
+        {/* 3. Marquee — lightweight, always eager */}
         <DynamicMarquee />
 
-        {/* 4. Strategic Mission & Multi-Stakeholder Mandate */}
-        <MissionSection />
+        {/* 4–10. Lazy-loaded below-the-fold sections */}
+        <Suspense fallback={<SectionSkeleton />}>
+          <MissionSection />
+        </Suspense>
 
-        {/* 5. Strategic Capabilities & Compute Pillars */}
-        <StrategicPillars />
+        <Suspense fallback={<SectionSkeleton />}>
+          <StrategicPillars />
+        </Suspense>
 
-        {/* 6. Portfolio Directory & Searchable Explorer */}
-        <VentureDirectory />
+        <Suspense fallback={<SectionSkeleton />}>
+          <VentureDirectory />
+        </Suspense>
 
-        {/* 7. Ecosystem Impact & Leadership Testimonials */}
-        <EcosystemImpact />
+        <Suspense fallback={<SectionSkeleton />}>
+          <EcosystemImpact />
+        </Suspense>
 
-        {/* 8. Interactive FAQ Accordion */}
-        <FaqSection />
+        <Suspense fallback={<SectionSkeleton />}>
+          <FaqSection />
+        </Suspense>
 
-        {/* 9. High-Conversion Dual CTA */}
-        <CtaSection />
+        <Suspense fallback={<SectionSkeleton />}>
+          <CtaSection />
+        </Suspense>
       </main>
 
-      {/* 10. Comprehensive Enterprise Global Footer */}
-      <LandingFooter />
+      <Suspense fallback={null}>
+        <LandingFooter />
+      </Suspense>
     </div>
   );
 }

@@ -10,25 +10,34 @@ import {
   DollarSign,
   HelpCircle,
   Layers,
+  Lock,
   MapPin,
   Plus,
   Rocket,
   Send,
+  ShieldAlert,
+  ShieldCheck,
   Sparkles,
   Trash2,
   X,
 } from "lucide-react";
-import { useId, useState } from "react";
+import { useEffect, useId, useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import type { ExperienceLevel, JobOpening, JobType, WorkplaceType } from "@/data/jobs";
+import { saveCustomJob } from "@/data/jobs";
 import { STARTUPS } from "@/data/startups";
+import { useAuth } from "@/lib/auth";
 
 interface PostJobModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onJobCreated: (job: JobOpening) => void;
+  onJobCreated?: (job: JobOpening) => void;
+  defaultStartupSlug?: string;
+  defaultStartupName?: string;
+  lockStartup?: boolean;
 }
 
 const SECTOR_OPTIONS = [
@@ -55,14 +64,40 @@ const COMPUTE_PRESETS = [
   "Remote EAII GPU Compute Allocation + Monthly Addis Ababa Living Lab Residency",
 ];
 
-export function PostJobModal({ isOpen, onClose, onJobCreated }: PostJobModalProps) {
+export function PostJobModal({
+  isOpen,
+  onClose,
+  onJobCreated,
+  defaultStartupSlug,
+  defaultStartupName,
+  lockStartup = false,
+}: PostJobModalProps) {
   const modalTitleId = useId();
+  const { user } = useAuth();
+  const isFounder =
+    user?.role === "STARTUP_ADMIN" ||
+    user?.role === "STARTUP_EDITOR" ||
+    user?.role === "SUPER_ADMIN";
+
+  const effectiveInitialSlug =
+    defaultStartupSlug || user?.startupSlug || STARTUPS[0]?.slug || "meklit-ai";
 
   // Startup selection mode: existing incubated startup or custom startup
   const [startupMode, setStartupMode] = useState<"incubated" | "custom">("incubated");
-  const [selectedStartupSlug, setSelectedStartupSlug] = useState<string>(STARTUPS[0]?.slug || "");
-  const [customStartupName, setCustomStartupName] = useState("");
+  const [selectedStartupSlug, setSelectedStartupSlug] = useState<string>(effectiveInitialSlug);
+  const [customStartupName, setCustomStartupName] = useState(defaultStartupName || "");
   const [customStartupTagline, setCustomStartupTagline] = useState("");
+
+  // Sync initial startup slug when default changes
+  useEffect(() => {
+    if (defaultStartupSlug) {
+      setSelectedStartupSlug(defaultStartupSlug);
+      const s = STARTUPS.find((st) => st.slug === defaultStartupSlug);
+      if (s) {
+        setSector(s.sector);
+      }
+    }
+  }, [defaultStartupSlug]);
 
   // Role details
   const [title, setTitle] = useState("");
@@ -131,6 +166,11 @@ export function PostJobModal({ isOpen, onClose, onJobCreated }: PostJobModalProp
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setFormError(null);
+
+    if (!isFounder) {
+      setFormError("Only verified startup founders and program staff can publish job openings.");
+      return;
+    }
 
     // Validation
     if (!title.trim()) {
@@ -227,7 +267,10 @@ export function PostJobModal({ isOpen, onClose, onJobCreated }: PostJobModalProp
 
     setTimeout(() => {
       setIsSubmitting(false);
-      onJobCreated(newJob);
+      saveCustomJob(newJob);
+      if (onJobCreated) {
+        onJobCreated(newJob);
+      }
       toast.success("Job Opening Published!", {
         description: `"${newJob.title}" at ${newJob.startupName} is now live in the careers directory.`,
       });
@@ -251,123 +294,177 @@ export function PostJobModal({ isOpen, onClose, onJobCreated }: PostJobModalProp
         aria-labelledby={modalTitleId}
         className="relative z-10 flex max-h-[92vh] w-full max-w-4xl flex-col rounded-3xl border border-border bg-card shadow-2xl overflow-hidden"
       >
-        {/* Header */}
-        <div className="flex items-center justify-between border-b border-border/80 px-6 py-5 sm:px-8">
-          <div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-0.5 text-xs font-semibold text-primary">
-              <Sparkles className="size-3" />
-              For Startups & Cohort Ventures
+        {!isFounder ? (
+          <div className="p-8 sm:p-12 text-center space-y-6">
+            <div className="mx-auto size-16 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-600 dark:text-amber-400">
+              <Lock className="size-8" />
             </div>
-            <h2 id={modalTitleId} className="mt-1.5 font-display text-xl font-bold text-foreground sm:text-2xl">
-              Post a Startup Job Opening
-            </h2>
-            <p className="text-xs text-muted-foreground sm:text-sm">
-              Publish positions to top AAU graduates, EAII researchers, and African tech talent.
-            </p>
-          </div>
-
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="Close dialog"
-            className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-          >
-            <X className="size-5" />
-          </button>
-        </div>
-
-        {/* Scrollable Form Body */}
-        <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto px-6 py-6 sm:px-8 space-y-7">
-          {formError && (
-            <div className="flex items-center gap-2.5 rounded-2xl border border-destructive/30 bg-destructive/10 p-3.5 text-xs font-medium text-destructive">
-              <AlertCircle className="size-4 shrink-0" />
-              <span>{formError}</span>
-            </div>
-          )}
-
-          {/* Section 1: Startup Identity */}
-          <div className="rounded-2xl border border-border bg-muted/20 p-5 space-y-4">
-            <div className="flex items-center justify-between">
-              <span className="font-display text-sm font-bold text-foreground flex items-center gap-2">
-                <Building2 className="size-4 text-primary" />
-                1. Hiring Startup
+            <div className="space-y-2">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-xs font-bold text-amber-600 dark:text-amber-400">
+                <ShieldAlert className="size-3.5" /> Founder Access Restricted
               </span>
-
-              <div className="flex items-center gap-2 text-xs">
-                <button
-                  type="button"
-                  onClick={() => setStartupMode("incubated")}
-                  className={`rounded-lg px-2.5 py-1 font-semibold transition-colors ${
-                    startupMode === "incubated"
-                      ? "bg-primary text-primary-foreground"
-                      : "text-muted-foreground hover:bg-muted"
-                  }`}
-                >
-                  Incubated Startup
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setStartupMode("custom")}
-                  className={`rounded-lg px-2.5 py-1 font-semibold transition-colors ${
-                    startupMode === "custom"
-                      ? "bg-primary text-primary-foreground"
-                      : "text-muted-foreground hover:bg-muted"
-                  }`}
-                >
-                  Other / New Venture
-                </button>
-              </div>
+              <h2 id={modalTitleId} className="font-display text-2xl font-bold text-foreground sm:text-3xl">
+                Startup Founder Access Only
+              </h2>
+              <p className="mx-auto max-w-lg text-sm text-muted-foreground leading-relaxed">
+                Job postings on the AI UNIPOD Ethiopia network are strictly reserved for incubated startup founders and program staff. Public visitors and guests cannot create or publish job listings.
+              </p>
             </div>
 
-            {startupMode === "incubated" ? (
+            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+              <Button asChild className="rounded-xl px-6 py-2.5 text-xs font-bold gap-2">
+                <Link to="/login">
+                  <Lock className="size-3.5" /> Sign in to Founder Portal
+                </Link>
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={onClose}
+                className="rounded-xl px-5 text-xs font-semibold"
+              >
+                Close
+              </Button>
+            </div>
+          </div>
+        ) : (
+          <>
+            {/* Header */}
+            <div className="flex items-center justify-between border-b border-border/80 px-6 py-5 sm:px-8">
               <div>
-                <label className="text-xs font-semibold text-muted-foreground block mb-1.5">
-                  Select Your Incubated Venture
-                </label>
-                <select
-                  value={selectedStartupSlug}
-                  onChange={(e) => handleStartupSelect(e.target.value)}
-                  className="w-full rounded-xl border border-border bg-card px-3.5 py-2.5 text-sm font-medium text-foreground focus:border-primary focus:outline-hidden"
-                >
-                  {STARTUPS.map((startup) => (
-                    <option key={startup.slug} value={startup.slug}>
-                      {startup.name} — {startup.sector} ({startup.tagline})
-                    </option>
-                  ))}
-                </select>
-                <p className="mt-1.5 text-[11px] text-muted-foreground">
-                  Includes pre-configured living lab GPU profiles and AAU candidate routing.
+                <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-0.5 text-xs font-semibold text-primary">
+                  <Sparkles className="size-3" />
+                  Founder Portal Recruitment
+                </div>
+                <h2 id={modalTitleId} className="mt-1.5 font-display text-xl font-bold text-foreground sm:text-2xl">
+                  Post a Startup Job Opening
+                </h2>
+                <p className="text-xs text-muted-foreground sm:text-sm">
+                  Publish positions directly to top AAU graduates, EAII researchers, and African tech talent.
                 </p>
               </div>
-            ) : (
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div>
-                  <label className="text-xs font-semibold text-muted-foreground block mb-1">
-                    Startup / Company Name <span className="text-destructive">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    value={customStartupName}
-                    onChange={(e) => setCustomStartupName(e.target.value)}
-                    placeholder="e.g. Addis Quantum Labs"
-                    className="w-full rounded-xl border border-border bg-card px-3.5 py-2 text-sm text-foreground focus:border-primary focus:outline-hidden"
-                  />
+
+              <button
+                type="button"
+                onClick={onClose}
+                aria-label="Close dialog"
+                className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+              >
+                <X className="size-5" />
+              </button>
+            </div>
+
+            {/* Scrollable Form Body */}
+            <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto px-6 py-6 sm:px-8 space-y-7">
+              {formError && (
+                <div className="flex items-center gap-2.5 rounded-2xl border border-destructive/30 bg-destructive/10 p-3.5 text-xs font-medium text-destructive">
+                  <AlertCircle className="size-4 shrink-0" />
+                  <span>{formError}</span>
                 </div>
-                <div>
-                  <label className="text-xs font-semibold text-muted-foreground block mb-1">
-                    Tagline / One-liner
-                  </label>
-                  <input
-                    type="text"
-                    value={customStartupTagline}
-                    onChange={(e) => setCustomStartupTagline(e.target.value)}
-                    placeholder="e.g. Autonomous drone delivery for rural medical hubs"
-                    className="w-full rounded-xl border border-border bg-card px-3.5 py-2 text-sm text-foreground focus:border-primary focus:outline-hidden"
-                  />
+              )}
+
+              {/* Section 1: Startup Identity */}
+              <div className="rounded-2xl border border-border bg-muted/20 p-5 space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="font-display text-sm font-bold text-foreground flex items-center gap-2">
+                    <Building2 className="size-4 text-primary" />
+                    1. Hiring Startup
+                  </span>
+
+                  {/* Mode switcher only available for super admins */}
+                  {user?.role === "SUPER_ADMIN" && !lockStartup && (
+                    <div className="flex items-center gap-2 text-xs">
+                      <button
+                        type="button"
+                        onClick={() => setStartupMode("incubated")}
+                        className={`rounded-lg px-2.5 py-1 font-semibold transition-colors ${
+                          startupMode === "incubated"
+                            ? "bg-primary text-primary-foreground"
+                            : "text-muted-foreground hover:bg-muted"
+                        }`}
+                      >
+                        Incubated Startup
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setStartupMode("custom")}
+                        className={`rounded-lg px-2.5 py-1 font-semibold transition-colors ${
+                          startupMode === "custom"
+                            ? "bg-primary text-primary-foreground"
+                            : "text-muted-foreground hover:bg-muted"
+                        }`}
+                      >
+                        Other / New Venture
+                      </button>
+                    </div>
+                  )}
                 </div>
+
+                {lockStartup || (user?.role !== "SUPER_ADMIN") ? (
+                  <div className="rounded-xl border border-primary/25 bg-card/80 p-4 flex items-center justify-between shadow-xs">
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <p className="font-bold text-sm text-foreground">{activeIncubatedStartup.name}</p>
+                        <span className="rounded-full bg-primary/10 border border-primary/20 px-2 py-0.5 text-[10px] font-bold text-primary">
+                          Verified Founder Venture
+                        </span>
+                      </div>
+                      <p className="text-xs text-muted-foreground mt-0.5">{activeIncubatedStartup.tagline}</p>
+                      <p className="text-[11px] text-muted-foreground/80 mt-1">
+                        Sector: <strong className="text-foreground">{activeIncubatedStartup.sector}</strong>
+                      </p>
+                    </div>
+                    <ShieldCheck className="size-6 text-primary shrink-0" />
+                  </div>
+                ) : startupMode === "incubated" ? (
+                  <div>
+                    <label className="text-xs font-semibold text-muted-foreground block mb-1.5">
+                      Select Incubated Venture
+                    </label>
+                    <select
+                      value={selectedStartupSlug}
+                      onChange={(e) => handleStartupSelect(e.target.value)}
+                      className="w-full rounded-xl border border-border bg-card px-3.5 py-2.5 text-sm font-medium text-foreground focus:border-primary focus:outline-hidden"
+                    >
+                      {STARTUPS.map((startup) => (
+                        <option key={startup.slug} value={startup.slug}>
+                          {startup.name} — {startup.sector} ({startup.tagline})
+                        </option>
+                      ))}
+                    </select>
+                    <p className="mt-1.5 text-[11px] text-muted-foreground">
+                      Includes pre-configured living lab GPU profiles and AAU candidate routing.
+                    </p>
+                  </div>
+                ) : (
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <div>
+                      <label className="text-xs font-semibold text-muted-foreground block mb-1">
+                        Startup / Company Name <span className="text-destructive">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        value={customStartupName}
+                        onChange={(e) => setCustomStartupName(e.target.value)}
+                        placeholder="e.g. Addis Quantum Labs"
+                        className="w-full rounded-xl border border-border bg-card px-3.5 py-2 text-sm text-foreground focus:border-primary focus:outline-hidden"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-xs font-semibold text-muted-foreground block mb-1">
+                        Tagline / One-liner
+                      </label>
+                      <input
+                        type="text"
+                        value={customStartupTagline}
+                        onChange={(e) => setCustomStartupTagline(e.target.value)}
+                        placeholder="e.g. Autonomous drone delivery for rural medical hubs"
+                        className="w-full rounded-xl border border-border bg-card px-3.5 py-2 text-sm text-foreground focus:border-primary focus:outline-hidden"
+                      />
+                    </div>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
 
           {/* Section 2: Role Details */}
           <div className="space-y-4">
@@ -707,6 +804,8 @@ export function PostJobModal({ isOpen, onClose, onJobCreated }: PostJobModalProp
             )}
           </Button>
         </div>
+          </>
+        )}
       </div>
     </div>
   );

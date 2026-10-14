@@ -26,6 +26,7 @@ import {
   Heart,
   Layers,
   List,
+  Lock,
   MapPin,
   Plus,
   PlusCircle,
@@ -43,14 +44,22 @@ import {
   X,
   Zap,
 } from "lucide-react";
-import { useDeferredValue, useMemo, useState } from "react";
+import { useEffect, useDeferredValue, useMemo, useState } from "react";
 
 import { PostJobModal } from "@/components/jobs/PostJobModal";
 import { LandingFooter } from "@/components/landing/LandingFooter";
 import { LandingHeader } from "@/components/landing/LandingHeader";
 import { Button } from "@/components/ui/button";
-import { JOB_OPENINGS, type JobOpening, type JobType, type ExperienceLevel, type WorkplaceType } from "@/data/jobs";
+import {
+  JOB_OPENINGS,
+  getCustomJobs,
+  type JobOpening,
+  type JobType,
+  type ExperienceLevel,
+  type WorkplaceType,
+} from "@/data/jobs";
 import { STARTUPS } from "@/data/startups";
+import { useAuth } from "@/lib/auth";
 
 export const Route = createFileRoute("/jobs")({
   head: () => ({
@@ -131,15 +140,27 @@ function StartupJobsPage() {
   const [copiedCode, setCopiedCode] = useState(false);
   const [copiedShareId, setCopiedShareId] = useState<string | null>(null);
 
+  const { user } = useAuth();
+  const isFounder =
+    user?.role === "STARTUP_ADMIN" ||
+    user?.role === "STARTUP_EDITOR" ||
+    user?.role === "SUPER_ADMIN";
+
   // Custom startup-posted jobs persisted in localStorage
-  const [customJobs, setCustomJobs] = useState<JobOpening[]>(() => {
-    try {
-      const saved = localStorage.getItem("unipod_posted_jobs");
-      return saved ? JSON.parse(saved) : [];
-    } catch {
-      return [];
-    }
-  });
+  const [customJobs, setCustomJobs] = useState<JobOpening[]>(() => getCustomJobs());
+
+  // Keep jobs in sync when updated from founder portal or storage
+  useEffect(() => {
+    const handleUpdate = () => {
+      setCustomJobs(getCustomJobs());
+    };
+    window.addEventListener("unipod_jobs_updated", handleUpdate);
+    window.addEventListener("storage", handleUpdate);
+    return () => {
+      window.removeEventListener("unipod_jobs_updated", handleUpdate);
+      window.removeEventListener("storage", handleUpdate);
+    };
+  }, []);
 
   const allJobs = useMemo(() => {
     return [...customJobs, ...JOB_OPENINGS];
@@ -390,7 +411,7 @@ function StartupJobsPage() {
                   Join high-impact engineering teams, clinical researchers, and climate fellows across ventures incubated at <strong>AI UniPod Ethiopia</strong>. Build sovereign models with direct access to <strong>high-performance GPU workstations</strong> and the EAII central data center.
                 </p>
 
-                {/* Search Bar & Post a Job CTA in Hero */}
+                {/* Search Bar in Hero */}
                 <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 max-w-2xl">
                   <div className="flex flex-1 items-center rounded-2xl border border-border bg-card p-2 shadow-sm transition-all focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20">
                     <Search className="ml-3 size-5 text-muted-foreground shrink-0" />
@@ -415,14 +436,17 @@ function StartupJobsPage() {
                     </Button>
                   </div>
 
-                  <Button
-                    type="button"
-                    onClick={() => setIsPostJobModalOpen(true)}
-                    className="h-12 rounded-2xl px-5 text-xs font-bold shadow-sm gap-2 bg-primary text-primary-foreground hover:bg-primary/90 shrink-0"
-                  >
-                    <Plus className="size-4" />
-                    Post a Job
-                  </Button>
+                  {isFounder && (
+                    <Button
+                      asChild
+                      className="h-12 rounded-2xl px-5 text-xs font-bold shadow-sm gap-2 bg-primary text-primary-foreground hover:bg-primary/90 shrink-0"
+                    >
+                      <Link to="/portal">
+                        <Briefcase className="size-4" />
+                        Founder Portal
+                      </Link>
+                    </Button>
+                  )}
                 </div>
               </div>
 
@@ -467,18 +491,31 @@ function StartupJobsPage() {
 
                 <div className="mt-6 pt-4 border-t border-border/80 flex items-center justify-between gap-2">
                   <div>
-                    <p className="text-xs font-bold text-foreground">Hiring for your startup?</p>
-                    <p className="text-[11px] text-muted-foreground">Free ecosystem listing for cohort ventures.</p>
+                    <p className="text-xs font-bold text-foreground">
+                      {isFounder ? "Hiring for your startup?" : "Ecosystem Recruitment"}
+                    </p>
+                    <p className="text-[11px] text-muted-foreground">
+                      {isFounder
+                        ? "Manage recruitment directly via the Founder Portal."
+                        : "Job postings are managed exclusively by verified startup founders."}
+                    </p>
                   </div>
-                  <Button
-                    type="button"
-                    onClick={() => setIsPostJobModalOpen(true)}
-                    size="sm"
-                    variant="outline"
-                    className="rounded-xl text-xs font-semibold border-primary/30 text-primary hover:bg-primary/10 shrink-0"
-                  >
-                    Post an Opening <ChevronRight className="ml-1 size-3.5" />
-                  </Button>
+                  {isFounder ? (
+                    <Button
+                      asChild
+                      size="sm"
+                      variant="outline"
+                      className="rounded-xl text-xs font-semibold border-primary/30 text-primary hover:bg-primary/10 shrink-0"
+                    >
+                      <Link to="/portal">
+                        Founder Portal <ChevronRight className="ml-1 size-3.5" />
+                      </Link>
+                    </Button>
+                  ) : (
+                    <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-1 text-[11px] font-semibold text-primary shrink-0">
+                      <ShieldCheck className="size-3" /> Founder Verified
+                    </span>
+                  )}
                 </div>
               </div>
             </div>
@@ -685,18 +722,22 @@ function StartupJobsPage() {
                 )}
               </div>
 
-              {/* Right: Post a Job CTA, Saved Tab & View Mode */}
+              {/* Right: Founder Portal (if founder), Saved Tab & View Mode */}
               <div className="flex items-center gap-2 sm:gap-3">
-                <Button
-                  type="button"
-                  onClick={() => setIsPostJobModalOpen(true)}
-                  size="sm"
-                  className="rounded-xl px-3 sm:px-3.5 py-2 text-xs font-semibold bg-primary text-primary-foreground hover:bg-primary/90 shadow-2xs gap-1.5"
-                >
-                  <Plus className="size-3.5" />
-                  <span className="hidden sm:inline">Post a Job</span>
-                  <span className="sm:hidden">Post</span>
-                </Button>
+                {isFounder && (
+                  <Button
+                    asChild
+                    size="sm"
+                    variant="outline"
+                    className="rounded-xl px-3 sm:px-3.5 py-2 text-xs font-semibold border-primary/30 text-primary hover:bg-primary/10 shadow-2xs gap-1.5"
+                  >
+                    <Link to="/portal">
+                      <Briefcase className="size-3.5" />
+                      <span className="hidden sm:inline">Founder Portal</span>
+                      <span className="sm:hidden">Portal</span>
+                    </Link>
+                  </Button>
+                )}
 
                 {/* Bookmarked Filter Pill */}
                 <button
@@ -767,19 +808,33 @@ function StartupJobsPage() {
                   Hiring for your startup or AI research team?
                 </h2>
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Post openings directly to 2,400+ AAU and EAII engineers, data scientists, and African researchers. Every recruited candidate receives access to high-performance GPU workstations at the Addis Ababa Living Lab.
+                  Post openings directly to 2,400+ AAU and EAII engineers, data scientists, and African researchers. Job postings are exclusively reserved for verified startup founders and lab directors.
                 </p>
               </div>
 
               <div className="flex flex-wrap items-center gap-3 shrink-0">
-                <Button
-                  type="button"
-                  onClick={() => setIsPostJobModalOpen(true)}
-                  className="rounded-2xl px-6 py-5 text-xs sm:text-sm font-bold shadow-md gap-2"
-                >
-                  <Plus className="size-4" />
-                  Post a Startup Opening
-                </Button>
+                {isFounder ? (
+                  <Button
+                    asChild
+                    className="rounded-2xl px-6 py-5 text-xs sm:text-sm font-bold shadow-md gap-2"
+                  >
+                    <Link to="/portal">
+                      <Briefcase className="size-4" />
+                      Manage Openings in Founder Portal
+                    </Link>
+                  </Button>
+                ) : (
+                  <Button
+                    asChild
+                    variant="outline"
+                    className="rounded-2xl px-6 py-5 text-xs sm:text-sm font-semibold border-primary/30 hover:bg-primary/10 gap-2"
+                  >
+                    <Link to="/login">
+                      <Lock className="size-4 text-primary" />
+                      Founder Portal Sign In
+                    </Link>
+                  </Button>
+                )}
               </div>
             </div>
           </div>
@@ -1796,12 +1851,14 @@ function StartupJobsPage() {
         </div>
       )}
 
-      {/* 4. Post a Startup Job Modal */}
-      <PostJobModal
-        isOpen={isPostJobModalOpen}
-        onClose={() => setIsPostJobModalOpen(false)}
-        onJobCreated={handleJobCreated}
-      />
+      {/* 4. Post a Startup Job Modal (strictly founder authenticated) */}
+      {isFounder && (
+        <PostJobModal
+          isOpen={isPostJobModalOpen}
+          onClose={() => setIsPostJobModalOpen(false)}
+          onJobCreated={handleJobCreated}
+        />
+      )}
 
       {/* 5. Comprehensive Enterprise Global Footer */}
       <LandingFooter />

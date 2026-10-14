@@ -426,3 +426,51 @@ export const JOB_OPENINGS: JobOpening[] = [
     ],
   },
 ];
+
+export const POSTED_JOBS_STORAGE_KEY = "unipod_posted_jobs";
+
+export function getCustomJobs(): JobOpening[] {
+  if (typeof window === "undefined") return [];
+  try {
+    const raw = localStorage.getItem(POSTED_JOBS_STORAGE_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+}
+
+export function saveCustomJob(job: JobOpening): JobOpening[] {
+  if (typeof window === "undefined") return [];
+  try {
+    const current = getCustomJobs();
+    const updated = [job, ...current.filter((j) => j.id !== job.id)];
+    localStorage.setItem(POSTED_JOBS_STORAGE_KEY, JSON.stringify(updated));
+    window.dispatchEvent(new CustomEvent("unipod_jobs_updated", { detail: { job, action: "save" } }));
+    return updated;
+  } catch {
+    return getCustomJobs();
+  }
+}
+
+export function deleteCustomJob(jobId: string): JobOpening[] {
+  if (typeof window === "undefined") return [];
+  try {
+    const current = getCustomJobs();
+    const updated = current.filter((j) => j.id !== jobId);
+    localStorage.setItem(POSTED_JOBS_STORAGE_KEY, JSON.stringify(updated));
+    window.dispatchEvent(new CustomEvent("unipod_jobs_updated", { detail: { jobId, action: "delete" } }));
+    return updated;
+  } catch {
+    return getCustomJobs();
+  }
+}
+
+export function getAllJobs(): JobOpening[] {
+  const custom = getCustomJobs();
+  return [...custom, ...JOB_OPENINGS];
+}
+
+export function getJobsForStartup(startupSlug: string): JobOpening[] {
+  const all = getAllJobs();
+  return all.filter((j) => j.startupSlug.toLowerCase() === startupSlug.toLowerCase());
+}
