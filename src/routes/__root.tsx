@@ -102,13 +102,22 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "preconnect", href: "https://cdn.spline.design", crossOrigin: "anonymous" },
-      // Font stylesheet — loaded asynchronously (media=print trick removes render-blocking)
+      { rel: "preconnect", href: "https://prod.spline.design", crossOrigin: "anonymous" },
+      // Early preload for Spline viewer and 3D scene data
+      {
+        rel: "modulepreload",
+        href: "https://cdn.spline.design/@splinetool/viewer@2.0.55/build/spline-viewer.js",
+      },
+      {
+        rel: "preload",
+        as: "fetch",
+        href: "https://prod.spline.design/2GuQxMiUCFuKQ9zL/scene.splinecode",
+        crossOrigin: "anonymous",
+      },
+      // Font stylesheet
       {
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap",
-        // @ts-expect-error - non-standard but supported by HeadContent serialization
-        media: "print",
-        onLoad: "this.media='all'",
       },
       // Preload primary brand logo for zero-delay header render
       {

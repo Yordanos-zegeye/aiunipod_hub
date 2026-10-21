@@ -19,37 +19,25 @@ export function SplineStage() {
       (navigator.connection?.saveData === true || navigator.connection?.effectiveType === "2g");
 
     if (isMobile || isSaveData) {
-      // Do not download 5MB+ 3D assets on mobile or slow connections
+      // Do not download 3D assets on mobile or slow connections
       return;
     }
 
-    // On desktop, defer 3D loading until the browser is idle and critical elements have painted
-    let idleHandle: number | undefined;
-    let timerHandle: number | undefined;
+    // Immediately trigger Spline loading on desktop without delay
+    setShouldLoadSpline(true);
 
-    const startLoading = () => {
-      setShouldLoadSpline(true);
-    };
-
-    const win = typeof window !== "undefined" ? (window as Window & { requestIdleCallback?: any; cancelIdleCallback?: any }) : null;
-
-    if (win && typeof win.requestIdleCallback === "function") {
-      idleHandle = win.requestIdleCallback(startLoading, { timeout: 1200 });
-    } else {
-      timerHandle = window.setTimeout(startLoading, 600);
+    // Pre-inject the script right away to ensure customElement is defined ASAP
+    let script = document.querySelector<HTMLScriptElement>(`script[src="${SPLINE_SCRIPT}"]`);
+    if (!script) {
+      script = document.createElement("script");
+      script.type = "module";
+      script.src = SPLINE_SCRIPT;
+      script.async = true;
+      document.head.appendChild(script);
     }
-
-    return () => {
-      if (idleHandle && win && typeof win.cancelIdleCallback === "function") {
-        win.cancelIdleCallback(idleHandle);
-      }
-      if (timerHandle) {
-        window.clearTimeout(timerHandle);
-      }
-    };
   }, []);
 
-  // When shouldLoadSpline is true, inject script and initialize
+  // When shouldLoadSpline is true, initialize viewer & events
   useEffect(() => {
     if (!shouldLoadSpline) return;
 
@@ -109,8 +97,20 @@ export function SplineStage() {
       hideSplineLogo();
     };
 
-    const fallbackTimer = window.setTimeout(markLoaded, 3000);
+    const fallbackTimer = window.setTimeout(markLoaded, 2000);
     viewer?.addEventListener("load", markLoaded);
+    viewer?.addEventListener("load-complete", markLoaded);
+
+    // Fast check: reveal as soon as canvas is mounted inside Spline's shadowRoot
+    const checkCanvasReady = () => {
+      hideSplineLogo();
+      const currentViewer = viewerRef.current;
+      const canvas = currentViewer?.shadowRoot?.querySelector("canvas");
+      if (canvas) {
+        setLoaded(true);
+      }
+    };
+    const readyInterval = window.setInterval(checkCanvasReady, 60);
 
     // Regularly ensure logo stays removed after scene initialization
     const logoInterval = window.setInterval(hideSplineLogo, 250);
@@ -192,6 +192,7 @@ export function SplineStage() {
     window.addEventListener("pointermove", handlePointerMove, { passive: true });
 
     return () => {
+      window.clearInterval(readyInterval);
       window.clearTimeout(fallbackTimer);
       window.clearTimeout(stopLogoInterval);
       window.clearInterval(logoInterval);
@@ -201,6 +202,7 @@ export function SplineStage() {
       }
       observer.disconnect();
       viewer?.removeEventListener("load", markLoaded);
+      viewer?.removeEventListener("load-complete", markLoaded);
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("pointermove", handlePointerMove);
     };
@@ -221,8 +223,8 @@ export function SplineStage() {
           {createElement("spline-viewer", {
             ref: viewerRef,
             url: SPLINE_SCENE,
-            loading: "lazy",
-            className: `spline-viewer transition-opacity duration-700 ${loaded ? "opacity-100" : "opacity-0"}`,
+            loading: "eager",
+            className: `spline-viewer transition-opacity duration-500 ${loaded ? "opacity-100" : "opacity-0"}`,
           })}
         </>
       ) : (

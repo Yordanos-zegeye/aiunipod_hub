@@ -272,12 +272,13 @@
   display: grid;
   place-content: center;
   gap: 0.75rem;
-  background: var(--background);
+  background: transparent;
+  pointer-events: none;
   color: var(--muted-foreground);
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  transition: opacity 600ms ease, visibility 600ms ease;
+  transition: opacity 300ms ease, visibility 300ms ease;
 }
 
 .spline-loading span {

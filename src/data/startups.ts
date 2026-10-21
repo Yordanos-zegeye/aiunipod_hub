@@ -109,7 +109,7 @@ export type StartupGrowthPlan = {
 
 export type StartupDiligenceDoc = {
   title: string;
-  category: "Pitch Deck" | "Financials" | "Technical" | "Regulatory & Impact" | "Cap Table";
+  category: "Pitch Deck" | "Financials" | "Technical" | "Regulatory & Impact" | "Cap Table" | "Traction";
   file_type: "PDF" | "XLSX" | "DOCX";
   file_size: string;
   status: "Available" | "Verified" | "Restricted";
@@ -6468,52 +6468,7 @@ export const STARTUPS: Startup[] = [
           "radius": "1rem",
           "layout": "classic"
       }
-  }
-];
-
-export const STORAGE_PREFIX = "aiunipod_startup_override_";
-
-export function getSavedStartup(slug: string): Startup | null {
-  if (typeof window === "undefined" || !window.localStorage) return null;
-  const base = STARTUPS.find((s) => s.slug === slug);
-  if (!base) return null;
-  try {
-    const raw = window.localStorage.getItem(STORAGE_PREFIX + slug);
-    if (!raw) return null;
-    return JSON.parse(raw);
-  } catch (e) {
-    console.error("Failed to parse saved startup override", e);
-    return null;
-  }
-}
-
-export function saveStartupOverride(slug: string, data: Startup): void {
-  if (typeof window !== "undefined" && window.localStorage) {
-    try {
-      window.localStorage.setItem(STORAGE_PREFIX + slug, JSON.stringify(data));
-      window.dispatchEvent(new CustomEvent("aiunipod_startup_updated", { detail: { slug } }));
-    } catch (e) {
-      console.error("Failed to save startup override", e);
-    }
-  }
-}
-
-export function resetStartupOverride(slug: string): void {
-  if (typeof window !== "undefined" && window.localStorage) {
-    try {
-      window.localStorage.removeItem(STORAGE_PREFIX + slug);
-      window.dispatchEvent(new CustomEvent("aiunipod_startup_updated", { detail: { slug } }));
-    } catch (e) {
-      console.error("Failed to reset startup override", e);
-    }
-  }
-}
-
-export function getAllStartups(): Startup[] {
-  if (typeof window !== "undefined" && window.localStorage) {
-    try {
-      const validSlugs = new Set(STARTUPS.map((s) => s.slug));
-      const keysToRemove: string[] = [,
+  },
   {
     "slug": "tenaye-ai",
     "name": "Tenaye AI",
@@ -8399,6 +8354,50 @@ export function getAllStartups(): Startup[] {
     }
 }
 ];
+
+export const STORAGE_PREFIX = "aiunipod_startup_override_";
+
+export function getSavedStartup(slug: string): Startup | null {
+  if (typeof window === "undefined" || !window.localStorage) return null;
+  const base = STARTUPS.find((s) => s.slug === slug);
+  if (!base) return null;
+  try {
+    const raw = window.localStorage.getItem(STORAGE_PREFIX + slug);
+    if (!raw) return null;
+    return JSON.parse(raw);
+  } catch (e) {
+    console.error("Failed to parse saved startup override", e);
+    return null;
+  }
+}
+
+export function saveStartupOverride(slug: string, data: Startup): void {
+  if (typeof window !== "undefined" && window.localStorage) {
+    try {
+      window.localStorage.setItem(STORAGE_PREFIX + slug, JSON.stringify(data));
+      window.dispatchEvent(new CustomEvent("aiunipod_startup_updated", { detail: { slug } }));
+    } catch (e) {
+      console.error("Failed to save startup override", e);
+    }
+  }
+}
+
+export function resetStartupOverride(slug: string): void {
+  if (typeof window !== "undefined" && window.localStorage) {
+    try {
+      window.localStorage.removeItem(STORAGE_PREFIX + slug);
+      window.dispatchEvent(new CustomEvent("aiunipod_startup_updated", { detail: { slug } }));
+    } catch (e) {
+      console.error("Failed to reset startup override", e);
+    }
+  }
+}
+
+export function getAllStartups(): Startup[] {
+  if (typeof window !== "undefined" && window.localStorage) {
+    try {
+      const validSlugs = new Set(STARTUPS.map((s) => s.slug));
+      const keysToRemove: string[] = [];
       for (let i = 0; i < window.localStorage.length; i++) {
         const key = window.localStorage.key(i);
         if (key && key.startsWith(STORAGE_PREFIX)) {
